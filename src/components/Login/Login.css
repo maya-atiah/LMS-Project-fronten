@@ -1,0 +1,31 @@
+.main-container-login{
+    background-image: url("../assets/images/Option-A.jpg");
+    /* position: relative; */
+    background-position: center center;
+    background-size: cover;
+    object-fit: cover;
+    height: 61rem;
+    filter: brightness(80%);
+    /* background-repeat: no-repeat; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.adminlogin-box-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    width:30em;
+    height:35em;
+    position: relative;
+    background-color: #017F94;
+    border-radius:3em;
+    border: 2px solid #EE8B3A;
+    box-shadow: 0 0.188em 1.550em rgb(156,156,156) ;
+   
+    
+}
+

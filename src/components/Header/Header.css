@@ -1,0 +1,13 @@
+.header-container {
+  /* display: flex; */
+  /* justify-content: center; */
+  /* align-items: center;  */
+  height:20rem;
+  /* width:105rem; */
+   /* set the height of the container to whatever value you want */
+   background-image: url('../../assets/Images/Option-A.jpg');
+   background-size:100% 100%;
+   object-fit: cover;
+   background-position: center center;
+   
+}
