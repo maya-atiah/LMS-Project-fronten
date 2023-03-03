@@ -7,7 +7,7 @@ const LoginPage=()=>{
     return (
         <div className="main-container-login">
             <div className="adminlogin-box-container">
-                hi
+                welcome
             </div>
         </div>
     )
