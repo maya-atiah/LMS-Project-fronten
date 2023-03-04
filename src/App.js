@@ -8,22 +8,18 @@ import Teachers from "./components/Teachers/Teachers";
 import Attendance from "./components/Attendance/Attendance";
 import Reports from "./components/Reports/Reports";
 import Header from "./components/Header/Header";
-// import Calender from "./components/Calender/Calender";
+import Calender from "./components/Calender/Calender";
 import "./style/index.css";
-
 
 function App() {
   const [navVisible, showNavbar] = useState(false);
 
   return (
-    
     <BrowserRouter>
       <div className="App">
-      
         <Navbar visible={navVisible} show={showNavbar} />
-        <Header />    
-        {/* <Calender/>*/}
-
+        <Header />
+        <Calender />
         <Routes>
           <Route path="/Home" element={<Home />} />
           <Route path="/Classes" element={<Classes />} />
@@ -31,7 +27,6 @@ function App() {
           <Route path="/Teachers" element={<Teachers />} />
           <Route path="/Attendance" element={<Attendance />} />
           <Route path="/Reports" element={<Reports />} />
-         
         </Routes>
       </div>
     </BrowserRouter>
