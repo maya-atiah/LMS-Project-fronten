@@ -1,9 +1,6 @@
 .component-container {
         display: flex;
         flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        background-color: red;
         margin-left: 20rem;
         margin-top: 5rem;
         margin-right:20rem ;
