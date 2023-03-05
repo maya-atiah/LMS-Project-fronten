@@ -12,7 +12,7 @@ import {
 import "../Courses/CourseCard.css";
 import { DeleteForeverRounded } from "@mui/icons-material";
 
-export default function CourseCard({ course }) {
+export default function CourseCard({ course ,handleDelete}) {
   return (
     <div>
       {/* <Card elevation={1}>
@@ -55,8 +55,8 @@ export default function CourseCard({ course }) {
             })}
           </CardContent>
         </CardActionArea>
-        <CardActions>
-          <IconButton aria-label='delete'>
+        <CardActions onClick={()=>handleDelete(course.id)}>
+          <IconButton aria-label='delete' >
             <DeleteForeverRounded/>
           </IconButton>
         </CardActions>

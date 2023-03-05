@@ -13,7 +13,22 @@ import "./style/index.css";
 
 
 function App() {
+
   const [navVisible, showNavbar] = useState(false);
+
+  // const [fix,setFix]= useState(false);
+
+  // function setFixedSidebar() {
+
+  //   if (window.scrollY >= 500) {
+  //     setFix(true)
+  //   } else {
+  //     setFix(false)
+  //   }
+  // }
+
+  // window.addEventListener("scroll",setFixedSidebar)
+
 
   return (
     

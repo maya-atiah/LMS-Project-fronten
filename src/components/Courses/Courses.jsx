@@ -16,6 +16,12 @@ function Courses() {
     console.log('course',course);
   }
 
+  const handleDelete= async (id)=>{
+    await axios.delete('http://localhost:8000/api/deleteById/'+id);
+  const newCourse=course.filter(course=>course.id !== id)
+  setCourse(newCourse);
+  }
+
   useEffect(()=>{
     fetchCourses();
   });
@@ -28,7 +34,7 @@ console.log('course',course);
         <Grid  container spacing={4}>
           {course.map((course) => (
             <Grid item xs={12} md={12} lg={4} key={course.id}>
-              <CourseCard course={course}  />
+              <CourseCard course={course} handleDelete={handleDelete} />
             </Grid>
           ))}
         </Grid>
