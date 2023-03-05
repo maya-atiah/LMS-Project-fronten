@@ -11,7 +11,6 @@ function Home() {
     {
       title: "Total students ",
       text: "200",
-
       img: stud,
     },
 
@@ -26,13 +25,7 @@ function Home() {
   //   {
   //     title: "Total students ",
   //     text: "200",
-  //     img: stu1,
-  //   },
-
-  //   {
-  //     title: "Total Teachers ",
-  //     text: "50",
-  //     img: teacher,
+  //     img: stud,
   //   },
   // ]);
 
@@ -47,7 +40,25 @@ function Home() {
                 <img src={card.img} alt={card.title} />
                 <h3>
                   {card.title}
-                  {card.text}{" "}
+                  {card.text}
+                  {""}
+                </h3>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+      <section>
+        <div className="component-container">
+          <h1> Home</h1>
+          <div className="cards">
+            {cards.map((card, i) => (
+              <div key={i} className="card">
+                <img src={card.img} alt={card.title} />
+                <h3>
+                  {card.title}
+                  {card.text}
+                  {""}
                 </h3>
               </div>
             ))}
