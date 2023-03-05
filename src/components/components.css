@@ -3,10 +3,9 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: rgb(255, 255, 255);
   margin-left: 20rem;
-  margin-top: -3rem;
-  margin-right: 20rem;
+  margin-top: 1rem;
+  margin-right: 30rem;
   /* set the height of the container to fill the main content area */
 }
 .react-calendar {

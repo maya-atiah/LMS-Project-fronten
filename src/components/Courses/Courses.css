@@ -1,10 +1,22 @@
 .course-title{
-    font-size: 1.5rem;
-    color: #017F94;
-    border-bottom: 2px solid #017F94;
-    margin-bottom: 2rem;
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 30px;
+    line-height: 36px;
+    color: #017f94;
+    align-self: stretch;
+    border-bottom: 2px solid #017f94;
+    margin-bottom: 12px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 }
 
 .CourseColor{
     background-color: #017F94;
+}
+
+.addingCourse{
+    cursor: pointer;
 }
