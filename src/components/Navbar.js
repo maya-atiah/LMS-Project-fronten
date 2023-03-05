@@ -1,8 +1,6 @@
 import React from "react";
 import {
   FaHome,
-  FaAngleRight,
-  FaAngleLeft,
   FaBookOpen,
   FaThLarge,
   FaUserAlt,
@@ -16,24 +14,17 @@ import "../style/navbar.css";
 
 const ICON_SIZE = 20;
 
-function Navbar({ visible, show }) {
+function Navbar() {
   return (
     <>
       <div className="mobile-nav">
-        <button className="mobile-nav-btn" onClick={() => show(!visible)}>
+        <button className="mobile-nav-btn" >
           <FaBars size={24} />
         </button>
       </div>
-      <nav className={!visible ? "navbar" : ""}>
-        <button
-          type="button"
-          className="nav-btn"
-          onClick={() => show(!visible)}
-        >
-          {!visible ? <FaAngleRight size={30} /> : <FaAngleLeft size={30} />}
-        </button>
+      <nav >
         <div >
-          <NavLink className="logo" to="/">
+          <NavLink className="logo">
             <img src={require("../assets/Images/logo.png")} alt="logo" />
           </NavLink>
           <div className="links nav-top">
