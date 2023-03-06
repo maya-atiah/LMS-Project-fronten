@@ -1,12 +1,14 @@
 import React from "react";
 import "./Card.css";
-import img from "../pfpic.png";
+import img from "./pfpic.png";
+import trash from "./trash.png";
 export const TeacherCard = (props) => {
   return (
     <div>
       <div className="cardFrame">
-        <a href="#" className="deleteTeacherButten">X</a>
-        <img src={img} alt="img" width="80px" />
+        <a href="#" className="deleteTeacherButten">
+          <img src={trash} alt="" className="deleteTeacherButten"/></a>
+        <img src={img} alt="img" width="90px" className="pfpic" />
         <div className="cardline"></div>
         <div className="p">
           <p>First Name: {props.firstName}</p>
@@ -15,7 +17,9 @@ export const TeacherCard = (props) => {
           <p>Phone_nb: {props.phoneNumber}</p>
           <p>Course:</p>
         </div>
-        <button className="editButton">edit</button>
+        <button className="editButton">
+          <b>edit</b>
+        </button>
       </div>
     </div>
   );
