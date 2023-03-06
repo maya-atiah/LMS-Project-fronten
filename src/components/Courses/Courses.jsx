@@ -4,6 +4,8 @@ import "../Courses/Courses.css";
 import { Container, Grid } from "@mui/material";
 import CourseCard from "./CourseCard";
 import axios from "axios";
+import Navhead from "../../components/Navhead";
+
 
 function Courses() {
 
@@ -22,6 +24,9 @@ function Courses() {
 
 console.log('course',course);
   return (
+    <>
+    <Navhead/>
+
     <div className='component-container'>
       <div className='course-title'> Courses</div>
       <Container >
@@ -33,7 +38,7 @@ console.log('course',course);
           ))}
         </Grid>
       </Container>
-    </div>
+    </div></>
   );
 }
 
