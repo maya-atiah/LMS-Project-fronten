@@ -2,11 +2,13 @@ import React from "react";
 import "../components.css";
 import { useState } from "react";
 import "./Home.css";
+import Navhead from "../../components/Navhead";
 
 import stud from "../../assets/Images/student.png";
 import teacher from "../../assets/Images/teacher.png";
 
 function Home() {
+
   const [cards] = useState([
     {
       title: "Total students ",
@@ -31,6 +33,7 @@ function Home() {
 
   return (
     <div>
+      <Navhead/>
       <section>
         <div className="component-container">
           <h1> Home</h1>
