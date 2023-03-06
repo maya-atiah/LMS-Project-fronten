@@ -10,6 +10,8 @@ import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
 import { Typography, Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import Navhead from "../../components/Navhead";
+
 
 function Courses() {
   const [course, setCourse] = useState([]);
@@ -60,6 +62,9 @@ function Courses() {
   console.log("course", course);
 
   return (
+    <>
+    <Navhead/>
+
     <div className='component-container'>
       <div className='course-title' onClick={() => setButtonPopup(true)}>
         <div>Courses </div>
@@ -117,7 +122,7 @@ function Courses() {
           ))}
         </Grid>
       </Container>
-    </div>
+    </div></>
   );
 }
 

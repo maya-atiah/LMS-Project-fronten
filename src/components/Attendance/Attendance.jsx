@@ -1,8 +1,14 @@
 import React from "react";
 import "../components.css";
+import Navhead from "../../components/Navhead";
 
 function Attendance() {
-  return <div className="component-container">sdfdsasdasdasasfs</div>;
+  return (
+  <div >sdfdsasdasdasasfs
+  
+  <Navhead/>
+  </div>
+  )
 }
 
 export default Attendance;

@@ -2,11 +2,13 @@ import React from "react";
 import "../components.css";
 import { useState } from "react";
 import "./Home.css";
+import Navhead from "../../components/Navhead";
 
 import stud from "../../assets/Images/student.png";
 import teacher from "../../assets/Images/teacher.png";
 
 function Home() {
+
   const [cards] = useState([
     {
       title: "Total students ",
@@ -31,6 +33,7 @@ function Home() {
 
   return (
     <div>
+      <Navhead/>
       <section>
         <div className="component-container">
           <h1> Home</h1>
@@ -48,11 +51,10 @@ function Home() {
           </div>
         </div>
       </section>
-      <section>
-        <div className="component-container">
-          <h1> Home</h1>
+      {/* <section> 
+         <div className="component-container">
           <div className="cards">
-            {cards.map((card, i) => (
+            {cards2.map((card, i) => (
               <div key={i} className="card">
                 <img src={card.img} alt={card.title} />
                 <h3>
@@ -62,9 +64,9 @@ function Home() {
                 </h3>
               </div>
             ))}
-          </div>
+          </div> 
         </div>
-      </section>
+      </section> */}
     </div>
   );
 }

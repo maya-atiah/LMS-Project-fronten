@@ -1,10 +1,12 @@
 import React from "react";
 import "../components.css";
-
+import "../../style/index.css"
+import Navhead from "../../components/Navhead";
 function Classes() {
   return(
-   <div className="component-container">
-       
+   
+   <div >
+       <Navhead/>
 
   </div>
   )
