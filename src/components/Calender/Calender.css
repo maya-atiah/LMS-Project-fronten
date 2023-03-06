@@ -1,5 +1,5 @@
 .react-calendar {
-  position: fixed;
+  position: absolute;
   width: 300px;
   left: 1500px;
   top: 400px;
@@ -116,4 +116,12 @@
 }
 .react-calendar--selectRange .react-calendar__tile--hover {
   background-color: #e6e6e6;
+}
+
+
+@media screen and (max-width:950px){
+  .react-calendar{
+    display: none;
+  }
+  
 }
