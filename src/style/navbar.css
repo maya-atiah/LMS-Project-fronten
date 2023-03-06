@@ -1,5 +1,5 @@
 nav {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   display: flex;
@@ -40,9 +40,13 @@ nav {
 }
 
 .nav-link:hover {
-  background-color: #afb4ff;
+  background-color: rgb(122, 120, 119);
   color: #4e4e4e;
 }
+.nav-link.active {
+  background-color: #ee8b3a;
+}
+
 
 .nav-link span {
   margin-left: 10px;
