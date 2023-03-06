@@ -6,12 +6,9 @@ import CourseCard from "./CourseCard";
 import axios from "axios";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import PopupCourse from "../../components/Courses/PopupCourse";
-import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
-import { Typography, Button } from "@mui/material";
-import { useNavigate } from "react-router-dom";
+import { Typography } from "@mui/material";
 import Navhead from "../../components/Navhead";
-
 
 function Courses() {
   const [course, setCourse] = useState([]);
@@ -19,7 +16,6 @@ function Courses() {
   const [buttonPopup, setButtonPopup] = useState(false);
   const [subject, setSubject] = useState("");
   const [isPending, setIsPending] = useState(false);
-  const navigate = useNavigate();
 
   const fetchCourses = async () => {
     const res = await axios.get("http://localhost:8000/api/user-grade-section");
@@ -43,86 +39,84 @@ function Courses() {
     await axios
       .post("http://localhost:8000/api/course", { subject })
       .then(() => {
-        setIsPending(false);
-        navigate("/Courses");
+        // setIsPending(false);
       });
+    setButtonPopup(false);
   };
 
   useEffect(() => {
     fetchCourses();
-    addCourse();
-  }, [isDeleted]);
+    // addCourse();
+  }, [isDeleted, buttonPopup]);
 
   const submitHandler = (e) => {
     e.preventDefault();
     addCourse();
-    setButtonPopup(false);
+    // setButtonPopup(false);
   };
 
   console.log("course", course);
 
   return (
     <>
-    <Navhead/>
+      <Navhead />
 
-    <div className='component-container'>
-      <div className='course-title' onClick={() => setButtonPopup(true)}>
-        <div>Courses </div>
-        <div className='addingCourse'>
-          <AddCircleIcon /> Add Course
-          <PopupCourse
-            trigger={buttonPopup}
-            setTrigger={() => setButtonPopup(false)}
-          >
-            
-            <Box
-              component='form'
-              sx={{
-                "& > :not(style)": { m: 1},
-              }}
-              noValidate
-              autoComplete='off'
+      <div className='component-container'>
+        <div className='course-title' onClick={() => setButtonPopup(true)}>
+          <div>Courses </div>
+          <div className='addingCourse'>
+            <AddCircleIcon /> Add Course
+            <PopupCourse
+              trigger={buttonPopup}
+              setTrigger={() => setButtonPopup(false)}
             >
-              <Typography gutterBottom color='white' variant='h4' component='div'>
-            Add Course
-          </Typography>
-              {/* <TextField
-                id='outlined-basic'
-                label='Subject'
-                variant='outlined'
-                onChange={(e) => setSubject(e.target.value)}
-              /> */}
-              <input type="text" id="subject" name="subject"/>
-              {!isPending && (
-                // <Button variant='contained' onClick={submitHandler}>
-                //   add
-                // </Button>
-                <button className="btn-add-course">add</button>
-              )}
-              {isPending && (
-                <Button variant='contained' onClick={submitHandler} placeholder="Write the subject">
-                  adding Course
-                </Button>
-              )}
-            </Box>
-            {/* <div className="course-title-input">Add Course</div>
-            <form> 
-              <input type="text" ></input>
-              <button>Add</button>
-            </form> */}
-          </PopupCourse>
+              <Box
+                component='form'
+                sx={{
+                  "& > :not(style)": { m: 1 },
+                }}
+                noValidate
+                autoComplete='off'
+              >
+                <Typography
+                  gutterBottom
+                  color='white'
+                  variant='h4'
+                  component='div'
+                >
+                  Add Course
+                </Typography>
+                <input
+                  type='text'
+                  id='subject'
+                  name='subject'
+                  onChange={(e) => setSubject(e.target.value)}
+                />
+                {!isPending && (
+                  <button className='btn-add-course' onClick={submitHandler}>
+                    add
+                  </button>
+                )}
+                {isPending && (
+                  <button className='btn-add-course' onClick={submitHandler}>
+                    adding course
+                  </button>
+                )}
+              </Box>
+            </PopupCourse>
+          </div>
         </div>
+        <Container>
+          <Grid container spacing={3}>
+            {course.map((course) => (
+              <Grid item xs={12} md={12} lg={4} key={course.id}>
+                <CourseCard course={course} handleDelete={handleDelete} />
+              </Grid>
+            ))}
+          </Grid>
+        </Container>
       </div>
-      <Container>
-        <Grid container spacing={3}>
-          {course.map((course) => (
-            <Grid item xs={12} md={12} lg={4} key={course.id}>
-              <CourseCard course={course} handleDelete={handleDelete} />
-            </Grid>
-          ))}
-        </Grid>
-      </Container>
-    </div></>
+    </>
   );
 }
 
