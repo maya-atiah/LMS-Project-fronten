@@ -19,7 +19,6 @@ function App() {
       <div className="App">
         <Navbar visible={navVisible} show={showNavbar} />
         <Header />
-        <Calender />
         <Routes>
           <Route path="/Home" element={<Home />} />
           <Route path="/Classes" element={<Classes />} />
@@ -28,6 +27,7 @@ function App() {
           <Route path="/Attendance" element={<Attendance />} />
           <Route path="/Reports" element={<Reports />} />
         </Routes>
+        <Calender />
       </div>
     </BrowserRouter>
   );

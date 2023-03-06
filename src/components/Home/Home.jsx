@@ -48,11 +48,10 @@ function Home() {
           </div>
         </div>
       </section>
-      <section>
-        <div className="component-container">
-          <h1> Home</h1>
+      {/* <section> 
+         <div className="component-container">
           <div className="cards">
-            {cards.map((card, i) => (
+            {cards2.map((card, i) => (
               <div key={i} className="card">
                 <img src={card.img} alt={card.title} />
                 <h3>
@@ -62,9 +61,9 @@ function Home() {
                 </h3>
               </div>
             ))}
-          </div>
+          </div> 
         </div>
-      </section>
+      </section> */}
     </div>
   );
 }
