@@ -22,19 +22,7 @@ function Teachers() {
   const teacherCard = teacher.map((object) => {
     return <TeacherCard key={object.id} firstName={object.firstName} lastName={object.lastName} email={object.email} phoneNumber={object.phoneNumber}    />;
   });
-  // return (
-  //   <div>
-  //     <section>
-  //       <div className="container">
-  //         <p className="allTeachersTitle">All Teachers</p>
-  //         <div className="Teachersline"> </div>
-  //         <div className="cards">
-  //           {teacherCard}
-  //         </div>
-  //       </div>
-  //     </section>
-  //   </div>
-  // );
+
 
   return (
     <div className="Teachercontainer">
@@ -42,7 +30,6 @@ function Teachers() {
         <p className="allTeachersTitle">All Teachers</p>
         <div className="Teachersline"></div>
         <div className="teacherCardsContainer">
-        {/* <TeacherCard/> */}
        {teacherCard}
 
         </div>
