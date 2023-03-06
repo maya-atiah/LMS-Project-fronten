@@ -9,9 +9,12 @@ import PopupCourse from "../../components/Courses/PopupCourse";
 import Box from "@mui/material/Box";
 import { Typography } from "@mui/material";
 import Navhead from "../../components/Navhead";
+import { useNavigate } from 'react-router-dom';
 
 function Courses() {
-  const [course, setCourse] = useState([]);
+
+
+  const [course,setCourse]=useState([]);
   const [isDeleted, setIsDeleted] = useState(false);
   const [buttonPopup, setButtonPopup] = useState(false);
   const [subject, setSubject] = useState("");
@@ -43,6 +46,14 @@ function Courses() {
       });
     setButtonPopup(false);
   };
+
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (!localStorage.getItem('token')) {
+      navigate('/');
+    }
+  }, []);
+  
 
   useEffect(() => {
     fetchCourses();

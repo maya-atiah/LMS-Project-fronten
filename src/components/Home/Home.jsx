@@ -1,14 +1,19 @@
 import React from "react";
 import "../components.css";
-import { useState } from "react";
+import { useState ,useEffect} from "react";
 import "./Home.css";
 import Navhead from "../../components/Navhead";
-
+import { useNavigate } from 'react-router-dom';
 import stud from "../../assets/Images/student.png";
 import teacher from "../../assets/Images/teacher.png";
 
 function Home() {
-
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (!localStorage.getItem('token')) {
+      navigate('/');
+    }
+  }, []);
   const [cards] = useState([
     {
       title: "Total students ",
