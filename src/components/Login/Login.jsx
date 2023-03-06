@@ -1,5 +1,5 @@
 import React from 'react';
-import { Component, useState } from "react";
+import { Component, useState , useEffect} from "react";
 import "../Login/Login";
 import "./Login.css"
 import Home from '../Home/Home';
@@ -33,7 +33,12 @@ const LoginPage=()=>{
       });
       const data = await response.json();
       if (response.ok) {
-        setIsLoggedIn(true);
+        alert("login successful");
+        window.localStorage.setItem("token", data.token);
+
+        window.location.href = "/Home";
+        // localStorage.setItem("token", data.token); // Store token in localStorage
+        // setIsLoggedIn(true);
       } else {
         alert(data.message);
       }
@@ -42,9 +47,17 @@ const LoginPage=()=>{
     }
   };
 
-  if (isLoggedIn) {
-    return <Home />;
-  }
+  // useEffect(() => {
+  //   const token = localStorage.getItem("token");
+  //   if (token) {
+  //     setIsLoggedIn(true);
+  //   }
+  // }, []);
+
+  // if (isLoggedIn) {
+
+  //   return <Home />;
+  // }
 
     return (
         <div className="main-container-login">

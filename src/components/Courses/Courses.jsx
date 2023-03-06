@@ -5,11 +5,18 @@ import { Container, Grid } from "@mui/material";
 import CourseCard from "./CourseCard";
 import axios from "axios";
 import Navhead from "../../components/Navhead";
+import { useNavigate } from 'react-router-dom';
+
 
 
 function Courses() {
 
-     
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (!localStorage.getItem('token')) {
+      navigate('/');
+    }
+  }, []);
   const [course,setCourse]=useState([]);
 
   const fetchCourses=async()=>{
