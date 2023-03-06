@@ -20,3 +20,35 @@
 .addingCourse{
     cursor: pointer;
 }
+.course-title-input{
+    color:white;
+}
+.btn-add-course{
+    background-color: white;
+    border: 1px solid white;
+    color:white;
+    padding:0.2rem ;
+    text-align: center;
+    text-decoration: none;
+    font-size: 1rem;
+    cursor: pointer;
+    width:8rem;
+    display: block;
+    border-radius: 10rem;
+    border: 2px solid #EE8B3A;
+    background-color: transparent;
+}
+input[type=text] {
+    width: 15rem;
+    padding: 0.5rem;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: 2px solid #EE8B3A;
+    border-radius: 4px;
+    background-color: transparent;
+  }
+
+  input::placeholder{
+    color:white;
+    
+  }

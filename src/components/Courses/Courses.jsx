@@ -9,8 +9,7 @@ import PopupCourse from "../../components/Courses/PopupCourse";
 import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
 import { Typography, Button } from "@mui/material";
-import { useNavigate } from 'react-router-dom';
-
+import { useNavigate } from "react-router-dom";
 
 function Courses() {
   const [course, setCourse] = useState([]);
@@ -38,14 +37,13 @@ function Courses() {
     }
   };
 
-
   const addCourse = async () => {
-    await axios.post("http://localhost:8000/api/course", { subject })
-    .then(()=>{
-      setIsPending(false);
-      navigate('/Courses');
-
-    });
+    await axios
+      .post("http://localhost:8000/api/course", { subject })
+      .then(() => {
+        setIsPending(false);
+        navigate("/Courses");
+      });
   };
 
   useEffect(() => {
@@ -71,34 +69,42 @@ function Courses() {
             trigger={buttonPopup}
             setTrigger={() => setButtonPopup(false)}
           >
-            <Typography gutterBottom color='white' variant='h5' component='div'>
-              Add Course
-            </Typography>
+            
             <Box
               component='form'
               sx={{
-                "& > :not(style)": { m: 1, width: "25ch" },
+                "& > :not(style)": { m: 1},
               }}
               noValidate
               autoComplete='off'
             >
-              <TextField
+              <Typography gutterBottom color='white' variant='h4' component='div'>
+            Add Course
+          </Typography>
+              {/* <TextField
                 id='outlined-basic'
                 label='Subject'
                 variant='outlined'
                 onChange={(e) => setSubject(e.target.value)}
-              />
+              /> */}
+              <input type="text" id="subject" name="subject"/>
               {!isPending && (
-                <Button variant='contained' onClick={submitHandler} >
-                  add
-                </Button>
+                // <Button variant='contained' onClick={submitHandler}>
+                //   add
+                // </Button>
+                <button className="btn-add-course">add</button>
               )}
               {isPending && (
-                <Button variant='contained' onClick={submitHandler}>
+                <Button variant='contained' onClick={submitHandler} placeholder="Write the subject">
                   adding Course
                 </Button>
               )}
             </Box>
+            {/* <div className="course-title-input">Add Course</div>
+            <form> 
+              <input type="text" ></input>
+              <button>Add</button>
+            </form> */}
           </PopupCourse>
         </div>
       </div>
