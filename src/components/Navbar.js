@@ -7,6 +7,13 @@ import "../style/navbar.css";
 const ICON_SIZE = 20;
 
 function Navbar() {
+  
+  const logOut = () => {
+    window.location.href = "/";
+
+    window.localStorage.clear();
+    localStorage.removeItem('token');
+  };
   return (
     <>
       <div className="mobile-nav">
@@ -48,9 +55,9 @@ function Navbar() {
         </div>
 
         <div className="links">
-          <NavLink to="/Sign-out" className="nav-link">
+          <NavLink to="/" className="nav-link">
             <FaSignOutAlt size={ICON_SIZE} />
-            <span>Logout</span>
+            <span onClick={logOut}>Logout</span>
           </NavLink>
         </div>
       </nav>
