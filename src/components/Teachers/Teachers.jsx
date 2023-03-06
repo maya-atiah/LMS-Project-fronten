@@ -2,7 +2,7 @@ import { React } from "react";
 import { useState,useEffect } from "react";
 import "./Teacher.css";
 import axios from "axios";
-import { TeacherCard } from "./TeacherCard/Card";
+import { TeacherCard } from "./TeacherCard/TeacherCard.jsx";
 
 function Teachers() {
   const [teacher, setTeacher] = useState([]);
@@ -36,6 +36,9 @@ function Teachers() {
       </div>
     </div>
   );
+
+
+
 }
 
 export default Teachers;
