@@ -37,7 +37,7 @@ function Teachers() {
   // );
 
   return (
-    <div className="container">
+    <div className="Teachercontainer">
       <div className="allTeachersSection">
         <p className="allTeachersTitle">All Teachers</p>
         <div className="Teachersline"></div>

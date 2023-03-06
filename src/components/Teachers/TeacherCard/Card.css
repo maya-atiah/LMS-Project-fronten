@@ -1,74 +1,72 @@
-.cardFrame{
-    background-color: #017F94;
-    width: 19vw;
-    height: 50vh;
-    margin: 10px;
-    border-radius: 10px;
-    align-items: center;
-    justify-content: space-around;
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-    
+.cardFrameTeacher {
+  background-color: #017f94;
+  width: 19vw;
+  height: 50vh;
+  margin: 10px;
+  border-radius: 10px;
+  align-items: center;
+  justify-content: space-around;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
 }
-.cardline{
-    height: 3px;
-    width: 90%;
+.cardlineteachercard {
+  height: 3px;
+  width: 90%;
 
-    background-color: orange;
-    margin: auto;
-    margin-top: -20px;
+  background-color: orange;
+  margin: auto;
+  margin-top: -20px;
 }
-.cardFrame img{
-    margin: auto;
-
+.cardFrameTeacher img {
+  margin: auto;
 }
-.p{
-    width: 100%;
-    margin-bottom: 50px;
+.TeacherCardContent {
+  width: 100%;
+  margin-bottom: 50px;
 }
-.p p{
-padding-left: 15px;
-margin: 0px;
-margin-bottom:5px;
-
+.TeacherCardContent p {
+  padding-left: 15px;
+  margin: 0px;
+  margin-bottom: 5px;
 }
-.pfpic{
-    border: 2px solid;
-    border-radius: 50%;
-    padding: 5px;
+.pfpic {
+  border: 2px solid;
+  border-radius: 50%;
+  padding: 5px;
 }
-.deleteTeacherButten{
-    position: absolute;
-    margin-bottom: 44vh;
-    margin-left: 14vw;
-    width: 25px;
+.deleteTeacherButten {
+  position: absolute;
+  margin-bottom: 44vh;
+  margin-left: 14vw;
+  width: 25px;
 }
-.deleteTeacherButten:hover{
-    opacity: 90%;
+.deleteTeacherButten:hover {
+  opacity: 90%;
 }
 
-.editButton{
-    position: absolute;
-    margin-top: 44vh;
-    margin-right: 10vw;
-    width: 70px;
-    height: 25px;
-    border-radius: 20px;
-    background-color: orange;
-    border: 0px;
-    color: white;    
+.editButtonTeacher {
+  position: absolute;
+  margin-top: 44vh;
+  margin-right: 10vw;
+  width: 70px;
+  height: 25px;
+  border-radius: 20px;
+  background-color: orange;
+  border: 0px;
+  color: white;
 }
-.editButton:hover{
-    background-color: white;
-    opacity: 90%;
-    color: orange;
-    cursor: pointer;
-    border: orange 2px solid;
-}.editButton:active{
-    background-color: orange;
-    opacity: 90%;
-    color: white;
-    cursor: pointer;
-    border: white 2px solid;
+.editButtonTeacher:hover {
+  background-color: white;
+  opacity: 90%;
+  color: orange;
+  cursor: pointer;
+  border: orange 2px solid;
+}
+.editButtonTeacher:active {
+  background-color: orange;
+  opacity: 90%;
+  color: white;
+  cursor: pointer;
+  border: white 2px solid;
 }
