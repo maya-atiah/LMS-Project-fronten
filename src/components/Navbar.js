@@ -1,36 +1,35 @@
 import React from "react";
-import {
-  FaHome,
-  FaBookOpen,
-  FaThLarge,
-  FaUserAlt,
-  FaSignOutAlt,
-  FaBars,
-  FaRegListAlt,
-  FaRegNewspaper,
-} from "react-icons/fa";
+import { FaHome, FaThLarge, FaBookOpen, FaUserAlt, FaRegListAlt, FaRegNewspaper,FaBars,FaSignOutAlt} from 'react-icons/fa';
+
 import { NavLink } from "react-router-dom";
 import "../style/navbar.css";
 
 const ICON_SIZE = 20;
 
 function Navbar() {
+  
+  const logOut = () => {
+    window.location.href = "/";
+
+    window.localStorage.clear();
+    localStorage.removeItem('token');
+  };
   return (
     <>
       <div className="mobile-nav">
-        <button className="mobile-nav-btn" >
+        <button className="mobile-nav-btn">
           <FaBars size={24} />
         </button>
       </div>
-      <nav >
-        <div >
+      <nav>
+        <div>
           <NavLink className="logo">
             <img src={require("../assets/Images/logo.png")} alt="logo" />
           </NavLink>
           <div className="links nav-top">
             <NavLink to="/Home" className="nav-link">
               <FaHome size={ICON_SIZE} />
-              <span>Home</span>
+              <span>Dashboard</span>
             </NavLink>
             <NavLink to="/Classes" className="nav-link">
               <FaThLarge size={ICON_SIZE} />
@@ -56,9 +55,9 @@ function Navbar() {
         </div>
 
         <div className="links">
-          <NavLink to="/Sign-out" className="nav-link">
+          <NavLink to="/" className="nav-link">
             <FaSignOutAlt size={ICON_SIZE} />
-            <span>Logout</span>
+            <span onClick={logOut}>Logout</span>
           </NavLink>
         </div>
       </nav>

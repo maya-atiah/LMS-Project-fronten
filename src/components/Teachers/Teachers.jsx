@@ -3,13 +3,22 @@ import { useState,useEffect } from "react";
 import "./Teacher.css";
 import axios from "axios";
 import { TeacherCard } from "./TeacherCard/Card";
+import Navhead from "../../components/Navhead";
+import { useNavigate } from 'react-router-dom';
+import { useState ,useEffect} from "react";
 
 function Teachers() {
-  const [teacher, setTeacher] = useState([]);
 
+
+  const [teacher, setTeacher] = useState([]);
+  const navigate = useNavigate();
   useEffect(() => {
-    getAllTeachers();
+    if (!localStorage.getItem('token')) {
+      navigate('/');
+    }
   }, []);
+
+ 
 
   const getAllTeachers = () =>
     axios
@@ -23,8 +32,14 @@ function Teachers() {
     return <TeacherCard key={object.id} firstName={object.firstName} lastName={object.lastName} email={object.email} phoneNumber={object.phoneNumber}    />;
   });
 
+  useEffect(() => {
+    getAllTeachers();
+  }, []);
 
   return (
+<>
+    <Navhead/>
+
     <div className="Teachercontainer">
       <div className="allTeachersSection">
         <p className="allTeachersTitle">All Teachers</p>
@@ -35,6 +50,7 @@ function Teachers() {
         </div>
       </div>
     </div>
+    </>
   );
 }
 
