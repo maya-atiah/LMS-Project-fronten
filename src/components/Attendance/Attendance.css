@@ -1,0 +1,17 @@
+
+h1 {
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 30px;
+    line-height: 36px;
+    color: #017f94;
+    align-self: stretch;
+    border-bottom: 2px solid #017f94;
+    margin-bottom: 12px;
+  }
+
+  
+  .demo-multiple-name-label{
+    color:#EE8B3A;
+  }
