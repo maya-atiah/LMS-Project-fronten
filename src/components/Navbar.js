@@ -1,19 +1,25 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { FaHome, FaThLarge, FaBookOpen, FaUserAlt, FaRegListAlt, FaRegNewspaper,FaBars,FaSignOutAlt} from 'react-icons/fa';
 
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import "../style/navbar.css";
 
 const ICON_SIZE = 20;
 
 function Navbar() {
-  
+  const navigate= useNavigate();
   const logOut = () => {
     window.location.href = "/";
 
     window.localStorage.clear();
     localStorage.removeItem('token');
+    navigate('/');
   };
+  useEffect(() =>{
+    if(!localStorage.getItem('token')){
+      navigate('/');
+    }
+  }, []);
   return (
     <>
       <div className="mobile-nav">

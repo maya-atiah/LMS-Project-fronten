@@ -13,7 +13,7 @@ function Courses() {
 
   const navigate = useNavigate();
   useEffect(() => {
-    if (!localStorage.getItem('token')) {
+    if (!localStorage.getItem('token') && window.location.pathname !== '/') {
       navigate('/');
     }
   }, []);

@@ -10,10 +10,13 @@ import teacher from "../../assets/Images/teacher.png";
 function Home() {
   const navigate = useNavigate();
   useEffect(() => {
-    if (!localStorage.getItem('token')) {
+    if (!localStorage.getItem('token') && window.location.pathname !== '/') {
       navigate('/');
     }
-  }, []);
+  }, [navigate]);
+
+
+  
   const [cards] = useState([
     {
       title: "Total students ",
