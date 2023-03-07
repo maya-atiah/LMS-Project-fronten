@@ -10,6 +10,8 @@ function Teachers() {
   useEffect(() => {
     getAllTeachers();
   }, []);
+ 
+
 
   const getAllTeachers = () =>
     axios
@@ -22,7 +24,10 @@ function Teachers() {
   const teacherCard = teacher.map((object) => {
     return <TeacherCard key={object.id} firstName={object.firstName} lastName={object.lastName} email={object.email} phoneNumber={object.phoneNumber}    />;
   });
-
+  const deleteTeacher = async (id) => {
+    await axios.delete(`http://localhost:8000/api/teacher/${id}`);
+   getAllTeachers();
+ };
 
   return (
     <div className="Teachercontainer">

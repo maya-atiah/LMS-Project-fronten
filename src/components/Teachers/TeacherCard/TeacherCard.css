@@ -41,8 +41,11 @@
   position: absolute;
   margin-bottom: 44vh;
   margin-left: 14vw;
+  background: none;
+/* border: none; */
  
 }
+
 .deleteTeacherButtencontainer:hover {
   opacity: 90%;
 }
