@@ -1,6 +1,6 @@
 .cardFrameTeacher {
   background-color: #017f94;
-  width: 19vw;
+  width: 16vw;
   height: 50vh;
   margin: 10px;
   border-radius: 10px;
@@ -20,6 +20,8 @@
 }
 .cardFrameTeacher img {
   margin: auto;
+  width: 90px;
+  height: 90px;
 }
 .TeacherCardContent {
   width: 100%;
@@ -35,13 +37,16 @@
   border-radius: 50%;
   padding: 5px;
 }
-.deleteTeacherButten {
+.deleteTeacherButtencontainer {
   position: absolute;
   margin-bottom: 44vh;
   margin-left: 14vw;
-  width: 25px;
+  background: none;
+/* border: none; */
+ 
 }
-.deleteTeacherButten:hover {
+
+.deleteTeacherButtencontainer:hover {
   opacity: 90%;
 }
 

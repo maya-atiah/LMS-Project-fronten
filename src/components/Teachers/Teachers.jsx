@@ -2,7 +2,7 @@ import { React } from "react";
 import { useState, useEffect } from "react";
 import "./Teacher.css";
 import axios from "axios";
-import { TeacherCard } from "./TeacherCard/Card";
+import { TeacherCard } from "./TeacherCard/TeacherCard.jsx";
 import Navhead from "../../components/Navhead";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
@@ -16,6 +16,8 @@ function Teachers() {
       navigate("/");
     }
   }, []);
+ 
+
 
   const getAllTeachers = () =>
     axios
@@ -36,7 +38,10 @@ function Teachers() {
       />
     );
   });
-
+  const deleteTeacher = async (id) => {
+    await axios.delete(`http://localhost:8000/api/teacher/${id}`);
+   getAllTeachers();
+ };
   useEffect(() => {
     getAllTeachers();
   }, []);
@@ -54,6 +59,9 @@ function Teachers() {
       </div>
     </>
   );
+
+
+
 }
 
 export default Teachers;
