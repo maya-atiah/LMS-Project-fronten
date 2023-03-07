@@ -1,0 +1,77 @@
+.cardFrameTeacher {
+  background-color: #017f94;
+  width: 16vw;
+  height: 50vh;
+  margin: 10px;
+  border-radius: 10px;
+  align-items: center;
+  justify-content: space-around;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+.cardlineteachercard {
+  height: 3px;
+  width: 90%;
+
+  background-color: orange;
+  margin: auto;
+  margin-top: -20px;
+}
+.cardFrameTeacher img {
+  margin: auto;
+  width: 90px;
+  height: 90px;
+}
+.TeacherCardContent {
+  width: 100%;
+  margin-bottom: 50px;
+}
+.TeacherCardContent p {
+  padding-left: 15px;
+  margin: 0px;
+  margin-bottom: 5px;
+}
+.pfpic {
+  border: 2px solid;
+  border-radius: 50%;
+  padding: 5px;
+}
+.deleteTeacherButtencontainer {
+  position: absolute;
+  margin-bottom: 44vh;
+  margin-left: 14vw;
+  background: none;
+/* border: none; */
+ 
+}
+
+.deleteTeacherButtencontainer:hover {
+  opacity: 90%;
+}
+
+.editButtonTeacher {
+  position: absolute;
+  margin-top: 44vh;
+  margin-right: 10vw;
+  width: 70px;
+  height: 25px;
+  border-radius: 20px;
+  background-color: orange;
+  border: 0px;
+  color: white;
+}
+.editButtonTeacher:hover {
+  background-color: white;
+  opacity: 90%;
+  color: orange;
+  cursor: pointer;
+  border: orange 2px solid;
+}
+.editButtonTeacher:active {
+  background-color: orange;
+  opacity: 90%;
+  color: white;
+  cursor: pointer;
+  border: white 2px solid;
+}
