@@ -1,14 +1,14 @@
 import React from 'react';
-import { Component, useState , useEffect} from "react";
+import {  useState } from "react";
 import "../Login/Login";
 import "./Login.css"
-import Home from '../Home/Home';
+
 
 const LoginPage=()=>{
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  
 
   const handleEmailChange = (event) => {
     setEmail(event.target.value);

@@ -11,6 +11,7 @@ import { Typography } from "@mui/material";
 import Navhead from "../../components/Navhead";
 import { useNavigate } from 'react-router-dom';
 
+
 function Courses() {
 
 
@@ -53,7 +54,7 @@ function Courses() {
       navigate('/');
     }
   }, []);
-  
+
 
   useEffect(() => {
     fetchCourses();
