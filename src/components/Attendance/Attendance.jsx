@@ -1,156 +1,206 @@
-// import React from "react";
-// import "../components.css";
-// import Navhead from "../../components/Navhead";
-// import { styled } from '@mui/material/styles';
-// import Paper from '@mui/material/Paper';
-// import TableCell, { tableCellClasses } from '@mui/material/TableCell';
-// import { Table, TableBody, TableHead, TableRow } from "@mui/material";
-// import TableContainer from '@mui/material/TableContainer';
-// import { useTheme } from '@mui/material/styles';
-// import OutlinedInput from '@mui/material/OutlinedInput';
-// import InputLabel from '@mui/material/InputLabel';
-// import MenuItem from '@mui/material/MenuItem';
-// import FormControl from '@mui/material/FormControl';
-// import Select from '@mui/material/Select';
-// import { ThemeProvider,createMuiTheme } from "@material-ui/core/styles";
+import React from "react";
+import "../components.css";
+import "../Attendance/Attendance.css";
+import Navhead from "../../components/Navhead";
+import { useTheme } from "@mui/material/styles";
+import OutlinedInput from "@mui/material/OutlinedInput";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
+import { useState } from "react";
+import axios from "axios";
+import { useEffect } from "react";
 
-// const ITEM_HEIGHT = 48;
-// const ITEM_PADDING_TOP = 8;
-// const MenuProps = {
-//   PaperProps: {
-//     style: {
-//       maxHeight: ITEM_HEIGHT * 1.5 + ITEM_PADDING_TOP,
-//       width: 150,
-//     },
-//   },
-// };
+const ITEM_HEIGHT = 48;
+const ITEM_PADDING_TOP = 8;
+const MenuProps = {
+  PaperProps: {
+    style: {
+      maxHeight: ITEM_HEIGHT * 1.5 + ITEM_PADDING_TOP,
+      width: 150,
+    },
+  },
+};
 
-// const names = [
-//   'Grade 1',
-//   'Grade 2',
-//   'Grade 3',
-//   'Grade 4',
+const names = ["Grade 1", "Grade 2", "Grade 3", "Grade 4"];
 
-// ];
+function getStyles(name, personName, theme) {
+  return {
+    fontWeight:
+      personName.indexOf(name) === -1
+        ? theme.typography.fontWeightRegular
+        : theme.typography.fontWeightMedium,
+  };
+}
 
-// function getStyles(name, personName, theme) {
-//   return {
-//     fontWeight:
-//       personName.indexOf(name) === -1
-//         ? theme.typography.fontWeightRegular
-//         : theme.typography.fontWeightMedium,
-//   };
-// }
+function Attendance() {
 
-// const customTheme=createMuiTheme({
-//   //theme settings
-//   palette: {
-//     primary: {
-//       main: '#EE8B3A',
-//     },
-//     secondary: pink,
-//   },
-// })
-// function Attendance() {
+const [attendee,setAttendee]=useState();
 
+const fetchAttendance=async()=>{
+  const res=await axios.get('http://localhost:8000/api/attendance');
+  setAttendee(res.data);
+  console.log(attendee);
+}
+console.log(attendee);
+  const theme = useTheme();
+  const [personName, setPersonName] = React.useState([]);
 
+  const handleChange = (event) => {
+    const {
+      target: { value },
+    } = event;
+    setPersonName(
+      // On autofill we get a stringified value.
+      typeof value === "string" ? value.split(",") : value
+    );
+  };
 
-//   const StyledTableCell = styled(TableCell)(({ theme }) => ({
-//     [`&.${tableCellClasses.head}`]: {
-//       backgroundColor: theme.palette.common.black,
-//       color: theme.palette.common.white,
-//     },
-//     [`&.${tableCellClasses.body}`]: {
-//       fontSize: 14,
-//     },
-//   }));
-  
-//   const StyledTableRow = styled(TableRow)(({ theme }) => ({
-//     '&:nth-of-type(odd)': {
-//       backgroundColor: theme.palette.action.hover,
-//     },
-//     // hide last border
-//     '&:last-child td, &:last-child th': {
-//       border: 0,
-//     },
-//   }));
+  useEffect(()=>{
+    fetchAttendance();
+},[])
 
-//   const theme = useTheme();
-//   const [personName, setPersonName] = React.useState([]);
+  return (
+    <div>
+      <Navhead />
 
-//   const handleChange = (event) => {
-//     const {
-//       target: { value },
-//     } = event;
-//     setPersonName(
-//       // On autofill we get a stringified value.
-//       typeof value === 'string' ? value.split(',') : value,
-//     );
-//   };
+      <section>
+        <div className='component-container'>
+          <h1> Attendance</h1>
+          <div className='form-attendance'>
+            <div>
+              <FormControl sx={{ m: 1, width: 300 }}>
+                <InputLabel
+                  id='demo-multiple-name-label'
+                  className='demo-multiple-name-label'
+                >
+                  Grade/Section
+                </InputLabel>
+                <Select
+                  labelId='demo-multiple-name-label'
+                  id='demo-multiple-name'
+                  multiple
+                  value={personName}
+                  onChange={handleChange}
+                  input={<OutlinedInput label='Name' />}
+                  MenuProps={MenuProps}
+                >
+                  {names.map((name) => (
+                    <MenuItem
+                      key={name}
+                      value={name}
+                      style={getStyles(name, personName, theme)}
+                    >
+                      {name}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+            </div>
+            <div>
+              <FormControl sx={{ m: 1, width: 300 }}>
+                <InputLabel
+                  id='demo-multiple-name-label'
+                  className='demo-multiple-name-label'
+                >
+                  Student Name
+                </InputLabel>
+                <Select
+                  labelId='demo-multiple-name-label'
+                  id='demo-multiple-name'
+                  multiple
+                  value={personName}
+                  onChange={handleChange}
+                  input={<OutlinedInput label='Name' />}
+                  MenuProps={MenuProps}
+                >
+                  {names.map((name) => (
+                    <MenuItem
+                      key={name}
+                      value={name}
+                      style={getStyles(name, personName, theme)}
+                    >
+                      {name}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+            </div>
+            <div><button className="submit-attendance">Submit</button></div>
+          </div>
+          {/* <TableContainer component={Paper}>
+            <Table sx={{ minWidth: 700 }} aria-label='customized table'>
+              <TableHead>
+                <TableRow>
+                  <StyledTableCell>First Name</StyledTableCell>
+                  <StyledTableCell align='right'></StyledTableCell>
+                  <StyledTableCell align='right'>Last Name</StyledTableCell>
+                  <StyledTableCell align='right'>Status</StyledTableCell>
+                  <StyledTableCell align='right'>Date</StyledTableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                <StyledTableRow>
+                  <StyledTableCell component='th' scope='row'>
+                    hi
+                  </StyledTableCell>
+                  <StyledTableCell align='right'>hi</StyledTableCell>
+                  <StyledTableCell align='right'>hi</StyledTableCell>
+                  <StyledTableCell align='right'>hi</StyledTableCell>
+                  <StyledTableCell align='right'>hi</StyledTableCell>
+                </StyledTableRow>
+              </TableBody>
+            </Table>
+          </TableContainer> */}
+          <div>
+            <table className='attendance-table'>
+              <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>
+              Status
+                </th>
+                <th>Date</th>
+              </tr>
 
+              <tr>
+                <td>Maya</td>
+                <td>Atiah</td>
+                <td>    <form >
+                   <div className="input-attendance">
+                  <div > <input
+                      type='radio'
+                      id='present'
+                      name='fav_language'
+                      value='present'
+                    />
+                  <label>present</label></div> 
+                  <div>  <input
+                      type='radio'
+                      id='abscent'
+                      name='fav_language'
+                      value='abscent'
+                    />
+                   <label >abscent</label></div> 
+                   <div>
+                    <input
+                      type='radio'
+                      id='late'
+                      name='fav_language'
+                      value='late'
+                    />
+                   <label for='late'>late</label></div> 
+                   </div>
+                  </form> </td>
+                <td>1111</td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </section>
+    </div>
+  );
+}
 
-
-//   return (
-//     <div>
-//       <Navhead />
-
-//       <section>
-//         <div className='component-container'>
-//           <h1> Attendance</h1>
-//          <ThemeProvider> <div>
-//       <FormControl sx={{ m: 1, width: 300 }}>
-//         <InputLabel id="demo-multiple-name-label" className="demo-multiple-name-label">Grade</InputLabel>
-//         <Select
-//           labelId="demo-multiple-name-label"
-//           id="demo-multiple-name"
-//           multiple
-//           value={personName}
-//           onChange={handleChange}
-//           input={<OutlinedInput label="Name" />}
-//           MenuProps={MenuProps}
-//         >
-//           {names.map((name) => (
-//             <MenuItem
-//               key={name}
-//               value={name}
-//               style={getStyles(name, personName, theme)}
-//             >
-//               {name}
-//             </MenuItem>
-//           ))}
-//         </Select>
-//       </FormControl>
-//     </div></ThemeProvider>
-//           <TableContainer component={Paper}>
-//       <Table sx={{ minWidth: 700 }} aria-label="customized table">
-//         <TableHead>
-//           <TableRow>
-//             <StyledTableCell>Student Name</StyledTableCell>
-//             <StyledTableCell align="right">Calories</StyledTableCell>
-//             <StyledTableCell align="right">Fat&nbsp;(g)</StyledTableCell>
-//             <StyledTableCell align="right">Carbs&nbsp;(g)</StyledTableCell>
-//             <StyledTableCell align="right">Protein&nbsp;(g)</StyledTableCell>
-//           </TableRow>
-//         </TableHead>
-//         <TableBody>
-        
-//             <StyledTableRow >
-//               <StyledTableCell component="th" scope="row">
-//              hi
-//               </StyledTableCell>
-//               <StyledTableCell align="right">hi</StyledTableCell>
-//               <StyledTableCell align="right">hi</StyledTableCell>
-//               <StyledTableCell align="right">hi</StyledTableCell>
-//               <StyledTableCell align="right">hi</StyledTableCell>
-//             </StyledTableRow>
-      
-//         </TableBody>
-//       </Table>
-//     </TableContainer>
-//         </div>
-//       </section>
-//     </div>
-//   );
-// }
-
-// export default Attendance;
+export default Attendance;

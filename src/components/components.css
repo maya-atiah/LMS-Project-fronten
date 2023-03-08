@@ -2,7 +2,6 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
   margin-left: 20rem;
   margin-top: 1rem;
   margin-right: 30rem;
@@ -10,6 +9,11 @@
 }
 
 
+@media (max-width: 1546px) {
+  .component-container{
+    margin-right: 15rem;
+  }
+}
 @media (max-width: 900px) {
   .react-calendar {
     display: none;
