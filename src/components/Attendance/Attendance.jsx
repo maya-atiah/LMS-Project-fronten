@@ -1,6 +1,5 @@
 import React from "react";
 import "../components.css";
-import "../Attendance/Attendance.css";
 import Navhead from "../../components/Navhead";
 import { useTheme } from "@mui/material/styles";
 import OutlinedInput from "@mui/material/OutlinedInput";
@@ -36,6 +35,32 @@ function getStyles(name, personName, theme) {
 }
 
 function Attendance() {
+
+const [attendee,setAttendee]=useState();
+
+const fetchAttendance=async()=>{
+  const res=await axios.get('http://localhost:8000/api/attendance');
+  setAttendee(res.data);
+  console.log(attendee);
+}
+console.log(attendee);
+  const theme = useTheme();
+  const [personName, setPersonName] = React.useState([]);
+
+  const handleChange = (event) => {
+    const {
+      target: { value },
+    } = event;
+    setPersonName(
+      // On autofill we get a stringified value.
+      typeof value === "string" ? value.split(",") : value
+    );
+  };
+
+  useEffect(()=>{
+    fetchAttendance();
+},[])
+
   const [attendee, setAttendee] = useState();
   const [gradeSection, setGradeSection] = useState();
 

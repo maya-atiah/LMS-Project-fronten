@@ -2,13 +2,13 @@ import React from "react";
 import "../components.css"
 import Navhead from "../../components/Navhead";
 import { useNavigate } from 'react-router-dom';
-import { useState ,useEffect} from "react";
+import { useEffect} from "react";
 
 
 function Reports() {
   const navigate = useNavigate();
   useEffect(() => {
-    if (!localStorage.getItem('token')) {
+    if (!localStorage.getItem('token') && window.location.pathname !== '/') {
       navigate('/');
     }
   }, []);
