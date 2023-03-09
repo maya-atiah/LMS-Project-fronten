@@ -27,6 +27,8 @@ function Teachers() {
       navigate("/");
     }
   }, []);
+ 
+
 
   const getAllTeachers = () =>
     axios
@@ -84,6 +86,9 @@ function Teachers() {
     setButtonPopup(false);
   };
 
+    await axios.delete(`http://localhost:8000/api/teacher/${id}`);
+   getAllTeachers();
+ };
   useEffect(() => {
     getAllTeachers();
   }, [buttonPopup]);
@@ -217,6 +222,9 @@ function Teachers() {
       <div className="Teachercontainer"></div>
     </>
   );
+
+
+
 }
 
 export default Teachers;
