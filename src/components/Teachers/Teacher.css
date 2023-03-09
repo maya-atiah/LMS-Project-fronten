@@ -1,0 +1,80 @@
+.Teachercontainer {
+  margin-left: 16vw;
+  height: 70vh;
+  width: 55vw;
+
+  padding: 15px;
+  flex-direction: column;
+}
+/* .course-title{
+  width: 90%;
+  margin-right: 10%;
+} */
+/* .cards{
+    display: grid;
+    grid-template-columns: auto auto;
+    margin-left: 10vh;
+} 
+.card{
+    background-color: #017f94;
+    padding: 10px;
+    width: 15vw;
+    border-radius:10px ;
+    margin: 10px;
+    height: 40vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+   
+}
+
+.cardline{
+    height: 3px;
+    width: 100%;
+    background-color: orange;
+    margin: auto;
+    margin-bottom: 20px;
+}
+
+.card p{
+    margin: 2px;
+    width: 100%;
+
+}
+
+.card img{
+   
+    height: 100px;
+    width: 100px;
+
+
+
+}
+.Teachersline {
+    
+    height: 2.5px;
+width: 100%;
+    background-color: #017f94;
+    margin-top: 4px;
+    margin-bottom: 30px;
+  } */
+ .allTeachersSection {
+  width: 100%;
+  height: 100%;
+}
+.allTeachersTitle {
+  margin-left: 4px;
+}
+.Teachersline {
+  height: 2.5px;
+  width: 100%;
+  background-color: #017f94;
+  margin-top: 4px;
+  margin-bottom: 30px;
+}
+.teacherCardsContainer {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  
+}

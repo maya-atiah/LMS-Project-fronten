@@ -8,6 +8,8 @@ import Courses from "./components/Courses/Courses";
 import Teachers from "./components/Teachers/Teachers";
 import Attendance from "./components/Attendance/Attendance";
 import Reports from "./components/Reports/Reports";
+import Students from "./components/Students/Students";
+
 import "./style/index.css";
 import LoginPage from "./components/Login/Login";
 
@@ -45,6 +47,8 @@ function App() {
           <Route path="/Classes" element={<Classes />} />
           <Route path="/Courses" element={<Courses />} />
           <Route path="/Teachers" element={<Teachers />} />
+          <Route path="/Students" element={<Students/>} />
+
           <Route path="/Attendance" element={<Attendance />} />
           <Route path="/Reports" element={<Reports />} />
         </Routes> 

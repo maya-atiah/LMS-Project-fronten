@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { FaHome, FaThLarge, FaBookOpen, FaUserAlt, FaRegListAlt, FaRegNewspaper,FaBars,FaSignOutAlt} from 'react-icons/fa';
+import { FaHome, FaThLarge, FaBookOpen,  FaBookReader,FaUserAlt, FaRegListAlt, FaRegNewspaper,FaBars,FaSignOutAlt} from 'react-icons/fa';
 
 import { NavLink, useNavigate } from "react-router-dom";
 import "../style/navbar.css";
@@ -48,6 +48,10 @@ function Navbar() {
             <NavLink to="/Teachers" className="nav-link">
               <FaUserAlt size={ICON_SIZE} />
               <span>Teachers</span>
+            </NavLink>
+            <NavLink to="/Students" className="nav-link">
+              <FaBookReader size={ICON_SIZE} />
+              <span>Students</span>
             </NavLink>
             <NavLink to="/Attendance" className="nav-link">
               <FaRegListAlt size={ICON_SIZE} />
