@@ -3,7 +3,7 @@ import "../components.css";
 import "../../style/index.css"
 import Navhead from "../../components/Navhead";
 import { useNavigate } from 'react-router-dom';
-import { useState ,useEffect} from "react";
+import { useEffect} from "react";
 
 function Classes() {
   const navigate = useNavigate();

@@ -1,7 +1,7 @@
 import { React } from "react";
+import {TeacherCard} from "./TeacherCard/TeacherCard"
 import "./Teacher.css";
 import axios from "axios";
-import { TeacherCard } from "./TeacherCard/TeacherCard.jsx";
 import Navhead from "../../components/Navhead";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
@@ -60,29 +60,28 @@ function Teachers() {
       password,
       phoneNumber,
       role,
-    }
-      // const response = await axios.post("http://localhost:8000/api/user",JSON.stringify(body));
+    };
+    // const response = await axios.post("http://localhost:8000/api/user",JSON.stringify(body));
 
-      var data = JSON.stringify(body);
-      
-      var config = {
-        method: 'post',
-        url: 'http://localhost:8000/api/user',
-        headers: { 
-          'Content-Type': 'application/json'
-        },
-        data : data
-      };
-      
-      axios(config)
+    var data = JSON.stringify(body);
+
+    var config = {
+      method: "post",
+      url: "http://localhost:8000/api/user",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      data: data,
+    };
+
+    axios(config)
       .then(function (response) {
-        console.log("res ",JSON.stringify(response.data));
+        console.log("res ", JSON.stringify(response.data));
       })
       .catch(function (error) {
         console.log(error);
       });
-      setButtonPopup(false);
-    
+    setButtonPopup(false);
   };
 
   useEffect(() => {
@@ -184,15 +183,13 @@ function Teachers() {
                         type="text"
                         id="role"
                         name="role"
-                        
                         onChange={(e) => setRole(e.target.value)}
                       />
                     </div>
                   </div>
 
                   {!isPending && (
-                    <button className="btn-add-teacher" onClick={submitHandler}
-                    >
+                    <button className="btn-add-teacher" onClick={submitHandler}>
                       add
                     </button>
                   )}
@@ -217,6 +214,7 @@ function Teachers() {
           </div>
         </div>
       </div>
+      <div className="Teachercontainer"></div>
     </>
   );
 }
