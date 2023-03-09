@@ -1,14 +1,13 @@
 import { React } from "react";
-import { useState, useEffect } from "react";
+
 import "./Teacher.css";
-import axios from "axios";
-import { TeacherCard } from "./TeacherCard/TeacherCard.jsx";
+
 import Navhead from "../../components/Navhead";
 import { useNavigate } from "react-router-dom";
 
 
 function Teachers() {
-  const [teacher, setTeacher] = useState([]);
+//   const [teacher, setTeacher] = useState([]);
 
   const navigate = useNavigate();
   useEffect(() => {
@@ -48,20 +47,13 @@ function Teachers() {
 
   return (
     <>
-      <Navhead />
+       <Navhead />
 
-      <div className='Teachercontainer'>
-        <div className='allTeachersSection'>
-          <p className='allTeachersTitle'>All Teachers</p>
-          <div className='Teachersline'></div>
-          <div className='teacherCardsContainer'>{teacherCard}</div>
-        </div>
-      </div>
+       <div className='Teachercontainer'>
+        
+       </div>
     </>
   );
-
-
-
 }
 
 export default Teachers;
