@@ -1,7 +1,6 @@
 import { React } from "react";
 import "./Teacher.css";
-import axios from "axios";
-import { TeacherCard } from "./TeacherCard/TeacherCard.jsx";
+
 import Navhead from "../../components/Navhead";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
@@ -27,6 +26,8 @@ function Teachers() {
       navigate("/");
     }
   }, []);
+ 
+
 
   const getAllTeachers = () =>
     axios
@@ -48,36 +49,16 @@ function Teachers() {
     );
   });
   const deleteTeacher = async (id) => {
-    await axios.delete(`http://localhost:8000/api/user/${id}`);
-    getAllTeachers();
-  };
-
-  const addTeacher = () => {
-    axios
-      .post("http://localhost:8000/api/user", {
-        firstName,
-        lastName,
-        email,
-        password,
-        phoneNumber,
-        role
-      })
-      .then(() => {});
-    setButtonPopup(false);
-  };
-
+    await axios.delete(`http://localhost:8000/api/teacher/${id}`);
+   getAllTeachers();
+ };
   useEffect(() => {
     getAllTeachers();
-  }, [buttonPopup]);
-  const submitHandler = (e) => {
-    e.preventDefault();
-    addTeacher();
-    // setButtonPopup(false);
-  };
+  }, []);
 
   return (
     <>
-      <Navhead />
+       <Navhead />
 
       <div className="Teachercontainer">
         <div className="allTeachersSection">
@@ -198,6 +179,9 @@ function Teachers() {
       </div>
     </>
   );
+
+
+
 }
 
 export default Teachers;
