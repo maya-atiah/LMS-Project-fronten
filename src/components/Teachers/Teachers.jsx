@@ -52,18 +52,37 @@ function Teachers() {
     getAllTeachers();
   };
 
-  const addTeacher = () => {
-    axios
-      .post("http://localhost:8000/api/user", {
-        firstName,
-        lastName,
-        email,
-        password,
-        phoneNumber,
-        role
+  const addTeacher = async () => {
+    const body = {
+      firstName,
+      lastName,
+      email,
+      password,
+      phoneNumber,
+      role,
+    }
+      // const response = await axios.post("http://localhost:8000/api/user",JSON.stringify(body));
+
+      var data = JSON.stringify(body);
+      
+      var config = {
+        method: 'post',
+        url: 'http://localhost:8000/api/user',
+        headers: { 
+          'Content-Type': 'application/json'
+        },
+        data : data
+      };
+      
+      axios(config)
+      .then(function (response) {
+        console.log("res ",JSON.stringify(response.data));
       })
-      .then(() => {});
-    setButtonPopup(false);
+      .catch(function (error) {
+        console.log(error);
+      });
+      setButtonPopup(false);
+    
   };
 
   useEffect(() => {
@@ -165,13 +184,15 @@ function Teachers() {
                         type="text"
                         id="role"
                         name="role"
+                        
                         onChange={(e) => setRole(e.target.value)}
                       />
                     </div>
                   </div>
 
                   {!isPending && (
-                    <button className="btn-add-teacher" onClick={submitHandler}>
+                    <button className="btn-add-teacher" onClick={submitHandler}
+                    >
                       add
                     </button>
                   )}
