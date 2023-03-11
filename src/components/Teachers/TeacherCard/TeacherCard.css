@@ -42,7 +42,7 @@
   margin-bottom: 43vh;
   margin-left: 12vw;
   background: none;
-border-radius: 30%; 
+border: none; 
 }
 
 .deleteTeacherButtencontainer:hover {
@@ -73,4 +73,23 @@ border-radius: 30%;
   color: white;
   cursor: pointer;
   border: white 2px solid;
+}
+@media only screen and (max-width: 1000px) {
+
+  .cardFrameTeacher {
+    width: 23vw;
+  }
+  .deleteTeacherButtencontainer {
+    margin-left: 18vw;
+  }
+}
+
+@media only screen and (max-width: 650px) {
+
+  .cardFrameTeacher {
+    width: 40vw;
+  }
+  .deleteTeacherButtencontainer {
+    margin-left: 28vw;
+  }
 }

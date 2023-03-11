@@ -1,14 +1,17 @@
-import { React } from "react";
-import {TeacherCard} from "./TeacherCard/TeacherCard"
-import "./Teacher.css";
-import axios from "axios";
-import Navhead from "../../components/Navhead";
-import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
-import PopupTeacher from "./PopupTeacher";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+// SideBare component
+import Navhead from "../../components/Navhead";
+// Components related to Teacher
+import { TeacherCard } from "./TeacherCard/TeacherCard";
+import PopupTeacher from "./PopupTeacher/PopupTeacher";
+// @mui components
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import Box from "@mui/material/Box";
 import { Typography } from "@mui/material";
+
+import "./Teacher.css";
 
 function Teachers() {
   const [teacher, setTeacher] = useState([]);
@@ -18,7 +21,7 @@ function Teachers() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [phoneNumber, setPhone] = useState("");
-  const [role, setRole] = useState("");
+  const [role, setRole] = useState("teacher");
   const [isPending, setIsPending] = useState(false);
 
   const navigate = useNavigate();
@@ -27,7 +30,7 @@ function Teachers() {
       navigate("/");
     }
   }, []);
-
+  // Fetching all users
   const getAllTeachers = () =>
     axios
       .get("http://localhost:8000/api/teacher")
@@ -47,11 +50,13 @@ function Teachers() {
       />
     );
   });
+
+  // Deleting function
   const deleteTeacher = async (id) => {
     await axios.delete(`http://localhost:8000/api/user/${id}`);
     getAllTeachers();
   };
-
+  // Posting a function
   const addTeacher = async () => {
     const body = {
       firstName,
@@ -73,7 +78,7 @@ function Teachers() {
       },
       data: data,
     };
-
+    console.log(config);
     axios(config)
       .then(function (response) {
         console.log("res ", JSON.stringify(response.data));
@@ -83,6 +88,8 @@ function Teachers() {
       });
     setButtonPopup(false);
   };
+  
+
 
   useEffect(() => {
     getAllTeachers();
@@ -99,9 +106,9 @@ function Teachers() {
 
       <div className="Teachercontainer">
         <div className="allTeachersSection">
-          <div className="titleTeacherAdd" onClick={() => setButtonPopup(true)}>
+          <div className="titleTeacherAdd">
             <h3 className="allTeachersTitle">All Teachers</h3>
-            <div className="addTeacher">
+            <div className="addTeacher" onClick={() => setButtonPopup(true)}>
               <div className="alignAddTeacher">
                 <AddCircleIcon /> <h3>Add Teacher</h3>
               </div>
@@ -176,16 +183,6 @@ function Teachers() {
                         onChange={(e) => setPhone(e.target.value)}
                       />
                     </div>{" "}
-                    <div className="input-label-flex">
-                      {" "}
-                      <label htmlFor="role">role</label>
-                      <input
-                        type="text"
-                        id="role"
-                        name="role"
-                        onChange={(e) => setRole(e.target.value)}
-                      />
-                    </div>
                   </div>
 
                   {!isPending && (
