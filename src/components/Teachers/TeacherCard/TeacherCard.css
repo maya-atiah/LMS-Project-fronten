@@ -22,6 +22,7 @@
   margin: auto;
   width: 90px;
   height: 90px;
+  color: black;
 }
 .TeacherCardContent {
   width: 100%;
@@ -43,6 +44,7 @@
   margin-left: 12vw;
   background: none;
 border-radius: 30%; 
+border:none;
 }
 
 .deleteTeacherButtencontainer:hover {
@@ -73,4 +75,12 @@ border-radius: 30%;
   color: white;
   cursor: pointer;
   border: white 2px solid;
+}
+
+.allTeachersSection{
+  color:white;
+}
+
+.img{
+  color:white;
 }
