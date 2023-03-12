@@ -23,6 +23,20 @@ function Classes() {
   const [sectionIds, setsection] = useState("[]");
   const [isPending, setIsPending] = useState(false);
   const [classes, setclass] = useState([]);
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+const [editMode, setEditMode] = useState(false);
+const [addMode, setAddMode] = useState(false);
+const [data, setData] = useState([]);
+const [id, setId] = useState(null);
+
+const [formData, setFormData] = useState({
+  name: "",
+   });
+const handleChange = (event) => {
+  setFormData({ ...formData, [event.target.name]: event.target.value });
+};
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   useEffect(() => {
     loadclass();
@@ -37,16 +51,69 @@ function Classes() {
 
   //delete
   const deleteUser = async (id) => {
-    await axios.delete(`http://localhost:8000/api/grade/${id}`);
+  
+  const confirm = window.confirm("Are you sure you want to delete this grade?");
+    if (!confirm) {
+      return;
+    }
+  await axios.delete(`http://localhost:8000/api/grade/${id}`);
 
     loadclass();
   };
   ///////////////////////////////////////////////////////////////////////////////////
   //add
-  const addClass = async () => {
+  
+const addClass = async () => {
     const capacity = 50;
-    console.log(sectionIds[0], name, capacity);
-    const body = {
+    
+
+  // Check if the name already exists in classes array
+  // const gradeExists = classes.some((grade) => grade.name === name);
+  
+  // if (gradeExists) {
+  //  alert( `'${name}' already exists`);
+  //   return;
+
+   // Check if the name already exists in classes array
+   const gradeExists = classes.some((grade) => grade.name === name);
+   if (gradeExists) {
+    // Find the grade object that matches the entered grade name
+    const matchedGrade = classes.find((grade) => grade.name === name);
+  
+    // Add the new section name to the sections array of the matched grade object
+    // matchedGrade.sections.push({ letter: sectionIds[0] });
+  
+    // Make a PUT request to update the existing grade object in the database
+    // axios.put('http://localhost:8000/api/grades', matchedGrade.sections)
+    //   .then(response => {
+    //     console.log(response.data); // Log the updated grade object
+    //     setclass([...classes]); // Update the state with the updated classes array
+    //   })
+    //   .catch(error => {
+    //     console.error(error);
+    //   });
+
+    const b={
+      "sectionIds[0]" : sectionIds[0]
+    }
+    console.log("body ",JSON.stringify(b));
+
+  await axios
+    .post("http://localhost:8000/api/grade",JSON.stringify(b),{ headers: {
+      'Content-Type': 'application/json'
+  }}
+    )
+    .then(() => {
+     
+    });
+  setButtonPopup(false);
+  loadclass();
+  }
+
+
+// console.log(sectionIds[0], name, capacity);
+    else{
+const body = {
       name: name,
       capacity: capacity,
       "sectionIds[0]": sectionIds[0],
@@ -54,25 +121,26 @@ function Classes() {
 
     console.log("body ", JSON.stringify(body));
 
-    await axios
-      .post("http://localhost:8000/api/grade", JSON.stringify(body), {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      })
-      .then(() => {});
-    setButtonPopup(false);
-  };
+  await axios
+    .post("http://localhost:8000/api/grade",JSON.stringify(body),{ headers: {
+      'Content-Type': 'application/json'
+  }}
+    )
+    .then(() => {
+     
+    });
+  setButtonPopup(false);
+  loadclass();
+  }
+}
 
   ///
   const submitHandler = (e) => {
     e.preventDefault();
     addClass();
-    // addSection();
+  
   };
-  ///////////////////////////////////////////////////////////////////////////////////
-
-  return (
+    return (
     <>
       <Navhead />
 
@@ -134,14 +202,17 @@ function Classes() {
           </div>
         </div>
         <br></br> <br></br>
-        <div>
-          <table className="table-class">
-            <thead>
-              <tr className="first--">
-                <th>Class</th>
-                <th>Section</th>
-                <th>Delete</th>
-              </tr>
+
+
+            <div>
+             
+<table className="table-class">
+          <thead>
+            <tr className="first--">
+              <th>Class</th>
+              <th>Section</th>
+              <th>Delete</th>
+            </tr>
             </thead>
 
             <tbody>
