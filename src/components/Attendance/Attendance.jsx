@@ -118,7 +118,7 @@ function Attendance() {
                     <th>First Name</th>
                     <th>Last Name</th>
                     <th>Status</th>
-                    <th>Date</th>
+                   
                   </tr>
                 </thead>
                 <tbody>
@@ -167,7 +167,7 @@ function Attendance() {
                               </div>
                             </form>{" "}
                           </td>
-                          <td>1111</td>
+                         
                         </tr>
                       );
                     })}
