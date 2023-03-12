@@ -1,5 +1,5 @@
 .react-calendar {
-  position: absolute;
+  position: fixed;
   width: 300px;
   left: 1325px;
   top: 400px;
@@ -8,7 +8,7 @@
   border-radius: 10px;
 }
 .react-calendar--doubleView {
-  width: 700px;
+  width: 600px;
 }
 .react-calendar--doubleView .react-calendar__viewContainer {
   display: flex;

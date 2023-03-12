@@ -1,5 +1,5 @@
 import { React } from "react";
-import {TeacherCard} from "./TeacherCard/TeacherCard"
+import { TeacherCard } from "./TeacherCard/TeacherCard";
 import "./Teacher.css";
 import axios from "axios";
 import Navhead from "../../components/Navhead";
@@ -36,6 +36,9 @@ function Teachers() {
         console.log(response.data.users);
       })
       .catch((error) => console.error(`Error : {${error}`));
+
+
+      
   const teacherCard = teacher.map((object) => {
     return (
       <TeacherCard
@@ -87,6 +90,7 @@ function Teachers() {
   useEffect(() => {
     getAllTeachers();
   }, [buttonPopup]);
+
   const submitHandler = (e) => {
     e.preventDefault();
     addTeacher();
@@ -97,12 +101,12 @@ function Teachers() {
     <>
       <Navhead />
 
-      <div className="Teachercontainer">
-        <div className="allTeachersSection">
-          <div className="titleTeacherAdd" onClick={() => setButtonPopup(true)}>
-            <h3 className="allTeachersTitle">All Teachers</h3>
-            <div className="addTeacher">
-              <div className="alignAddTeacher">
+      <div className='component-container'>
+        <div className='allTeachersSection'>
+          <div className='titleTeacherAdd' onClick={() => setButtonPopup(true)}>
+            <h3 className='allTeachersTitle'>All Teachers</h3>
+            <div className='addTeacher'>
+              <div className='alignAddTeacher'>
                 <AddCircleIcon /> <h3>Add Teacher</h3>
               </div>
 
@@ -111,90 +115,96 @@ function Teachers() {
                 setTrigger={() => setButtonPopup(false)}
               >
                 <Box
-                  component="form"
+                  component='form'
                   sx={{
                     "& > :not(style)": { m: 1 },
                   }}
                   noValidate
-                  autoComplete="off"
+                  autoComplete='off'
                 >
                   <Typography
                     gutterBottom
-                    color="white"
-                    variant="h4"
-                    component="div"
+                    color='white'
+                    variant='h4'
+                    component='div'
                   >
                     Add Teacher
                   </Typography>
-                  <div className="input">
-                    <div className="input-label-flex">
-                      <label htmlFor="firstName">First Name</label>
+                  <div className='input'>
+                    <div className='input-label-flex'>
+                      <label htmlFor='firstName'>First Name</label>
                       <input
-                        type="text"
-                        id="firstName"
-                        name="firstName"
+                        type='text'
+                        id='firstName'
+                        name='firstName'
+                        placeholder='First Name'
                         onChange={(e) => setFname(e.target.value)}
                       />
                     </div>
-                    <div className="input-label-flex">
+                    <div className='input-label-flex'>
                       {" "}
-                      <label htmlFor="lastName">Last Name</label>
+                      <label htmlFor='lastName'>Last Name</label>
                       <input
-                        type="text"
-                        id="lastName"
-                        name="lastName"
+                        type='text'
+                        id='lastName'
+                        name='lastName'
+                        placeholder='Last Name'
                         onChange={(e) => setLname(e.target.value)}
                       />
                     </div>
-                    <div className="input-label-flex">
+                    <div className='input-label-flex'>
                       {" "}
-                      <label htmlFor="Email">Email</label>
+                      <label htmlFor='Email'>Email</label>
                       <input
-                        type="mail"
-                        id="email"
-                        name="email"
+                        type='mail'
+                        id='email'
+                        name='email'
+                        placeholder='Email'
                         onChange={(e) => setEmail(e.target.value)}
                       />
                     </div>
-                    <div className="input-label-flex">
+                    <div className='input-label-flex'>
                       {" "}
-                      <label htmlFor="Password">Password</label>
+                      <label htmlFor='Password'>Password</label>
                       <input
-                        type="password"
-                        id="password"
-                        name="password"
+                        type='password'
+                        id='password'
+                        name='password'
+                        placeholder='Password'
                         onChange={(e) => setPassword(e.target.value)}
                       />
                     </div>
-                    <div className="input-label-flex">
+                    <div className='input-label-flex'>
                       {" "}
-                      <label htmlFor="phoneNumber">Phone Number</label>
+                      <label htmlFor='phoneNumber'>Phone Number</label>
                       <input
-                        type="text"
-                        id="phoneNumber"
-                        name="phoneNumber"
+                        type='text'
+                        id='phoneNumber'
+                        name='phoneNumber'
+                        placeholder='Phone number'
                         onChange={(e) => setPhone(e.target.value)}
                       />
                     </div>{" "}
-                    <div className="input-label-flex">
+                    <div className='input-label-flex'>
                       {" "}
-                      <label htmlFor="role">role</label>
+                      <label htmlFor='role'>role</label>
                       <input
-                        type="text"
-                        id="role"
-                        name="role"
+                        type='text'
+                        id='role'
+                        name='role'
+                        placeholder='Role'
                         onChange={(e) => setRole(e.target.value)}
                       />
                     </div>
                   </div>
 
                   {!isPending && (
-                    <button className="btn-add-teacher" onClick={submitHandler}>
+                    <button className='btn-add-teacher' onClick={submitHandler}>
                       add
                     </button>
                   )}
                   {isPending && (
-                    <button className="btn-add-teacher" onClick={submitHandler}>
+                    <button className='btn-add-teacher' onClick={submitHandler}>
                       adding course
                     </button>
                   )}
@@ -202,8 +212,8 @@ function Teachers() {
               </PopupTeacher>
             </div>
           </div>
-          <div className="Teachersline"></div>
-          <div className="teacherCardsContainer">
+          <div className='Teachersline'></div>
+          <div className='teacherCardsContainer'>
             {teacher.map((each, key) => (
               <TeacherCard
                 key={key}
@@ -214,9 +224,10 @@ function Teachers() {
           </div>
         </div>
       </div>
-      <div className="Teachercontainer"></div>
+      <div className='Teachercontainer'></div>
     </>
   );
 }
 
 export default Teachers;
+
