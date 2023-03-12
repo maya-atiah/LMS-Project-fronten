@@ -7,16 +7,18 @@ import axios from "axios";
 import { useEffect } from "react";
 import Dropdown from "react-multilevel-dropdown";
 import swal from 'sweetalert';
+import {AiFillCaretDown} from  "react-icons/ai";
 
 function Attendance() {
   
   const [gradeSection, setGradeSection] = useState([]);
   const [student, setStudent] = useState([]);
-  const [tableMood, setTableMood] = useState(false);
+  const [table, setTable] = useState(false);
   const [gradeId, setGradeId] = useState(null);
   const [sectionId, setSectionId] = useState(null);
- 
-  
+  const [title,setTitle]=useState('');
+ const [letter,setletter]=useState('');
+//  const [isNavExpanded, setIsNavExpanded] = useState(false);
 
   const fetchAttendance = async (e,id,status) => {
     // e.preventDefault();
@@ -39,7 +41,7 @@ function Attendance() {
     await axios
       .get(`http://localhost:8000/api/allStudent/${gradeId}/${sectionId}`)
       .then((res) =>{ setStudent(res.data);
-        setTableMood(true);
+        setTable(true);
       })
       .catch((err) => console.log(err));
   };
@@ -58,6 +60,7 @@ function Attendance() {
 
   const handleGetStudent = () => {
     fetchallStudentByGradeSection(gradeId, sectionId);
+    setTitle(gradeSection.name)
    
   };
 
@@ -72,9 +75,10 @@ function Attendance() {
         <div className='component-container'>
           <h1> Attendance</h1>
           <div className='form-attendance'>
-            <div>
+            <div >
               <Dropdown
-                title='Grade/Section'
+                title='Grade/Section '
+                
                 position='right'
                 className='dropdown-attendance'
               >
@@ -84,7 +88,8 @@ function Attendance() {
                       <Dropdown.Item
                         key={grade.id}
                         onClick={() => {
-                          setGradeId(grade.id);
+                          setGradeId(grade.id)
+                          setTitle(grade.name)
                         }}
                       >
                         {grade.name}
@@ -94,7 +99,9 @@ function Attendance() {
                               <Dropdown.Item
                                 key={section.id}
                                 onClick={() => {
-                                  setSectionId(section.id);
+                                  setSectionId(section.id)
+                                  setletter(section.letter)
+                                 
                                 }}
                               >
                                 {section.letter}
@@ -106,12 +113,14 @@ function Attendance() {
                     );
                   })}
               </Dropdown>
+              
             </div>
 
         
           </div>
+          <div className="attendance-gradename">{title}  {letter}</div>
           <div>
-            {tableMood && (
+            {table && (
               <table className='attendance-table'>
                 <thead>
                   <tr>

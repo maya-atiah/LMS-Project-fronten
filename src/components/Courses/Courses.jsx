@@ -99,7 +99,7 @@ function Courses() {
             <AddCircleIcon /> Add Course
             <PopupCourse
               trigger={buttonPopup}
-              setTrigger={() => setButtonPopup(false)}
+              setTrigger={setButtonPopup}
             >
               <Box
                 component='form'

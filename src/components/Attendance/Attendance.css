@@ -15,7 +15,11 @@ h1 {
   color: #EE8B3A !important;
 }
 
-
+.attendance-gradename{
+  color: #017f94;
+   font-weight: 400;
+  font-size: 30px;
+}
 
 
 .attendance-table{
