@@ -29,6 +29,10 @@ function Courses() {
     console.log("course", course);
   };
 
+
+  
+
+  
   const handleDelete = async (id) => {
     const res = await axios.delete(
       `http://localhost:8000/api/deleteById/${id}`
@@ -38,12 +42,14 @@ function Courses() {
       const newCourse = course.filter((course) => course.id !== id);
       setIsDeleted(true);
       setCourse(newCourse);
-      swal({
-        title: "Course is deleted",
-        icon: "success",
-      });
+       swal({
+      title: "Course is deleted",
+      icon: "success",
+    });
     }
   };
+
+  
 
   const addCourse = async () => {
     await axios
@@ -78,6 +84,9 @@ function Courses() {
   };
 
   console.log("course", course);
+
+
+ 
 
   return (
     <>
