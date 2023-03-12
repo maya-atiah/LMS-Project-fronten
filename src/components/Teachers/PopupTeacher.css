@@ -1,0 +1,42 @@
+.popupTeacher {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.621);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform: "translate(-50%,-50%";
+  z-index: 1000;
+}
+
+.popup-inner {
+  position: relative;
+  padding: 32px;
+  width: 100%;
+  max-width: 640px;
+  background-color: #017f94;
+  border-radius: 10px;
+}
+
+.close-teacher-btn {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  cursor: pointer;
+  background-color: white; /* Green */
+  border: 1px solid white;
+  color: white;
+  padding: 0.2rem;
+  text-align: center;
+  text-decoration: none;
+  font-size: 1rem;
+  cursor: pointer;
+  width: 8rem;
+  display: block;
+  border-radius: 10rem;
+  border: 2px solid #ee8b3a;
+  background-color: transparent;
+}

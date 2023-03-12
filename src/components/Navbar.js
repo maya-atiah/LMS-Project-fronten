@@ -1,45 +1,47 @@
-import React from "react";
+import React, { useState } from "react";
 import {
-  FaHome,
-  FaAngleRight,
-  FaAngleLeft,
-  FaBookOpen,
-  FaThLarge,
-  FaUserAlt,
-  FaSignOutAlt,
   FaBars,
+  FaHome,
+  FaThLarge,
+  FaBookOpen,
+  FaBookReader,
+  FaUserAlt,
   FaRegListAlt,
   FaRegNewspaper,
+  FaSignOutAlt,
 } from "react-icons/fa";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import "../style/navbar.css";
 
 const ICON_SIZE = 20;
 
-function Navbar({ visible, show }) {
+function Navbar() {
+  const navigate = useNavigate();
+  const [visible, setVisible] = useState(false);
+
+  const logOut = () => {
+    window.location.href = "/";
+    window.localStorage.clear();
+    localStorage.removeItem("token");
+    navigate("/");
+  };
+
   return (
     <>
       <div className="mobile-nav">
-        <button className="mobile-nav-btn" onClick={() => show(!visible)}>
+        <button className="mobile-nav-btn" onClick={() => setVisible(!visible)}>
           <FaBars size={24} />
         </button>
       </div>
-      <nav className={!visible ? "navbar" : ""}>
-        <button
-          type="button"
-          className="nav-btn"
-          onClick={() => show(!visible)}
-        >
-          {!visible ? <FaAngleRight size={30} /> : <FaAngleLeft size={30} />}
-        </button>
-        <div >
-          <NavLink className="logo" to="/">
+      <nav className={`nav ${visible ? "visible" : ""}`}>
+        <div>
+          <NavLink className="logo">
             <img src={require("../assets/Images/logo.png")} alt="logo" />
           </NavLink>
           <div className="links nav-top">
             <NavLink to="/Home" className="nav-link">
               <FaHome size={ICON_SIZE} />
-              <span>Home</span>
+              <span>Dashboard</span>
             </NavLink>
             <NavLink to="/Classes" className="nav-link">
               <FaThLarge size={ICON_SIZE} />
@@ -53,6 +55,10 @@ function Navbar({ visible, show }) {
               <FaUserAlt size={ICON_SIZE} />
               <span>Teachers</span>
             </NavLink>
+            <NavLink to="/Students" className="nav-link">
+              <FaBookReader size={ICON_SIZE} />
+              <span>Students</span>
+            </NavLink>
             <NavLink to="/Attendance" className="nav-link">
               <FaRegListAlt size={ICON_SIZE} />
               <span>Attendance</span>
@@ -65,9 +71,9 @@ function Navbar({ visible, show }) {
         </div>
 
         <div className="links">
-          <NavLink to="/Sign-out" className="nav-link">
+          <NavLink to="/" className="nav-link">
             <FaSignOutAlt size={ICON_SIZE} />
-            <span>Logout</span>
+            <span onClick={logOut}>Logout</span>
           </NavLink>
         </div>
       </nav>

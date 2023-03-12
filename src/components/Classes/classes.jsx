@@ -1,13 +1,252 @@
 import React from "react";
 import "../components.css";
+import "./Class.css";
+import AddCircleIcon from "@mui/icons-material/AddCircle";
+import Navhead from "../../components/Navhead";
+import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import axios from "axios";
+import Box from "@mui/material/Box";
+import { Typography } from "@mui/material";
+import PopupClass from "../../components/Classes/PopupClass";
 
 function Classes() {
-  return(
-   <div className="component-container">
-       
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (!localStorage.getItem("token") && window.location.pathname !== "/") {
+      navigate("/");
+    }
+  }, []);
 
-  </div>
-  )
+  const [buttonPopup, setButtonPopup] = useState(false);
+  const [name, setGrade] = useState("");
+  const [sectionIds, setsection] = useState("[]");
+  const [isPending, setIsPending] = useState(false);
+  const [classes, setclass] = useState([]);
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+const [editMode, setEditMode] = useState(false);
+const [addMode, setAddMode] = useState(false);
+const [data, setData] = useState([]);
+const [id, setId] = useState(null);
+
+const [formData, setFormData] = useState({
+  name: "",
+   });
+const handleChange = (event) => {
+  setFormData({ ...formData, [event.target.name]: event.target.value });
+};
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+  useEffect(() => {
+    loadclass();
+  }, [buttonPopup]);
+
+  //get
+  const loadclass = async () => {
+    const res = await axios.get("http://localhost:8000/api/grade");
+    console.log(res.data);
+    setclass(res.data);
+  };
+
+  //delete
+  const deleteUser = async (id) => {
+  
+  const confirm = window.confirm("Are you sure you want to delete this grade?");
+    if (!confirm) {
+      return;
+    }
+  await axios.delete(`http://localhost:8000/api/grade/${id}`);
+
+    loadclass();
+  };
+  ///////////////////////////////////////////////////////////////////////////////////
+  //add
+  
+const addClass = async () => {
+    const capacity = 50;
+    
+
+  // Check if the name already exists in classes array
+  // const gradeExists = classes.some((grade) => grade.name === name);
+  
+  // if (gradeExists) {
+  //  alert( `'${name}' already exists`);
+  //   return;
+
+   // Check if the name already exists in classes array
+   const gradeExists = classes.some((grade) => grade.name === name);
+   if (gradeExists) {
+    // Find the grade object that matches the entered grade name
+    const matchedGrade = classes.find((grade) => grade.name === name);
+  
+    // Add the new section name to the sections array of the matched grade object
+    // matchedGrade.sections.push({ letter: sectionIds[0] });
+  
+    // Make a PUT request to update the existing grade object in the database
+    // axios.put('http://localhost:8000/api/grades', matchedGrade.sections)
+    //   .then(response => {
+    //     console.log(response.data); // Log the updated grade object
+    //     setclass([...classes]); // Update the state with the updated classes array
+    //   })
+    //   .catch(error => {
+    //     console.error(error);
+    //   });
+
+    const b={
+      "sectionIds[0]" : sectionIds[0]
+    }
+    console.log("body ",JSON.stringify(b));
+
+  await axios
+    .post("http://localhost:8000/api/grade",JSON.stringify(b),{ headers: {
+      'Content-Type': 'application/json'
+  }}
+    )
+    .then(() => {
+     
+    });
+  setButtonPopup(false);
+  loadclass();
+  }
+
+
+// console.log(sectionIds[0], name, capacity);
+    else{
+const body = {
+      name: name,
+      capacity: capacity,
+      "sectionIds[0]": sectionIds[0],
+    };
+
+    console.log("body ", JSON.stringify(body));
+
+  await axios
+    .post("http://localhost:8000/api/grade",JSON.stringify(body),{ headers: {
+      'Content-Type': 'application/json'
+  }}
+    )
+    .then(() => {
+     
+    });
+  setButtonPopup(false);
+  loadclass();
+  }
+}
+
+  ///
+  const submitHandler = (e) => {
+    e.preventDefault();
+    addClass();
+  
+  };
+    return (
+    <>
+      <Navhead />
+
+      <div className="component-container">
+        <div className="course-title" onClick={() => setButtonPopup(true)}>
+          <div>Grades </div>
+          <div className="addingCourse">
+            <AddCircleIcon /> Add Grade
+            <PopupClass
+              trigger={buttonPopup}
+              setTrigger={() => setButtonPopup(false)}
+            >
+              <Box
+                component="form"
+                sx={{
+                  "& > :not(style)": { m: 1 },
+                }}
+                noValidate
+                autoComplete="off"
+              >
+                <Typography
+                  gutterBottom
+                  color="white"
+                  variant="h4"
+                  component="div"
+                >
+                  Add New Grade
+                </Typography>
+
+                <input
+                  type="text"
+                  id="Grade"
+                  name="Grade"
+                  placeholder="Grade name"
+                  onChange={(e) => setGrade(e.target.value)}
+                />
+                <br></br>
+                <input
+                  type="text"
+                  id="section"
+                  name="Section"
+                  placeholder="Section"
+                  onChange={(e) => setsection(e.target.value)}
+                />
+                <br></br>
+
+                {!isPending && (
+                  <button className="btn-add-course" onClick={submitHandler}>
+                    add
+                  </button>
+                )}
+                {isPending && (
+                  <button className="btn-add-course" onClick={submitHandler}>
+                    adding new Grade
+                  </button>
+                )}
+              </Box>
+            </PopupClass>
+          </div>
+        </div>
+        <br></br> <br></br>
+
+
+            <div>
+             
+<table className="table-class">
+          <thead>
+            <tr className="first--">
+              <th>Class</th>
+              <th>Section</th>
+              <th>Delete</th>
+            </tr>
+            </thead>
+
+            <tbody>
+              {classes.map((item, index) => {
+                return (
+                  <tr className="" key={index}>
+                    <th> {item.name} </th>
+
+                    <th>
+                      {item.sections.map((section, index) => (
+                        <th key={index}> {section.letter}</th>
+                      ))}
+                    </th>
+
+                    <th>
+                      {" "}
+                      <button
+                        alt=""
+                        className="button"
+                        onClick={() => deleteUser(item.id)}
+                      >
+                        {" "}
+                        Delete{" "}
+                      </button>
+                    </th>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </>
+  );
 }
 
 export default Classes;
