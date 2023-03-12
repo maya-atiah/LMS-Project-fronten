@@ -82,7 +82,7 @@ function Home() {
   return (
     <div>
       <Navhead />
-      <section classNAme="home-section>
+      <section classNAme="home-section">
         <div className="component-container">
           <h1 className="home"> Home </h1>
           <div className="cards">
