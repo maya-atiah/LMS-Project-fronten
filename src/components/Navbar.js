@@ -1,33 +1,39 @@
-import React, { useEffect } from "react";
-import { FaHome, FaThLarge, FaBookOpen,  FaBookReader,FaUserAlt, FaRegListAlt, FaRegNewspaper,FaBars,FaSignOutAlt} from 'react-icons/fa';
-
+import React, { useState } from "react";
+import {
+  FaBars,
+  FaHome,
+  FaThLarge,
+  FaBookOpen,
+  FaBookReader,
+  FaUserAlt,
+  FaRegListAlt,
+  FaRegNewspaper,
+  FaSignOutAlt,
+} from "react-icons/fa";
 import { NavLink, useNavigate } from "react-router-dom";
 import "../style/navbar.css";
 
 const ICON_SIZE = 20;
 
 function Navbar() {
-  const navigate= useNavigate();
+  const navigate = useNavigate();
+  const [visible, setVisible] = useState(false);
+
   const logOut = () => {
     window.location.href = "/";
-
     window.localStorage.clear();
-    localStorage.removeItem('token');
-    navigate('/');
+    localStorage.removeItem("token");
+    navigate("/");
   };
-  useEffect(() =>{
-    if(!localStorage.getItem('token')){
-      navigate('/');
-    }
-  }, []);
+
   return (
     <>
       <div className="mobile-nav">
-        <button className="mobile-nav-btn">
+        <button className="mobile-nav-btn" onClick={() => setVisible(!visible)}>
           <FaBars size={24} />
         </button>
       </div>
-      <nav>
+      <nav className={`nav ${visible ? "visible" : ""}`}>
         <div>
           <NavLink className="logo">
             <img src={require("../assets/Images/logo.png")} alt="logo" />

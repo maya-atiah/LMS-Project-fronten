@@ -15,7 +15,11 @@ h1 {
   color: #EE8B3A !important;
 }
 
-
+.attendance-gradename{
+  color: #017f94;
+   font-weight: 400;
+  font-size: 30px;
+}
 
 
 .attendance-table{
@@ -47,7 +51,11 @@ table, th, td {
   flex-direction: row;
   margin-bottom: 2rem;
   align-items:center;
+<<<<<<< HEAD
   justify-content: space-around;
+=======
+  justify-content: flex-start;
+>>>>>>> e8c411841eae4429e0e2f5e45db30b60148a842d
 }
 
 #demo-multiple-name{
@@ -82,6 +90,7 @@ justify-content: center;
 }
 .submit-attendance:hover{
   background-color: #017f94;
+<<<<<<< HEAD
 }
 
 .dropdown-attendance{
@@ -92,6 +101,24 @@ justify-content: center;
   padding: 0.6rem;
   border-radius: 15rem;
   font-weight: bold;
+=======
+  
+}
+
+
+.dropdown-attendance{
+  background: #EE8B3A ;
+  border-radius: 10rem;
+  color: white;
+  font-size:1.2rem;
+  padding: 0.5rem;
+  cursor: pointer;
+  width: 10rem;
+  height: 3rem;
+  border: none;
+  margin-top: 1px;
+  text-transform: capitalize;
+>>>>>>> e8c411841eae4429e0e2f5e45db30b60148a842d
 }
 
 .dropdown-attendance:hover{
