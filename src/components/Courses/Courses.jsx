@@ -10,6 +10,8 @@ import Box from "@mui/material/Box";
 import { Typography } from "@mui/material";
 import Navhead from "../../components/Navhead";
 import { useNavigate } from 'react-router-dom';
+import swal from 'sweetalert';
+
 
 
 function Courses() {
@@ -36,6 +38,10 @@ function Courses() {
       const newCourse = course.filter((course) => course.id !== id);
       setIsDeleted(true);
       setCourse(newCourse);
+      swal({
+        title: "Course is deleted",
+        icon: "success",
+      });
     }
   };
 
@@ -64,6 +70,10 @@ function Courses() {
   const submitHandler = (e) => {
     e.preventDefault();
     addCourse();
+    swal({
+      title: "Course is added",
+      icon: "success",
+    });
     // setButtonPopup(false);
   };
 
@@ -102,6 +112,7 @@ function Courses() {
                   type='text'
                   id='subject'
                   name='subject'
+                  placeholder="Write a Subject"
                   onChange={(e) => setSubject(e.target.value)}
                 />
                 {!isPending && (
@@ -121,7 +132,7 @@ function Courses() {
         <Container>
           <Grid container spacing={3}>
             {course.map((course) => (
-              <Grid item xs={12} md={12} lg={4} key={course.id}>
+              <Grid item xs={12} md={6} lg={4} key={course.id}>
                 <CourseCard course={course} handleDelete={handleDelete} />
               </Grid>
             ))}

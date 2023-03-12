@@ -6,57 +6,63 @@ import { useState } from "react";
 import axios from "axios";
 import { useEffect } from "react";
 import Dropdown from "react-multilevel-dropdown";
-
-
-
+import swal from 'sweetalert';
 
 function Attendance() {
-
-
-  const [attendee, setAttendee] = useState();
-  const [gradeSection, setGradeSection] = useState();
-  const [student,setStudent]=useState();
-  const [tableMood, setTableMood] = useState(false);
-
-  const [gradeName,setGradeName]=useState();
-  const [sectionName,setSectionName]=useState();
   
+  const [gradeSection, setGradeSection] = useState([]);
+  const [student, setStudent] = useState([]);
+  const [tableMood, setTableMood] = useState(false);
+  const [gradeId, setGradeId] = useState(null);
+  const [sectionId, setSectionId] = useState(null);
  
+  
 
-
-  const fetchAttendance = async () => {
-    const res = await axios.get("http://localhost:8000/api/attendance");
-    setAttendee(res.data);
-    // console.log(attendee);
+  const fetchAttendance = async (e,id,status) => {
+    // e.preventDefault();
+    const res=await axios.post(`http://localhost:8000/api/attendance/${id}`, {status});
+    
+     swal({
+      title: res.data.message,
+    });
+   
   };
 
   const fetchGradeSection = async () => {
-    const res = await axios.get("http://localhost:8000/api/grade");
-    setGradeSection(res.data);
+    await axios
+      .get("http://localhost:8000/api/grade")
+      .then((res) => setGradeSection(res.data))
+      .catch((err) => console.log(err));
   };
 
-
-
-  const fetchallStudentByGradeSection = async (gradeName,sectionName) => {
-    const res = await axios.get(`http://localhost:8000/api/allStudent/${gradeName}${sectionName}`);
-    setStudent(res.data);
+  const fetchallStudentByGradeSection = async (gradeId, sectionId) => {
+    await axios
+      .get(`http://localhost:8000/api/allStudent/${gradeId}/${sectionId}`)
+      .then((res) =>{ setStudent(res.data);
+        setTableMood(true);
+      })
+      .catch((err) => console.log(err));
   };
-  console.log(student);
-
-
-
 
   useEffect(() => {
-    fetchAttendance();
+    // fetchAttendance();
     fetchGradeSection();
-    fetchallStudentByGradeSection();
+    fetchallStudentByGradeSection(1,1);
   }, []);
+
+  useEffect(() => {
+    if (sectionId !== null) {
+      handleGetStudent();
+    }
+  }, [sectionId, gradeId]);
+
+  const handleGetStudent = () => {
+    fetchallStudentByGradeSection(gradeId, sectionId);
+   
+  };
+
   
 
-  const handleGetStudent=()=>{
-
-     setTableMood(true);
-  }
 
   return (
     <div>
@@ -67,16 +73,33 @@ function Attendance() {
           <h1> Attendance</h1>
           <div className='form-attendance'>
             <div>
-              <Dropdown title="Grade/Section" position='right' >
+              <Dropdown
+                title='Grade/Section'
+                position='right'
+                className='dropdown-attendance'
+              >
                 {gradeSection &&
                   gradeSection.map((grade) => {
                     return (
-                      <Dropdown.Item  onChange={(e)=>setGradeName(e.target.value)} key={grade.id}>
+                      <Dropdown.Item
+                        key={grade.id}
+                        onClick={() => {
+                          setGradeId(grade.id);
+                        }}
+                      >
                         {grade.name}
                         <Dropdown.Submenu position='right'>
                           {grade.sections.map((section) => {
-                             return (
-                            <Dropdown.Item onClick={handleGetStudent} onChange={(e)=>setSectionName(e.target.value)} key={section.id}>{section.letter}</Dropdown.Item>)
+                            return (
+                              <Dropdown.Item
+                                key={section.id}
+                                onClick={() => {
+                                  setSectionId(section.id);
+                                }}
+                              >
+                                {section.letter}
+                              </Dropdown.Item>
+                            );
                           })}
                         </Dropdown.Submenu>
                       </Dropdown.Item>
@@ -84,66 +107,72 @@ function Attendance() {
                   })}
               </Dropdown>
             </div>
-           
-            <div>
-              <button className='submit-attendance'>Submit</button>
-            </div>
+
+        
           </div>
           <div>
-            {tableMood &&(
-            <table className='attendance-table'>
-              <tr>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Status</th>
-                <th>Date</th>
-              </tr>
-              {student && student.map((student)=>{
-
-             
-              <tr>
-                <td>{student.firstName}</td>
-                <td>{student.lastNam}</td>
-                <td>
-                  {" "}
-                  <form>
-                    <div className='input-attendance'>
-                      <div>
-                        {" "}
-                        <input
-                          type='radio'
-                          id='present'
-                          name='fav_language'
-                          value='present'
-                        />
-                        <label>present</label>
-                      </div>
-                      <div>
-                        {" "}
-                        <input
-                          type='radio'
-                          id='abscent'
-                          name='fav_language'
-                          value='abscent'
-                        />
-                        <label>abscent</label>
-                      </div>
-                      <div>
-                        <input
-                          type='radio'
-                          id='late'
-                          name='fav_language'
-                          value='late'
-                        />
-                        <label for='late'>late</label>
-                      </div>
-                    </div>
-                  </form>{" "}
-                </td>
-                <td>1111</td>
-              </tr>
-               })}
-            </table>
+            {tableMood && (
+              <table className='attendance-table'>
+                <thead>
+                  <tr>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Status</th>
+                    <th>Date</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {student &&
+                    student.map((student) => {
+                      return (
+                        <tr key={student.id}>
+                          <td>{student.firstName}</td>
+                          <td>{student.lastName}</td>
+                          <td>
+                            {" "}
+                            <form>
+                              <div className='input-attendance'>
+                                <div>
+                                  {" "}
+                                  <input
+                                    type='radio'
+                                    id='present'
+                                    name='fav_language'
+                                    value='present'
+                                    onChange={(e) => fetchAttendance(e,student.id,e.target.value)}
+                                  />
+                                  <label>present</label>
+                                </div>
+                                <div>
+                                  {" "}
+                                  <input
+                                    type='radio'
+                                    id='abscent'
+                                    name='fav_language'
+                                    value='abscent'
+                                    onChange={(e) => fetchAttendance(e,student.id,e.target.value)}
+                                  />
+                                  <label>abscent</label>
+                                </div>
+                                <div>
+                                  <input
+                                    type='radio'
+                                    id='late'
+                                    name='fav_language'
+                                    value='late'
+                                    onChange={(e) => fetchAttendance(e,student.id,e.target.value)}
+                                  />
+                                  <label for='late'>late</label>
+                                </div>
+                              </div>
+                            </form>{" "}
+                          </td>
+                          <td>1111</td>
+                        </tr>
+                      );
+                    })}
+                </tbody>
+              </table>
             )}
           </div>
         </div>
