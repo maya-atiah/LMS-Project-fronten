@@ -1,52 +1,50 @@
 .table-class {
-    border-collapse: collapse;
-   /* width: 100%; */
-  }
+  border-collapse: collapse;
+  /* width: 100%; */
+}
 
-  .first--{
-    background-color: blue;
-  }
-  
-  .table-class th, .table-class td {
-    border: 3px solid #017F94;
-    padding: 8px;
-    text-align: center;
-    width: 500px;
-    color: #EE8B3A;
-    font-size: xx-large;
-   
-  }
-  
-  .table-class th {
-    background-color: white;
-  
-  }
-  .table-class tbody th.section {
-    margin-right: 10px;
-  }
-  
-  .table-class tbody tr:nth-child(even) {
-    background-color: #f2f2f2;
-  }
-  
-  .table-class tbody tr:hover {
-    background-color: #ddd;
-  }
-  
-  .button {
-    background-color:  #EE8B3A;
-    border: none;
-    color: #017F94;
-    padding: 8px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 20px;
-    cursor: pointer;
-    border-radius: 4px;
-  }
-  
+.first-- {
+  background-color: blue;
+}
 
-  .sectionss{
-   padding-left: 20px;
-  }
+.table-class th,
+.table-class td {
+  border: 3px solid #017f94;
+  padding: 8px;
+  text-align: center;
+  width: 500px;
+  color: #ee8b3a;
+  font-size: xx-large;
+}
+
+.table-class th {
+  background-color: white;
+}
+.table-class tbody th.section {
+  margin-right: 10px;
+}
+
+.table-class tbody tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.table-class tbody tr:hover {
+  background-color: #ddd;
+}
+
+.button {
+  background-color: #ee8b3a;
+  border: none;
+  color: #017f94;
+  padding: 8px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 20px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.sectionss {
+  padding-left: 20px;
+}
