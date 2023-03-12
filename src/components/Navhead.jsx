@@ -10,7 +10,7 @@ const Navhead=()=>{
 <div>
          <Navbar visible={navVisible} show={showNavbar} />
          <Header />  
-         {/* <Calender /> */}
+         <Calender /> 
 </div>
 
   )
