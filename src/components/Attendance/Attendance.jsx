@@ -6,7 +6,6 @@ import { useState } from "react";
 import axios from "axios";
 import { useEffect } from "react";
 import Dropdown from "react-multilevel-dropdown";
-import Dropdown from "react-multilevel-dropdown";
 import swal from 'sweetalert';
 import {AiFillCaretDown} from  "react-icons/ai";
 
