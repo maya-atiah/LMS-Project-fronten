@@ -51,11 +51,7 @@ table, th, td {
   flex-direction: row;
   margin-bottom: 2rem;
   align-items:center;
-<<<<<<< HEAD
-  justify-content: space-around;
-=======
   justify-content: flex-start;
->>>>>>> e8c411841eae4429e0e2f5e45db30b60148a842d
 }
 
 #demo-multiple-name{
@@ -85,23 +81,10 @@ justify-content: center;
   border: none;
   margin-top: 1px;
   text-transform: capitalize;
-  font-weight: bold;
 
 }
 .submit-attendance:hover{
   background-color: #017f94;
-<<<<<<< HEAD
-}
-
-.dropdown-attendance{
-  background-color: #EE8B3A;
-  font-size: 1.2rem;
-  color:white;
-  border: none;
-  padding: 0.6rem;
-  border-radius: 15rem;
-  font-weight: bold;
-=======
   
 }
 
@@ -118,7 +101,6 @@ justify-content: center;
   border: none;
   margin-top: 1px;
   text-transform: capitalize;
->>>>>>> e8c411841eae4429e0e2f5e45db30b60148a842d
 }
 
 .dropdown-attendance:hover{
