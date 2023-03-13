@@ -46,6 +46,7 @@
 border: none; 
 }
 
+
 .deleteTeacherButtencontainer:hover {
   opacity: 90%;
 }
@@ -56,19 +57,26 @@ border: none;
   margin-right: 10vw;
   width: 70px;
   height: 25px;
+  
+}
+.editButtonTeacher2 {
+  position: absolute;
+  margin-right: 10vw;
+  width: 70px;
+  height: 25px;
   border-radius: 20px;
   background-color: #EE8B3A;
   border: 0px;
   color: white;
 }
-.editButtonTeacher:hover {
+.editButtonTeacher2:hover {
   background-color: white;
   opacity: 90%;
   color: #EE8B3A;
   cursor: pointer;
   border: #EE8B3A 2px solid;
 }
-.editButtonTeacher:active {
+.editButtonTeacher2:active {
   background-color: #EE8B3A;
   opacity: 90%;
   color: white;
