@@ -12,7 +12,7 @@ import Box from "@mui/material/Box";
 import { Container, Grid } from "@mui/material";
 import { Typography } from "@mui/material";
 import { ToastContainer, toast } from "react-toastify";
-
+import Dropdown from "react-multilevel-dropdown";
 
 
 function Students() {
@@ -27,6 +27,15 @@ function Students() {
   const [isDeleted, setIsDeleted] = useState(false);
   const [selectedInfo, setSelectedInfo] = useState({});
   const [isUpdateMode, setIsUpdateMode] = useState(false);
+  
+
+  //////////////////////////////////////////////////////////
+  const [table, setTable] = useState(false);
+  const [gradeId, setGradeId] = useState(null);
+  const [sectionId, setSectionId] = useState(null);
+  const [title,setTitle]=useState('');
+  const [gradeSection, setGradeSection] = useState([]);
+ //////////////////////////////////////////////////////////
 
 
   const token = localStorage.getItem('token');
@@ -57,10 +66,34 @@ const studentCard = student.map((object) => {
       lastName={object.lastName}
       email={object.email}
       phoneNumber={object.phoneNumber}
+     
       getAllStudents={getAllStudents} // add getAllStudents to the props
+      // fetchGradeSection={fetchGradeSection}
+ww      //  fetchallStudentByGradeSection ={fetchallStudentByGradeSection }
+     
+
     />
   );
 });
+
+
+///////////////////////////////////////////////////////////////
+const fetchGradeSection = async () => {
+  await axios
+    .get("http://localhost:8000/api/grade")
+    .then((res) => setGradeSection(res.data))
+    .catch((err) => console.log(err));
+};
+///get students by grade/section
+const fetchallStudentByGradeSection = async (gradeId, sectionId) => {
+  await axios
+    .get(`http://localhost:8000/api/allStudent/${gradeId}/${sectionId}`)
+    .then((res) =>{ setStudent(res.data);
+      setTable(true);
+    })
+    .catch((err) => console.log(err));
+};
+////////////////////////////////////////////////////////////////
 
 const config1= {
   headers: {
@@ -108,8 +141,9 @@ const addStudent = async () => {
  
   axios(config)
     .then(function (response) {
-      console.log("res ", JSON.stringify(response.data));
+      // console.log("res ", JSON.stringify(response.data));
       setButtonPopup(false);
+     
     })
     .catch(function (error) {
       console.log(error);
@@ -119,18 +153,26 @@ const addStudent = async () => {
 
 useEffect(() => {
   getAllStudents();
-
+  fetchGradeSection();
+  fetchallStudentByGradeSection(1,1);
 }, [isDeleted,buttonPopup]);
 
 const submitHandler = (e) => {
   e.preventDefault();
   addStudent();
   window.alert("Student added successfully!");
- 
-
 };
 
-
+useEffect(() => {
+  if (sectionId !== null) {
+    handleGetStudent();
+  }
+}, [sectionId, gradeId]);
+const handleGetStudent = () => {
+  fetchallStudentByGradeSection(gradeId, sectionId);
+  setTitle(gradeSection.name)
+ 
+};
   return (
     <>
       <Navhead />
@@ -215,18 +257,18 @@ const submitHandler = (e) => {
 
 <select id="grade" name="grade" onChange={(e) => setName(e.target.value)}  className="my-select">
   <option value="">-- Select section --</option>
-  <option value="A">Grade 1</option>
-  <option value="B">Grade 2</option>
-  <option value="C">Grade 3</option>
-  <option value="D">Grade 4</option>
-  <option value="D">Grade 5</option>
-  <option value="D">Grade 6</option>
-  <option value="D">Grade 7</option>
-  <option value="D">Grade 8</option>
-  <option value="D">Grade 9</option>
-  <option value="D">Grade 10</option>
-  <option value="D">Grade 11</option>
-  <option value="D">Grade 12</option>
+  <option value="Grade 1">Grade 1</option>
+  <option value="Grade 2">Grade 2</option>
+  <option value="Grade 3">Grade 3</option>
+  <option value="Grade 4">Grade 4</option>
+  <option value="Grade 5">Grade 5</option>
+  <option value="Grade 6">Grade 6</option>
+  <option value="Grade 7">Grade 7</option>
+  <option value="Grade 8">Grade 8</option>
+  <option value="Grade 9">Grade 9</option>
+  <option value="Grade 10">Grade 10</option>
+  <option value="Grade 11">Grade 11</option>
+  <option value="Grade 12">Grade 12</option>
 </select>
     
     <br></br>
@@ -260,6 +302,47 @@ const submitHandler = (e) => {
               </PopupStudent> 
               </div>
             </div>
+
+            <div >
+              <Dropdown
+                title='Grade/Section '
+                
+                position='right'
+                className='dropdown-attendance'
+              >
+                {gradeSection &&
+                  gradeSection.map((grade) => {
+                    return (
+                      <Dropdown.Item
+                        key={grade.id}
+                        onClick={() => {
+                          setGradeId(grade.id)
+                          setTitle(grade.name)
+                        }}
+                      >
+                        {grade.name}
+                        <Dropdown.Submenu position='right'>
+                          {grade.sections.map((section) => {
+                            return (
+                              <Dropdown.Item
+                                key={section.id}
+                                onClick={() => {
+                                  setSectionId(section.id)
+                                  setLetter(section.letter)
+                                 
+                                }}
+                              >
+                                {section.letter}
+                              </Dropdown.Item>
+                            );
+                          })}
+                        </Dropdown.Submenu>
+                      </Dropdown.Item>
+                    );
+                  })}
+              </Dropdown>
+              
+            </div>
         
         
           <div>
@@ -271,7 +354,10 @@ const submitHandler = (e) => {
                 key={key}
                student={each}
                 deleteStudent={deleteStudent}
-                getAllStudents={getAllStudents}
+                // getAllStudents={getAllStudents}
+                fetchallStudentByGradeSection={fetchallStudentByGradeSection}
+                gradeId={gradeId}
+                sectionId={sectionId}
               />
               </Grid>
             ))}

@@ -9,7 +9,7 @@ import Box from "@mui/material/Box";
 import { Typography } from "@mui/material";
 import { useState, useEffect } from "react";
 
-export const StudentCard = ({ student, deleteStudent, getAllStudents, updateStudent}) => {
+export const StudentCard = ({ student, deleteStudent, getAllStudents,fetchallStudentByGradeSection,gradeId, sectionId,fetchGradeSection, updateStudent}) => {
   const handleDelete = () => {
     deleteStudent(student.id);
     window.confirm("Do you want to delete the student?");
@@ -46,13 +46,17 @@ const submitHandler = (e) => {
     .then(() => {
       setIsPending(false);
       setButtonPopup(false);
-      getAllStudents();
+      // getAllStudents();
+      // fetchGradeSection();
+      fetchallStudentByGradeSection(gradeId, sectionId);
     })
     .catch((err) => {
       console.log(err);
       setIsPending(false);
     });
 };
+
+
 
   
   return (
@@ -76,6 +80,7 @@ const submitHandler = (e) => {
           <p>
             <strong>Phone Number:</strong> {student.phoneNumber}
           </p>
+         
         </div>
         <div className='addingCourse'>
           <IconButton onClick={handleUpdate}>
