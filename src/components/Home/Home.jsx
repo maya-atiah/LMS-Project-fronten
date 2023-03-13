@@ -82,18 +82,21 @@ function Home() {
   return (
     <div>
       <Navhead />
-      <section className="home-section">
-        <div className="component-container">
-          <h1 className="home"> Home </h1>
-          <div className="cards">
+      <section className='home-section'>
+        <div className='component-container'>
+          <h1 className='home'> Home </h1>
+          <div className='cards'>
             {section1.map((card, i) => (
-              <div key={i} className="card">
+              <div key={i} className='card'>
                 <img src={card.img1} alt={card.title} />
-                <h3>{card.title} </h3>
+                 <div lassName='card-total-name1' ><h3>{card.title} </h3>
                 <h1>{card.text1}</h1>
+                </div>
                 {card.img2 && <img src={card.img2} alt={card.title} />}
-                <h3>{card.title2} </h3>
-                <h1>{card.text2}</h1>
+                <div className='card-total-name2'>
+                  <h3>{card.title2} </h3>
+                  <h1>{card.text2}</h1>
+                </div>
               </div>
             ))}
           </div>
@@ -101,16 +104,16 @@ function Home() {
       </section>
 
       <section>
-        <div className="component-container">
-          <h1 className="home"> Classes</h1>
-          <div className="cards">
+        <div className='component-container'>
+          <h1 className='home'> Classes</h1>
+          <div className='cards'>
             {section2.map((card, i) => (
-              <div key={i} className="card2">
+              <div key={i} className='card2'>
                 <img src={card.img2} alt={card.title} />
                 {card.img1 && <img src={card.img1} alt={card.title} />}
                 {card.img3 && <img src={card.img2} alt={card.title} />}
-                <Link to="/classes">
-                  <button className="btn1">View more</button>
+                <Link to='/classes'>
+                  <button className='btn1'>View more</button>
                 </Link>
               </div>
             ))}
@@ -119,22 +122,22 @@ function Home() {
       </section>
 
       <section>
-        <div className="component-container">
-          <div className="cards">
+        <div className='component-container'>
+          <div className='cards'>
             {section3.map((card, i) => (
-            <div key={i} className="card3">
-            <div className="img-container">
-              {card.img2 && <img src={card.img2} alt={card.title} />}
-              <Link to="/Attendance">
-                <button>Attendance</button>
-              </Link>
-            </div>
-            <div className="img-container">
-              {card.img1 && <img src={card.img1} alt={card.title} />}
-              <Link to="/Reports">
-                <button >Reports</button>
-              </Link>
-            </div>
+              <div key={i} className='card3'>
+                <div className='img-container'>
+                  {card.img2 && <img src={card.img2} alt={card.title} />}
+                  <Link to='/Attendance'>
+                    <button>Attendance</button>
+                  </Link>
+                </div>
+                <div className='img-container'>
+                  {card.img1 && <img src={card.img1} alt={card.title} />}
+                  <Link to='/Reports'>
+                    <button>Reports</button>
+                  </Link>
+                </div>
               </div>
             ))}
           </div>
