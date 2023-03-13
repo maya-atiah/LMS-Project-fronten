@@ -166,7 +166,12 @@
   flex-direction: column ;
 }
 
-
+@media (max-width:1390px){
+  .card3{
+    gap:2rem;
+    flex-direction: column;
+  }
+}
 
 @media (max-width: 1000px) {
   section {
