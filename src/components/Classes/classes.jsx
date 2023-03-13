@@ -145,7 +145,7 @@ const body = {
       <Navhead />
 
       <div className="component-container">
-        <div className="course-title" onClick={() => setButtonPopup(true)}>
+        <div className="grade-title" onClick={() => setButtonPopup(true)}>
           <div>Grades </div>
           <div className="addingCourse">
             <AddCircleIcon /> Add Grade
