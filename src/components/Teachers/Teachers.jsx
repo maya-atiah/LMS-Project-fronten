@@ -152,7 +152,6 @@ function Teachers() {
                   </Typography>
                   <div className='input'>
                     <div className='input-label-flex'>
-                      <label htmlFor='firstName'>First Name</label>
                       <input
                         type='text'
                         id='firstName'
@@ -163,7 +162,6 @@ function Teachers() {
                     </div>
                     <div className='input-label-flex'>
                       {" "}
-                      <label htmlFor='lastName'>Last Name</label>
                       <input
                         type='text'
                         id='lastName'
@@ -174,7 +172,6 @@ function Teachers() {
                     </div>
                     <div className='input-label-flex'>
                       {" "}
-                      <label htmlFor='Email'>Email</label>
                       <input
                         type='mail'
                         id='email'
@@ -185,7 +182,6 @@ function Teachers() {
                     </div>
                     <div className='input-label-flex'>
                       {" "}
-                      <label htmlFor='Password'>Password</label>
                       <input
                         type='password'
                         id='password'
@@ -196,7 +192,6 @@ function Teachers() {
                     </div>
                     <div className='input-label-flex'>
                       {" "}
-                      <label htmlFor='phoneNumber'>Phone Number</label>
                       <input
                         type='text'
                         id='phoneNumber'
@@ -207,7 +202,6 @@ function Teachers() {
                     </div>{" "}
                     <div className='input-label-flex'>
                       {" "}
-                      <label htmlFor='role'>Course</label>
                       <input
                         type='text'
                         id='subject'
@@ -218,7 +212,6 @@ function Teachers() {
                     </div>
                     <div className='input-label-flex'>
                       {" "}
-                      <label htmlFor='role'>Course</label>
                       <input
                         type='text'
                         id='subject'
@@ -229,7 +222,6 @@ function Teachers() {
                     </div>
                     <div className='input-label-flex'>
                       {" "}
-                      <label htmlFor='role'>Course</label>
                       <input
                         type='text'
                         id='subject'
