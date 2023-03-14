@@ -38,7 +38,7 @@ export default function CourseCard({ course ,handleDelete}) {
         <CardActionArea>
           <CardMedia
             component='img'
-            height='100'
+            height='200'
             image={Profile}
             alt='course'
           />

@@ -4,7 +4,7 @@ import Profile from '../../assets/Images/Option-A.jpg'
 function Header() {
   return (
     <div className="header-container ">
-     <img src={Profile}/>
+     <img className="header-image" src={Profile}/>
     </div>
   );
 }

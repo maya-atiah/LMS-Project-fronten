@@ -1,15 +1,18 @@
-import { React } from "react";
-import { TeacherCard } from "./TeacherCard/TeacherCard";
-import "./Teacher.css";
-import axios from "axios";
-import Navhead from "../../components/Navhead";
-import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
-import PopupTeacher from "./PopupTeacher";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+// SideBare component
+import Navhead from "../../components/Navhead";
+// Components related to Teacher
+import { TeacherCard } from "./TeacherCard/TeacherCard";
+import PopupTeacher from "./PopupTeacher/PopupTeacher";
+// @mui components
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import Box from "@mui/material/Box";
 import { Typography } from "@mui/material";
 
+import "./Teacher.css";
+import "../components.css"
 function Teachers() {
   const [teacher, setTeacher] = useState([]);
   const [buttonPopup, setButtonPopup] = useState(false);
@@ -18,8 +21,13 @@ function Teachers() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [phoneNumber, setPhone] = useState("");
-  const [role, setRole] = useState("");
   const [isPending, setIsPending] = useState(false);
+  const token = localStorage.getItem('token');
+  const [name, setName] = useState("");
+  const [letter, setLetter] = useState("");
+  const [subject, setSubject] = useState("");
+
+
 
   const navigate = useNavigate();
   useEffect(() => {
@@ -27,7 +35,7 @@ function Teachers() {
       navigate("/");
     }
   }, []);
-
+  // Fetching all users
   const getAllTeachers = () =>
     axios
       .get("http://localhost:8000/api/teacher")
@@ -37,8 +45,6 @@ function Teachers() {
       })
       .catch((error) => console.error(`Error : {${error}`));
 
-
-      
   const teacherCard = teacher.map((object) => {
     return (
       <TeacherCard
@@ -50,11 +56,18 @@ function Teachers() {
       />
     );
   });
+
+  const config1= {
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${token}`,
+    }
+  }
   const deleteTeacher = async (id) => {
-    await axios.delete(`http://localhost:8000/api/user/${id}`);
+    await axios.delete(`http://localhost:8000/api/user/${id}`, config1);
     getAllTeachers();
   };
-
+  // Posting a function
   const addTeacher = async () => {
     const body = {
       firstName,
@@ -62,7 +75,10 @@ function Teachers() {
       email,
       password,
       phoneNumber,
-      role,
+      role:"teacher",
+      name,
+      letter,
+      subject,
     };
     // const response = await axios.post("http://localhost:8000/api/user",JSON.stringify(body));
 
@@ -73,13 +89,17 @@ function Teachers() {
       url: "http://localhost:8000/api/user",
       headers: {
         "Content-Type": "application/json",
+      "Authorization": `Bearer ${token}`,
+
       },
       data: data,
     };
-
+    console.log(config);
     axios(config)
       .then(function (response) {
         console.log("res ", JSON.stringify(response.data));
+      setButtonPopup(false);
+
       })
       .catch(function (error) {
         console.log(error);
@@ -101,13 +121,13 @@ function Teachers() {
     <>
       <Navhead />
 
-      <div className='component-container'>
-        <div className='allTeachersSection'>
-          <div className='titleTeacherAdd' onClick={() => setButtonPopup(true)}>
-            <h3 className='allTeachersTitle'>All Teachers</h3>
-            <div className='addTeacher'>
-              <div className='alignAddTeacher'>
-                <AddCircleIcon /> <h3>Add Teacher</h3>
+      <div className="component-container">
+        <div className="allTeachersSection">
+          <div className="titleTeacherAdd">
+            <div className="allTeachersTitle">All Teachers</div>
+            <div className="addTeacher" onClick={() => setButtonPopup(true)}>
+              <div className="alignAddTeacher">
+                <AddCircleIcon /> <div className="Addd">Add Teacher</div>
               </div>
 
               <PopupTeacher
@@ -115,18 +135,18 @@ function Teachers() {
                 setTrigger={() => setButtonPopup(false)}
               >
                 <Box
-                  component='form'
+                  component="form"
                   sx={{
                     "& > :not(style)": { m: 1 },
                   }}
                   noValidate
-                  autoComplete='off'
+                  autoComplete="off"
                 >
                   <Typography
                     gutterBottom
-                    color='white'
-                    variant='h4'
-                    component='div'
+                    color="white"
+                    variant="h4"
+                    component="div"
                   >
                     Add Teacher
                   </Typography>
@@ -187,24 +207,46 @@ function Teachers() {
                     </div>{" "}
                     <div className='input-label-flex'>
                       {" "}
-                      <label htmlFor='role'>role</label>
+                      <label htmlFor='role'>Course</label>
                       <input
                         type='text'
-                        id='role'
-                        name='role'
-                        placeholder='Role'
-                        onChange={(e) => setRole(e.target.value)}
+                        id='subject'
+                        name='subject'
+                        placeholder='Course'
+                        onChange={(e) => setSubject(e.target.value)}
+                      />
+                    </div>
+                    <div className='input-label-flex'>
+                      {" "}
+                      <label htmlFor='role'>Course</label>
+                      <input
+                        type='text'
+                        id='subject'
+                        name='subject'
+                        placeholder='grade'
+                        onChange={(e) => setName(e.target.value)}
+                      />
+                    </div>
+                    <div className='input-label-flex'>
+                      {" "}
+                      <label htmlFor='role'>Course</label>
+                      <input
+                        type='text'
+                        id='subject'
+                        name='subject'
+                        placeholder='section'
+                        onChange={(e) => setLetter(e.target.value)}
                       />
                     </div>
                   </div>
 
                   {!isPending && (
-                    <button className='btn-add-teacher' onClick={submitHandler}>
+                    <button className="btn-add-teacher" onClick={submitHandler}>
                       add
                     </button>
                   )}
                   {isPending && (
-                    <button className='btn-add-teacher' onClick={submitHandler}>
+                    <button className="btn-add-teacher" onClick={submitHandler}>
                       adding course
                     </button>
                   )}
@@ -212,8 +254,8 @@ function Teachers() {
               </PopupTeacher>
             </div>
           </div>
-          <div className='Teachersline'></div>
-          <div className='teacherCardsContainer'>
+          <div className="MTeachersline"></div>
+          <div className="TeacherCardsContainer">
             {teacher.map((each, key) => (
               <TeacherCard
                 key={key}
@@ -224,10 +266,9 @@ function Teachers() {
           </div>
         </div>
       </div>
-      <div className='Teachercontainer'></div>
+      <div className="Teachercontainer"></div>
     </>
   );
 }
 
 export default Teachers;
-
