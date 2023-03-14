@@ -13,6 +13,8 @@ import { Container, Grid } from "@mui/material";
 import { Typography } from "@mui/material";
 import { ToastContainer, toast } from "react-toastify";
 import Dropdown from "react-multilevel-dropdown";
+import swal from 'sweetalert';
+
 
 
 function Students() {
@@ -190,7 +192,11 @@ useEffect(() => {
 const submitHandler = (e) => {
   e.preventDefault();
   addStudent();
-  window.alert("Student added successfully!");
+  // window.alert("Student added successfully!");
+  swal({
+    title: "Student added successfully!",
+    icon: "success",
+  });
 };
 
 useEffect(() => {

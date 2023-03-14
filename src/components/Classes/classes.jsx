@@ -9,6 +9,8 @@ import axios from "axios";
 import Box from "@mui/material/Box";
 import { Typography } from "@mui/material";
 import PopupClass from "../../components/Classes/PopupClass";
+import swal from 'sweetalert';
+
 
 function Classes() {
   const navigate = useNavigate();
@@ -51,58 +53,32 @@ const handleChange = (event) => {
 
   //delete
   const deleteUser = async (id) => {
-  
-  const confirm = window.confirm("Are you sure you want to delete this grade?");
-    if (!confirm) {
-      return;
-    }
-  await axios.delete(`http://localhost:8000/api/grade/${id}`);
-
-    loadclass();
+    swal({
+      title: "Are you sure?",
+      text: "Once deleted, you will not be able to recover this grade!",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+    })
+    .then(async (willDelete) => {
+      if (willDelete) {
+        await axios.delete(`http://localhost:8000/api/grade/${id}`);
+        loadclass();
+        swal("Poof! The grade has been deleted!", {
+          icon: "success",
+        });
+      } else {
+        swal("The grade is safe!");
+      }
+    });
   };
+  
   ///////////////////////////////////////////////////////////////////////////////////
   //add
   
 const addClass = async () => {
-    const capacity = 50;
-    
-
-  // Check if the name already exists in classes array
-  // const gradeExists = classes.some((grade) => grade.name === name);
-  
-  // if (gradeExists) {
-  //  alert( `'${name}' already exists`);
-  //   return;
-
-   // Check if the name already exists in classes array
-   const gradeExists = classes.some((grade) => grade.name === name);
-   if (gradeExists) {
-    // Find the grade object that matches the entered grade name
-    const matchedGrade = classes.find((grade) => grade.name === name);
-  
- 
-
-    const b={
-      "sectionIds[0]" : sectionIds[0]
-    }
-    console.log("body ",JSON.stringify(b));
-
-  await axios
-    .post("http://localhost:8000/api/grade",JSON.stringify(b),{ headers: {
-      'Content-Type': 'application/json'
-  }}
-    )
-    .then(() => {
-     
-    });
-  setButtonPopup(false);
-  loadclass();
-  }
-
-
-// console.log(sectionIds[0], name, capacity);
-    else{
-const body = {
+    const capacity = 50;  
+    const body = {
       name: name,
       capacity: capacity,
       "sectionIds[0]": sectionIds[0],
@@ -120,7 +96,7 @@ const body = {
     });
   setButtonPopup(false);
   loadclass();
-  }
+  
 }
 
   ///
@@ -187,18 +163,7 @@ const body = {
                   placeholder="Grade name"
                   onChange={(e) => setGrade(e.target.value)}
                 />
-                {/* 
-                <br></br>
-                <input
-                  type="text"
-                  id="section"
-                  name="Section"
-                  placeholder="Section"
-                  onChange={(e) => setsection(e.target.value)}
-                />
-                <br></br> */}
 
-    
     <br></br>
              
   <select  id="letter" name="letter" onChange={(e) => setsection(e.target.value)} className="my-select-student"> 
@@ -242,15 +207,15 @@ const body = {
               {classes.map((item, index) => {
                 return (
                   <tr className="" key={index}>
-                    <th> {item.name} </th>
+                    <td> {item.name} </td>
 
-                    <th>
+                    <td>
                       {item.sections.map((section, index) => (
-                        <th key={index}> {section.letter}</th>
+                        <td key={index}> {section.letter}</td>
                       ))}
-                    </th>
+                    </td>
 
-                    <th>
+                    <td>
                       {" "}
                       <button
                         alt=""
@@ -260,7 +225,7 @@ const body = {
                         {" "}
                         Delete{" "}
                       </button>
-                    </th>
+                    </td>
                   </tr>
                 );
               })}
