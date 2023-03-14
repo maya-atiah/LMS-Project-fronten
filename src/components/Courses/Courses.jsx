@@ -46,6 +46,7 @@ function Courses() {
         setIsDeleted(true);
        setCourse(newCourse);
         swal("Poof! The teacher has been deleted!", {
+          
           icon: "success",
         });
       } else {
