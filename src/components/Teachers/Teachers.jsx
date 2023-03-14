@@ -21,8 +21,13 @@ function Teachers() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [phoneNumber, setPhone] = useState("");
-  const [role, setRole] = useState("teacher");
   const [isPending, setIsPending] = useState(false);
+  const token = localStorage.getItem('token');
+  const [name, setName] = useState("");
+  const [letter, setLetter] = useState("");
+  const [subject, setSubject] = useState("");
+
+
 
   const navigate = useNavigate();
   useEffect(() => {
@@ -52,9 +57,14 @@ function Teachers() {
     );
   });
 
-  // Deleting function
+  const config1= {
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${token}`,
+    }
+  }
   const deleteTeacher = async (id) => {
-    await axios.delete(`http://localhost:8000/api/user/${id}`);
+    await axios.delete(`http://localhost:8000/api/user/${id}`, config1);
     getAllTeachers();
   };
   // Posting a function
@@ -65,7 +75,10 @@ function Teachers() {
       email,
       password,
       phoneNumber,
-      role,
+      role:"teacher",
+      name,
+      letter,
+      subject,
     };
     // const response = await axios.post("http://localhost:8000/api/user",JSON.stringify(body));
 
@@ -76,6 +89,8 @@ function Teachers() {
       url: "http://localhost:8000/api/user",
       headers: {
         "Content-Type": "application/json",
+      "Authorization": `Bearer ${token}`,
+
       },
       data: data,
     };
@@ -83,6 +98,8 @@ function Teachers() {
     axios(config)
       .then(function (response) {
         console.log("res ", JSON.stringify(response.data));
+      setButtonPopup(false);
+
       })
       .catch(function (error) {
         console.log(error);
@@ -133,51 +150,94 @@ function Teachers() {
                   >
                     Add Teacher
                   </Typography>
-                  <div className="input">
-                    <input
-                      className="input-label-flex"
-                      type="text"
-                      id="firstName"
-                      name="firstName"
-                      placeholder="First Name"
-                      onChange={(e) => setFname(e.target.value)}
-                    />
-
-                    <input
-                      className="input-label-flex"
-                      type="text"
-                      id="lastName"
-                      name="lastName"
-                      placeholder="Last Name"
-                      onChange={(e) => setLname(e.target.value)}
-                    />
-
-                    <input
-                      className="input-label-flex"
-                      type="mail"
-                      id="email"
-                      name="email"
-                      placeholder="Email"
-                      onChange={(e) => setEmail(e.target.value)}
-                    />
-
-                    <input
-                      className="input-label-flex"
-                      type="password"
-                      id="password"
-                      name="password"
-                      placeholder="Password"
-                      onChange={(e) => setPassword(e.target.value)}
-                    />
-
-                    <input
-                      className="input-label-flex"
-                      type="text"
-                      id="phoneNumber"
-                      name="phoneNumber"
-                      placeholder="Phone number"
-                      onChange={(e) => setPhone(e.target.value)}
-                    />
+                  <div className='input'>
+                    <div className='input-label-flex'>
+                      <label htmlFor='firstName'>First Name</label>
+                      <input
+                        type='text'
+                        id='firstName'
+                        name='firstName'
+                        placeholder='First Name'
+                        onChange={(e) => setFname(e.target.value)}
+                      />
+                    </div>
+                    <div className='input-label-flex'>
+                      {" "}
+                      <label htmlFor='lastName'>Last Name</label>
+                      <input
+                        type='text'
+                        id='lastName'
+                        name='lastName'
+                        placeholder='Last Name'
+                        onChange={(e) => setLname(e.target.value)}
+                      />
+                    </div>
+                    <div className='input-label-flex'>
+                      {" "}
+                      <label htmlFor='Email'>Email</label>
+                      <input
+                        type='mail'
+                        id='email'
+                        name='email'
+                        placeholder='Email'
+                        onChange={(e) => setEmail(e.target.value)}
+                      />
+                    </div>
+                    <div className='input-label-flex'>
+                      {" "}
+                      <label htmlFor='Password'>Password</label>
+                      <input
+                        type='password'
+                        id='password'
+                        name='password'
+                        placeholder='Password'
+                        onChange={(e) => setPassword(e.target.value)}
+                      />
+                    </div>
+                    <div className='input-label-flex'>
+                      {" "}
+                      <label htmlFor='phoneNumber'>Phone Number</label>
+                      <input
+                        type='text'
+                        id='phoneNumber'
+                        name='phoneNumber'
+                        placeholder='Phone number'
+                        onChange={(e) => setPhone(e.target.value)}
+                      />
+                    </div>{" "}
+                    <div className='input-label-flex'>
+                      {" "}
+                      <label htmlFor='role'>Course</label>
+                      <input
+                        type='text'
+                        id='subject'
+                        name='subject'
+                        placeholder='Course'
+                        onChange={(e) => setSubject(e.target.value)}
+                      />
+                    </div>
+                    <div className='input-label-flex'>
+                      {" "}
+                      <label htmlFor='role'>Course</label>
+                      <input
+                        type='text'
+                        id='subject'
+                        name='subject'
+                        placeholder='grade'
+                        onChange={(e) => setName(e.target.value)}
+                      />
+                    </div>
+                    <div className='input-label-flex'>
+                      {" "}
+                      <label htmlFor='role'>Course</label>
+                      <input
+                        type='text'
+                        id='subject'
+                        name='subject'
+                        placeholder='section'
+                        onChange={(e) => setLetter(e.target.value)}
+                      />
+                    </div>
                   </div>
 
                   {!isPending && (

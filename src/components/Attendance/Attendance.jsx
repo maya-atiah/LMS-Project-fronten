@@ -73,7 +73,7 @@ function Attendance() {
 
       <section>
         <div className='component-container'>
-          <h1> Attendance</h1>
+          <h1 className="attendance-titile"> Attendance</h1>
           <div className='form-attendance'>
             <div >
               <Dropdown
