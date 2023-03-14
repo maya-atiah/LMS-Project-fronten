@@ -1,5 +1,5 @@
 import axios from "axios";
-import "./StudentCard.css";
+// import "./StudentCard.css";
 import img from "./student2.png";
 import { IconButton} from "@mui/material";
 import { DeleteForeverRounded } from "@mui/icons-material";
@@ -9,7 +9,7 @@ import Box from "@mui/material/Box";
 import { Typography } from "@mui/material";
 import { useState, useEffect } from "react";
 
-export const StudentCard = ({ student, deleteStudent, getAllStudents, updateStudent}) => {
+export const StudentCard = ({ student, deleteStudent, getAllStudents,fetchallStudentByGradeSection,gradeId, sectionId,fetchGradeSection, updateStudent}) => {
   const handleDelete = () => {
     deleteStudent(student.id);
     window.confirm("Do you want to delete the student?");
@@ -25,6 +25,12 @@ export const StudentCard = ({ student, deleteStudent, getAllStudents, updateStud
   const [buttonPopup, setButtonPopup] = useState(false);
   const [firstName, setFname] = useState("");
   const [lastName, setLname] = useState("");
+  const [email, setEmail] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+ 
+
+
+
   const [isPending, setIsPending] = useState(false);
 
   const handleUpdate = () => {
@@ -39,14 +45,18 @@ const submitHandler = (e) => {
     id: student.id,
     firstName: firstName || student.firstName,
     lastName: lastName || student.lastName,
-    email: student.email,
-    phoneNumber: student.phoneNumber,
+    email: email|| student.email,
+    phoneNumber:  phoneNumber || student.phoneNumber,
+    
+
   };
   axios.put(`http://localhost:8000/api/user/${student.id}`, updatedStudent, config1)
     .then(() => {
       setIsPending(false);
       setButtonPopup(false);
-      getAllStudents();
+      // getAllStudents();
+      // fetchGradeSection();
+      fetchallStudentByGradeSection(gradeId, sectionId);
     })
     .catch((err) => {
       console.log(err);
@@ -54,16 +64,18 @@ const submitHandler = (e) => {
     });
 };
 
+
+
   
   return (
     <div>
-      <div className="cardFrameTeacher">
-        <button className="deleteTeacherButtencontainer" onClick={handleDelete}>
+      <div className="cardFrameStudent">
+        <button className="deleteStudentButtencontainer" onClick={handleDelete}>
           <DeleteForeverRounded />
         </button>
-        <img src={img} alt="img" className="pfpic" />
-        <div className="cardlineteachercard"></div>
-        <div className="TeacherCardContent">
+        <img src={img} alt="img" className="pfpicc" />
+        <div className="cardlinestudentcard"></div>
+        <div className="StudentCardContent">
           <p>
             <strong>First Name:</strong> {student.firstName}
           </p>
@@ -76,6 +88,7 @@ const submitHandler = (e) => {
           <p>
             <strong>Phone Number:</strong> {student.phoneNumber}
           </p>
+         
         </div>
         <div className='addingCourse'>
           <IconButton onClick={handleUpdate}>
@@ -118,6 +131,24 @@ const submitHandler = (e) => {
                 placeholder="Last Name"
                 onChange={(e) => setLname(e.target.value)}
               />
+               <br />
+              <input
+                type="text"
+                id="email"
+                name="email"
+                placeholder="Email"
+                onChange={(e) => setEmail(e.target.value)}
+              />
+              <br />
+              <input
+                type="text"
+                id="phonenumber"
+                name="phonenumber"
+                placeholder="Phone NUmber"
+                onChange={(e) => setPhoneNumber(e.target.value)}
+              />
+                 <br />
+           
               {!isPending && (
                 <button className="btn-add-teacher" onClick={submitHandler}>
                   Edit

@@ -5,14 +5,14 @@ import "../../components/Students/Students.css"
 import axios from "axios";
 import Navhead from "../../components/Navhead";
 import { useNavigate } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState, useEffect,Fragment } from "react";
 import PopupStudent from "./PopupStudent.jsx";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import Box from "@mui/material/Box";
 import { Container, Grid } from "@mui/material";
 import { Typography } from "@mui/material";
 import { ToastContainer, toast } from "react-toastify";
-
+import Dropdown from "react-multilevel-dropdown";
 
 
 function Students() {
@@ -28,9 +28,17 @@ function Students() {
   const [selectedInfo, setSelectedInfo] = useState({});
   const [isUpdateMode, setIsUpdateMode] = useState(false);
   const [tableMood, setTableMood] = useState(false);
+
+
+  
+
+  //////////////////////////////////////////////////////////
+  const [table, setTable] = useState(false);
   const [gradeId, setGradeId] = useState(null);
   const [sectionId, setSectionId] = useState(null);
-
+  const [title,setTitle]=useState('');
+  const [gradeSection, setGradeSection] = useState([]);
+ //////////////////////////////////////////////////////////
 
 
   const token = localStorage.getItem('token');
@@ -61,10 +69,57 @@ const studentCard = student.map((object) => {
       lastName={object.lastName}
       email={object.email}
       phoneNumber={object.phoneNumber}
+     
       getAllStudents={getAllStudents} // add getAllStudents to the props
+      // fetchGradeSection={fetchGradeSection}
+ww      //  fetchallStudentByGradeSection ={fetchallStudentByGradeSection }
+     
+
     />
   );
 });
+
+//grades and sections 
+  const [grades, setGrades] = useState([]);
+
+  useEffect(() => {
+    fetch("http://localhost:8000/api/grade")
+      .then((response) => response.json())
+      .then((data) => setGrades(data))
+      .catch((error) => console.log(error));
+  }, []);
+
+  const [letters, setLetters] = useState([]);
+
+  useEffect(() => {
+    fetch("http://localhost:8000/api/section")
+      .then((response) => response.json())
+      .then((data) => setLetters(data["All Sections"]))
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+
+  
+
+
+///////////////////////////////////////////////////////////////
+const fetchGradeSection = async () => {
+  await axios
+    .get("http://localhost:8000/api/grade")
+    .then((res) => setGradeSection(res.data))
+    .catch((err) => console.log(err));
+};
+///get students by grade/section
+const fetchallStudentByGradeSection = async (gradeId, sectionId) => {
+  await axios
+    .get(`http://localhost:8000/api/allStudent/${gradeId}/${sectionId}`)
+    .then((res) =>{ setStudent(res.data);
+      setTable(true);
+    })
+    .catch((err) => console.log(err));
+};
+////////////////////////////////////////////////////////////////
 
 const config1= {
   headers: {
@@ -86,16 +141,7 @@ const deleteStudent = async (id) => {
   
 };
 
-////////////////////////////////////////////////////////
-const fetchallStudentByGradeSection = async (gradeId, sectionId) => {
-  await axios
-    .get(`http://localhost:8000/api/allStudent/${gradeId}/${sectionId}`)
-    .then((res) =>{ setStudent(res.data);
-      setTableMood(true);
-    })
-    .catch((err) => console.log(err));
-};
-////////////////////////////////////////////////////////
+
 
 //add new student
 const addStudent = async () => {
@@ -123,8 +169,9 @@ const addStudent = async () => {
  
   axios(config)
     .then(function (response) {
-      console.log("res ", JSON.stringify(response.data));
+      // console.log("res ", JSON.stringify(response.data));
       setButtonPopup(false);
+     
     })
     .catch(function (error) {
       console.log(error);
@@ -135,7 +182,8 @@ const addStudent = async () => {
 useEffect(() => {
   getAllStudents();
   fetchallStudentByGradeSection(1,1);
-
+  fetchGradeSection();
+ 
 }, [isDeleted,buttonPopup]);
 
 
@@ -143,13 +191,20 @@ const submitHandler = (e) => {
   e.preventDefault();
   addStudent();
   window.alert("Student added successfully!");
- 
-
 };
+
+useEffect(() => {
+  if (sectionId !== null) {
+    handleGetStudent();
+  }
+}, [sectionId, gradeId]);
 const handleGetStudent = () => {
   fetchallStudentByGradeSection(gradeId, sectionId);
+  setTitle(gradeSection.name)
  
 };
+
+
 
 
   return (
@@ -160,7 +215,7 @@ const handleGetStudent = () => {
    <div className="component-container">
           <div className="course-title" onClick={() => setButtonPopup(true)}>
           <div>Students </div>
-          <div className='addingCourse'>
+          <div className='addingStudent'>
 
                 <AddCircleIcon /> Add Student
               <PopupStudent
@@ -227,52 +282,35 @@ const handleGetStudent = () => {
                   
                    
                   <br></br>
-                  {/* <input
-                        type="text"
-                        id="grade"
-                        name="grade" placeholder="Grade"
-                        onChange={(e) => setName(e.target.value)}
-                      /> */}
 
-<select id="grade" name="grade" onChange={(e) => setName(e.target.value)}  className="my-select">
+<select id="grade" name="grade" onChange={(e) => setName(e.target.value)} className="my-select-student">
   <option value="">-- Select section --</option>
-  <option value="A">Grade 1</option>
-  <option value="B">Grade 2</option>
-  <option value="C">Grade 3</option>
-  <option value="D">Grade 4</option>
-  <option value="D">Grade 5</option>
-  <option value="D">Grade 6</option>
-  <option value="D">Grade 7</option>
-  <option value="D">Grade 8</option>
-  <option value="D">Grade 9</option>
-  <option value="D">Grade 10</option>
-  <option value="D">Grade 11</option>
-  <option value="D">Grade 12</option>
+  {grades.map((grade) => (
+    <option key={grade.id} value={grade.name}>
+      {grade.name}
+    </option>
+  ))}
 </select>
     
     <br></br>
              
-
-<select id="letter" name="letter" onChange={(e) => setLetter(e.target.value)}  className="my-select">
-  <option value="">-- Select section --</option>
-  <option value="A">A</option>
-  <option value="B">B</option>
-  <option value="C">C</option>
-  <option value="D">D</option>
-  <option value="D">E</option>
-  <option value="D">F</option>
-  <option value="D">G</option>
-
-
+  <select  id="letter" name="letter" onChange={(e) => setLetter(e.target.value)} className="my-select-student"> 
+  <option value="">-- Select a letter --</option>
+  {letters.map((letter, index) => (
+    <option key={index} value={letter.letter}>
+      {letter.letter}
+    </option>
+  ))}
 </select>
+
    
                   {!isPending && (
-                    <button className="btn-add-teacher" onClick={submitHandler}>
+                    <button className="btn-add-student" onClick={submitHandler}>
                       Add
                     </button>
                   )}
                   {isPending && (
-                    <button className="btn-add-teacher" onClick={submitHandler}>
+                    <button className="btn-add-student" onClick={submitHandler}>
                       adding course
                       </button>
                      
@@ -280,6 +318,47 @@ const handleGetStudent = () => {
                 </Box>
               </PopupStudent> 
               </div>
+            </div>
+
+            <div >
+              <Dropdown
+                title='Grade/Section '
+                
+                position='right'
+                className='dropdown-attendance'
+              >
+                {gradeSection &&
+                  gradeSection.map((grade) => {
+                    return (
+                      <Dropdown.Item
+                        key={grade.id}
+                        onClick={() => {
+                          setGradeId(grade.id)
+                          setTitle(grade.name)
+                        }}
+                      >
+                        {grade.name}
+                        <Dropdown.Submenu position='right'>
+                          {grade.sections.map((section) => {
+                            return (
+                              <Dropdown.Item
+                                key={section.id}
+                                onClick={() => {
+                                  setSectionId(section.id)
+                                  setLetter(section.letter)
+                                 
+                                }}
+                              >
+                                {section.letter}
+                              </Dropdown.Item>
+                            );
+                          })}
+                        </Dropdown.Submenu>
+                      </Dropdown.Item>
+                    );
+                  })}
+              </Dropdown>
+              
             </div>
         
         
@@ -292,7 +371,10 @@ const handleGetStudent = () => {
                 key={key}
                student={each}
                 deleteStudent={deleteStudent}
-                getAllStudents={getAllStudents}
+                // getAllStudents={getAllStudents}
+                fetchallStudentByGradeSection={fetchallStudentByGradeSection}
+                gradeId={gradeId}
+                sectionId={sectionId}
               />
               </Grid>
             ))}
