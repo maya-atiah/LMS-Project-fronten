@@ -31,23 +31,27 @@ function Courses() {
   };
 
 
-  
-
-  
   const handleDelete = async (id) => {
-    const res = await axios.delete(
-      `http://localhost:8000/api/deleteById/${id}`
-    );
-
-    if (res.status === 200) {
-      const newCourse = course.filter((course) => course.id !== id);
-      setIsDeleted(true);
-      setCourse(newCourse);
-       swal({
-      title: "Course is deleted",
-      icon: "success",
+    swal({
+      title: "Are you sure?",
+      text: "Once deleted, you will not be able to recover this teacher!",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+    })
+    .then(async (willDelete) => {
+      if (willDelete) {
+        const newCourse = course.filter((course) => course.id !== id);
+        await axios.delete(`http://localhost:8000/api/deleteById/${id}`);
+        setIsDeleted(true);
+       setCourse(newCourse);
+        swal("Poof! The teacher has been deleted!", {
+          icon: "success",
+        });
+      } else {
+        swal("The Course is safe!");
+      }
     });
-    }
   };
 
   
