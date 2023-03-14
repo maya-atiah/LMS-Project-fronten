@@ -8,6 +8,8 @@ import img from "./pfpic.png";
 import Box from "@mui/material/Box";
 import { Typography } from "@mui/material";
 import axios from "axios";
+import swal from 'sweetalert';
+
 export const TeacherCard = ({
   teacher,
   deleteTeacher,

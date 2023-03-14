@@ -8,11 +8,30 @@ import AddCircleIcon from "@mui/icons-material/AddCircle";
 import Box from "@mui/material/Box";
 import { Typography } from "@mui/material";
 import { useState, useEffect } from "react";
+import swal from 'sweetalert';
+
 
 export const StudentCard = ({ student, deleteStudent, getAllStudents,fetchallStudentByGradeSection,gradeId, sectionId,fetchGradeSection, updateStudent}) => {
   const handleDelete = () => {
     deleteStudent(student.id);
-    window.confirm("Do you want to delete the student?");
+   
+    swal({
+      title: "Are you sure?",
+      text: "Once deleted, you will not be able to recover this student!",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+    })
+    .then((willDelete) => {
+      if (willDelete) {
+        swal("Poof! The student has been deleted!", {
+          icon: "success",
+        });
+      } else {
+        swal("The student is safe!");
+      }
+    });
+    
   };
 
   const token = localStorage.getItem('token');
@@ -90,12 +109,17 @@ const submitHandler = (e) => {
           </p>
          
         </div>
-        <div className='addingCourse'>
-          <IconButton onClick={handleUpdate}>
+        <div className="editButtonStudent">
+          {/* <IconButton onClick={handleUpdate}>
 
           
             <Typography>Edit</Typography>
-          </IconButton>
+          </IconButton> */}
+
+
+          <button className="editButtonStudent2" onClick={handleUpdate}>
+            Edit
+          </button>
           <PopupStudent
             trigger={buttonPopup}
             setTrigger={() => setButtonPopup(false)}
