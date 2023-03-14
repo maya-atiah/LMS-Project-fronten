@@ -10,9 +10,11 @@ import PopupTeacher from "./PopupTeacher/PopupTeacher";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import Box from "@mui/material/Box";
 import { Typography } from "@mui/material";
-
+import swal from 'sweetalert';
 import "./Teacher.css";
 import "../components.css"
+
+
 function Teachers() {
   const [teacher, setTeacher] = useState([]);
   const [buttonPopup, setButtonPopup] = useState(false);
@@ -63,10 +65,33 @@ function Teachers() {
       "Authorization": `Bearer ${token}`,
     }
   }
+  // const deleteTeacher = async (id) => {
+  //   await axios.delete(`http://localhost:8000/api/user/${id}`, config1);
+  //   getAllTeachers();
+ 
+  // };
+
   const deleteTeacher = async (id) => {
-    await axios.delete(`http://localhost:8000/api/user/${id}`, config1);
-    getAllTeachers();
+    swal({
+      title: "Are you sure?",
+      text: "Once deleted, you will not be able to recover this teacher!",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+    })
+    .then(async (willDelete) => {
+      if (willDelete) {
+        await axios.delete(`http://localhost:8000/api/user/${id}`, config1);
+        getAllTeachers();
+        swal("Poof! The teacher has been deleted!", {
+          icon: "success",
+        });
+      } else {
+        swal("The teacher is safe!");
+      }
+    });
   };
+  
   // Posting a function
   const addTeacher = async () => {
     const body = {
@@ -115,7 +140,32 @@ function Teachers() {
     e.preventDefault();
     addTeacher();
     // setButtonPopup(false);
+    swal({
+      title: "Teacher added successfully!",
+      icon: "success",
+    });
   };
+
+  //grades and sections 
+  const [grades, setGrades] = useState([]);
+
+  useEffect(() => {
+    fetch("http://localhost:8000/api/grade")
+      .then((response) => response.json())
+      .then((data) => setGrades(data))
+      .catch((error) => console.log(error));
+  }, []);
+
+  const [letters, setLetters] = useState([]);
+
+  useEffect(() => {
+    fetch("http://localhost:8000/api/section")
+      .then((response) => response.json())
+      .then((data) => setLetters(data["All Sections"]))
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
 
   return (
     <>
@@ -210,17 +260,29 @@ function Teachers() {
                         onChange={(e) => setSubject(e.target.value)}
                       />
                     </div>
-                    <div className='input-label-flex'>
+                    {/* <div className='input-label-flex'>
                       {" "}
                       <input
                         type='text'
                         id='subject'
                         name='subject'
-                        placeholder='grade'
+                        placeholder='Grade'
                         onChange={(e) => setName(e.target.value)}
                       />
-                    </div>
-                    <div className='input-label-flex'>
+                    </div> */}
+
+<select id="grade" name="grade" onChange={(e) => setName(e.target.value)} className="my-select-student">
+  <option value="">-- Select a Grade --</option>
+  {grades.map((grade) => (
+    <option key={grade.id} value={grade.name}>
+      {grade.name}
+    </option>
+  ))}
+
+
+</select>
+<br></br>
+                    {/* <div className='input-label-flex'>
                       {" "}
                       <input
                         type='text'
@@ -229,7 +291,16 @@ function Teachers() {
                         placeholder='section'
                         onChange={(e) => setLetter(e.target.value)}
                       />
-                    </div>
+                    </div> */}
+
+<select  id="letter" name="letter" onChange={(e) => setLetter(e.target.value)} className="my-select-student"> 
+  <option value="">-- Select a letter --</option>
+  {letters.map((letter, index) => (
+    <option key={index} value={letter.letter}>
+      {letter.letter}
+    </option>
+  ))}
+</select>
                   </div>
 
                   {!isPending && (

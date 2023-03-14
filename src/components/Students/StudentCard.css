@@ -48,5 +48,39 @@
   .deleteStudentButtencontainer:hover {
     opacity: 90%;
   }
+
+  .editButtonStudent {
+    position: absolute;
+    margin-top: 44vh;
+    margin-right: 10vw;
+    width: 80px;
+    height: 30px;
+    font-size: 35px;
+  }
+
+  .editButtonStudent2 {
+    position: absolute;
+    margin-right: 10vw;
+    width: 70px;
+    height: 25px;
+    border-radius: 15px;
+    background-color: #EE8B3A;
+    border: 0px;
+    color: white;
+  }
+  .editButtonStudent2:hover {
+    background-color: white;
+    opacity: 90%;
+    color: #EE8B3A;
+    cursor: pointer;
+    border: #EE8B3A 2px solid;
+  }
+  .editButtonSTudent2:active {
+    background-color: #EE8B3A;
+    opacity: 90%;
+    color: white;
+    cursor: pointer;
+    border: white 2px solid;
+  }
   
   
