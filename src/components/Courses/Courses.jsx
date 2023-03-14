@@ -10,7 +10,6 @@ import Box from "@mui/material/Box";
 import { Typography } from "@mui/material";
 import Navhead from "../../components/Navhead";
 import { useNavigate } from 'react-router-dom';
-import Dropdown from 'react-multilevel-dropdown';
 import swal from 'sweetalert';
 
 
@@ -45,8 +44,8 @@ function Courses() {
         await axios.delete(`http://localhost:8000/api/deleteById/${id}`);
         setIsDeleted(true);
        setCourse(newCourse);
-        swal("Poof! The teacher has been deleted!", {
-          
+        swal("Poof!The teacher has been deleted!", {
+
           icon: "success",
         });
       } else {
@@ -86,7 +85,7 @@ function Courses() {
       title: "Course is added",
       icon: "success",
     });
-    // setButtonPopup(false);
+  
   };
 
   console.log("course", course);
