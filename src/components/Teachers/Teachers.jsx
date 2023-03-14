@@ -12,7 +12,7 @@ import Box from "@mui/material/Box";
 import { Typography } from "@mui/material";
 
 import "./Teacher.css";
-
+import "../components.css"
 function Teachers() {
   const [teacher, setTeacher] = useState([]);
   const [buttonPopup, setButtonPopup] = useState(false);
@@ -104,7 +104,7 @@ function Teachers() {
     <>
       <Navhead />
 
-      <div className="Teachercontainer">
+      <div className="component-container">
         <div className="allTeachersSection">
           <div className="titleTeacherAdd">
             <div className="allTeachersTitle">All Teachers</div>
@@ -194,7 +194,7 @@ function Teachers() {
               </PopupTeacher>
             </div>
           </div>
-          <div className="Teachersline"></div>
+          <div className="MTeachersline"></div>
           <div className="TeacherCardsContainer">
             {teacher.map((each, key) => (
               <TeacherCard

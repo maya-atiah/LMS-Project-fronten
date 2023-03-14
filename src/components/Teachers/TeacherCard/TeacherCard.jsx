@@ -63,11 +63,21 @@ export const TeacherCard = ({
         <img src={img} alt="img" className="pfpic" />
         <div className="cardlineteachercard"></div>
         <div className="TeacherCardContent">
-          <p>First Name: {teacher.firstName}</p>
-          <p>Last Name: {teacher.lastName}</p>
-          <p>Email: {teacher.email}</p>
-          <p>Phone_nb: {teacher.phoneNumber}</p>
-          <p>Course:</p>
+          <p>
+            <strong>
+            First Name:
+            </strong>
+            {teacher.firstName}</p>
+          <p><strong>
+            Last Name:
+            </strong> {teacher.lastName}</p>
+          <p><strong>
+            Email:
+            </strong> {teacher.email}</p>
+          <p><strong>
+            Phone Number:
+            </strong> {teacher.phoneNumber}</p>
+          
         </div>
         <div className="editButtonTeacher">
           <button className="editButtonTeacher2" onClick={handleUpdate}>
@@ -94,14 +104,16 @@ export const TeacherCard = ({
                 Update
               </Typography>
               <input
+              className="input-label-flex"
                 type="text"
                 id="firstName"
                 name="firstName"
                 placeholder="First Name"
                 onChange={(e) => setFname(e.target.value)}
               />
-              <br />
+              
               <input
+              className="input-label-flex"
                 type="text"
                 id="lastName"
                 name="lastName"
@@ -109,6 +121,7 @@ export const TeacherCard = ({
                 onChange={(e) => setLname(e.target.value)}
               />
                 <input
+                className="input-label-flex"
                 type="text"
                 id="email"
                 name="email"
@@ -116,6 +129,7 @@ export const TeacherCard = ({
                 onChange={(e) => setEmail(e.target.value)}
               />
                 <input
+                className="input-label-flex"
                 type="text"
                 id="phoneNumber"
                 name="phonenumber"

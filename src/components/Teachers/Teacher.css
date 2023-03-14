@@ -44,14 +44,14 @@
   color: #017f94;
 
 }
-.Teachersline {
-  height: 1px;
+.MTeachersline {
+  height: 1.5px;
   width: 100%;
   background-color: #017f94;
-  margin-top: 4px;
-  margin-bottom: 30px;
+  margin-bottom: 10px;
 }
 .TeacherCardsContainer {
+  margin-left: 1vh;
   display: grid;
   grid-template-columns: auto auto auto;
 }
@@ -106,6 +106,7 @@ input::placeholder {
 .alignAddTeacher {
   display: flex;
   justify-content: center;
+  align-items: center;
   color: #017f94;
   cursor: pointer;
 }
