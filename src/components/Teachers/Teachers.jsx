@@ -202,7 +202,6 @@ function Teachers() {
                   </Typography>
                   <div className='input'>
                     <div className='input-label-flex'>
-                     
                       <input
                         type='text'
                         id='firstName'
@@ -213,7 +212,6 @@ function Teachers() {
                     </div>
                     <div className='input-label-flex'>
                       {" "}
-                     
                       <input
                         type='text'
                         id='lastName'
@@ -224,7 +222,6 @@ function Teachers() {
                     </div>
                     <div className='input-label-flex'>
                       {" "}
-                     
                       <input
                         type='mail'
                         id='email'
@@ -235,7 +232,6 @@ function Teachers() {
                     </div>
                     <div className='input-label-flex'>
                       {" "}
-                     
                       <input
                         type='password'
                         id='password'
@@ -246,7 +242,6 @@ function Teachers() {
                     </div>
                     <div className='input-label-flex'>
                       {" "}
-                      
                       <input
                         type='text'
                         id='phoneNumber'
@@ -257,7 +252,6 @@ function Teachers() {
                     </div>{" "}
                     <div className='input-label-flex'>
                       {" "}
-                     
                       <input
                         type='text'
                         id='subject'
@@ -268,7 +262,6 @@ function Teachers() {
                     </div>
                     {/* <div className='input-label-flex'>
                       {" "}
-                     
                       <input
                         type='text'
                         id='subject'
@@ -291,7 +284,6 @@ function Teachers() {
 <br></br>
                     {/* <div className='input-label-flex'>
                       {" "}
-                      <label htmlFor='role'>Section</label>
                       <input
                         type='text'
                         id='subject'
