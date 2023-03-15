@@ -263,7 +263,7 @@ const handleGetStudent = () => {
                   
                    <br></br>
                       <input
-                        type="mail"
+                        type="email"
                         id="email"
                         name="email"  placeholder="Email"
                         onChange={(e) => setEmail(e.target.value)}

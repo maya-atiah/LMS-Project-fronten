@@ -201,7 +201,6 @@ const submitHandler = (e) => {
         setsection(selectedValues);
     }}
     
-    
 />
 
 {console.log("ssj",sectionIds)}
