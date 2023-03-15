@@ -10,7 +10,8 @@ import Box from "@mui/material/Box";
 import { Typography } from "@mui/material";
 import PopupClass from "../../components/Classes/PopupClass";
 import swal from 'sweetalert';
-
+import { Multiselect } from "multiselect-react-dropdown";
+import Select from 'react-select';
 
 
 
@@ -87,32 +88,32 @@ const addClass = async () => {
     const body = {
       name: name,
       capacity: capacity,
-      // sectionIds,
-      "sectionIds[0]": sectionIds[0],
+      sectionIds,
+      // 'sectionIds[0]': sectionIds,
     };
-
+    console.log("sectooo",sectionIds)
     console.log("body ", JSON.stringify(body));
-
   await axios
     .post("http://localhost:8000/api/grade",JSON.stringify(body),{ headers: {
       'Content-Type': 'application/json'
   }}
     )
     .then(() => {
-     
     });
   setButtonPopup(false);
   loadclass();
-  
 }
 
-  ////////////////////////////////////////////////////////////////////////////////////////////
-  const submitHandler = (e) => {
-    e.preventDefault();
-   addClass();
-  
-  };
 
+ 
+
+const submitHandler = (e) => {
+  e.preventDefault();
+  addClass();
+};
+
+  ////////////////////////////////////////////////////////////////////////////////////////////
+ 
 
   const [grades, setGrades] = useState([]);
 
@@ -181,14 +182,29 @@ const addClass = async () => {
                   ></input> */}
 
     <br></br>
-     <select  id="letter" name="letter" onChange={(e) => setsection(e.target.value)} className="my-select-student"> 
+     {/* <select  id="letter" name="letter" onChange={(e) => setsection(e.target.value)} className="my-select-student"> 
      <option value="">-- Select a letter --</option>
      {letters.map((letter, index) => (
       <option key={index} value={letter.letter}>
       {letter.letter}
     </option>
   ))}
-</select>
+</select> */}
+{console.log("ssHGHJ",sectionIds[0])}
+<Select 
+    isMulti
+    name="letters"
+    options={letters.map((letter) => ({value: letter.id, label: letter.id}))}
+    className="my-select-student"
+    onChange={(selectedOptions) => {
+        const selectedValues = selectedOptions.map(option => option.value);
+        setsection(selectedValues);
+    }}
+    
+/>
+
+{console.log("ssj",sectionIds)}
+{/* {console.log("secttt",selectedValues.id)} */}
                 {!isPending && (
                   <button className="btn-add-course" onClick={submitHandler} >
                     add
