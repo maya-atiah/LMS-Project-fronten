@@ -1,16 +1,15 @@
 import React from "react";
 import "../components.css";
-import "../Attendance/Attendance.css";
-import Navhead from "../../components/Navhead";
+import "../TeacherSide/AttendanceTeacher.css";
 import { useState } from "react";
 import axios from "axios";
 import { useEffect } from "react";
 import Dropdown from "react-multilevel-dropdown";
 import swal from "sweetalert";
-import { AiFillCaretDown } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
+import TeacherSide from "./TeacherSide";
 
-function Attendance() {
+function AttendanceTeacher() {
   const [gradeSection, setGradeSection] = useState([]);
   const [student, setStudent] = useState([]);
   const [table, setTable] = useState(false);
@@ -73,9 +72,11 @@ function Attendance() {
     setTitle(gradeSection.name);
   };
 
+
   return (
+
     <div>
-      <Navhead />
+       <TeacherSide/>
 
       <section>
         <div className='component-container'>
@@ -209,4 +210,4 @@ function Attendance() {
   );
 }
 
-export default Attendance;
+export default AttendanceTeacher;

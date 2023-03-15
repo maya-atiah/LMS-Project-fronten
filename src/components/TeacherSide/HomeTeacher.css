@@ -1,0 +1,222 @@
+
+.home-section {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap:1rem;
+    width:100%;
+  }
+  
+  .home {
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 30px;
+    line-height: 36px;
+    color: #017f94;
+    align-self: stretch;
+    border-bottom: 2px solid #017f94;
+    margin-bottom: 12px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  
+  .cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  
+  .cards h3 {
+    color: #017f94;
+  }
+  
+  .card {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+    flex: 0 0 calc(50.33% - 20px);
+    max-width: calc(50.33% - 20px);
+    width: 100%;
+    padding:40px;
+    margin-bottom: 20px;
+    transition: 0.3s;
+    border: 1px solid #e06c0d;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 20px;
+   
+  }
+  .card3 {
+    width:100% ;
+    display: flex;
+    gap: 15%;
+    align-items: center;
+    transition: 0.3s;
+    border: 1px solid #e06c0d;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 20px;   
+     padding: 2rem;
+     justify-content: center
+  
+  }
+  
+  .card img {
+    max-height: 300px;
+    max-width: 100%;
+    object-fit: cover;
+  }
+  
+  .card h3 {
+    font-size: 1.5rem;
+    /* white-space: nowrap; */
+  
+  }
+  
+  .card h1 {
+    
+    font-size: 50px;
+    line-height: 1.5;
+    margin-bottom: 0;
+    /* padding: 0 20px; */
+    font-weight: 700;
+    color: #017f94;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .card:hover {
+    border-color: #e06c0d;
+  }
+  
+  .card2 {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 930px;
+    padding: 15px;
+    margin-bottom: 20px;
+    transition: 0.3s;
+    border: 2px solid #e06c0d;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 20px;
+  
+  }
+  .card2 img:first-child {
+    margin-right: 20px;
+  }
+  
+  #root > div > div > section:nth-child(3) > div > div > div > img:nth-child(3) {
+    margin-left: 40px;
+  }
+  
+  .card2:hover {
+    border-color: #e06c0d;
+  }
+  
+  
+  .card3 button {
+    background: #EE8B3A ;
+    border-radius: 10rem;
+    color: white;
+    font-size:1.2rem;
+    padding: 0.5rem;
+    cursor: pointer;
+    width: 12rem;
+    height: 3rem;
+    border: none;
+    margin-top: 1rem;
+    text-transform: capitalize;
+  }
+  .card3 button:hover{
+    background-color: #017f94;
+  }
+  
+  .img-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  
+  .btn1 {
+    position: relative;
+    font-size: 25px;
+    outline: none;
+    background: #ffffff;
+    color: #ffffff;
+    font-weight: bold;
+    max-width: 120px;
+    width: 100%;
+    align-items: center;
+    margin-top: 80px;
+    cursor: pointer;
+    transition: 0.3s;
+    margin-right: 15px;
+    margin-left: 15px;
+    border-radius: 30px;
+    background-color: #00697c;
+  }
+  
+  
+  .card-total-name1{
+    display: flex;
+    flex-direction: column ;
+  }
+  
+  @media (max-width:1390px){
+    .card3{
+      gap:2rem;
+      flex-direction: column;
+    }
+  }
+  
+  @media (max-width: 1000px) {
+    section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    h1 {
+      font-size: 30px;
+      line-height: 40px;
+    }
+    .card {
+      flex: 0 0 100%;
+      /* max-width: 100%; */
+      flex-direction: column;
+      text-align: center;
+    }
+    .card2 {
+      flex: 0 0 100%;
+      width: 150px;
+      flex-direction: column;
+    }
+  
+    
+    #root
+      > div
+      > div
+      > section:nth-child(3)
+      > div
+      > div
+      > div
+      > img:nth-child(3) {
+      margin-left: 0;
+      margin-top: 20px;
+    }
+    #root
+      > div
+      > div
+      > section:nth-child(3)
+      > div
+      > div
+      > div
+      > img:nth-child(1) {
+      margin-bottom: 20px;
+    }
+  }
+  
