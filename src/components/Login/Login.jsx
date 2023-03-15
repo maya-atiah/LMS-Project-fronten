@@ -2,7 +2,7 @@ import React from 'react';
 import {  useState } from "react";
 import "../Login/Login";
 import "./Login.css"
-
+import swal from 'sweetalert';
 
 const LoginPage=()=>{
 
@@ -17,47 +17,97 @@ const LoginPage=()=>{
   const handlePasswordChange = (event) => {
     setPassword(event.target.value);
   };
+ 
 
-  const handleLogin = async (event) => {
-    event.preventDefault();
-    try {
-      const response = await fetch("http://localhost:8000/api/user/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          email,
-          password,
-        }),
-      });
-      const data = await response.json();
-      if (response.ok) {
-        alert("login successful");
+// const handleLogin = async (event) => {
+//   event.preventDefault();
+//   try {
+//     const response = await fetch("http://localhost:8000/api/user/login", {
+//       method: "POST",
+//       headers: {
+//         "Content-Type": "application/json",
+//       },
+//       body: JSON.stringify({
+//         email,
+//         password,
+//       }),
+//     });
+
+//     const data = await response.json();
+//     if (response.ok) {
+//       swal({
+//         title: "Login successful",
+//         icon: "success",
+      
+//       }).then(() => {
+        // window.localStorage.setItem("token", data.token);
+//         window.location.href = "/Home";
+//         if(response.data.role=="teacher"){
+//           window.localStorage.setItem("token", data.token);
+//           window.location.href="/Attendance";
+//         }
+  
+//         else if(response.data.role=="super admin"){
+//           window.localStorage.setItem("token", data.token);
+//           window.location.href = "/Home"
+//         }
+//       });
+
+     
+//     } else {
+//       swal({
+//         title: "Login failed",
+//         text: data.message,
+//         icon: "error",
+//       });
+//     }
+//   } catch (error) {
+//     console.error(error);
+//   }
+// };
+
+const handleLogin = async (event) => {
+  event.preventDefault();
+  try {
+    const response = await fetch("http://localhost:8000/api/user/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email,
+        password,
+      }),
+    });
+
+    const data = await response.json();
+    if (response.ok) {
+      swal({
+        title: "Login successful",
+        icon: "success",
+      }).then(() => {
         window.localStorage.setItem("token", data.token);
-
-        window.location.href = "/Home";
-        // localStorage.setItem("token", data.token); // Store token in localStorage
-        // setIsLoggedIn(true);
-      } else {
-        alert(data.message);
-      }
-    } catch (error) {
-      console.error(error);
+        if (data.role === "teacher") {
+          window.location.href = "/Attendance";
+        } else if (data.role === "super admin") {
+          window.location.href = "/Home";
+        } else {
+          
+        }
+      });
+    } else {
+      swal({
+        title: "Login failed",
+        text: data.message,
+        icon: "error",
+      });
     }
-  };
+  } catch (error) {
+    console.error(error);
+  }
+};
 
-  // useEffect(() => {
-  //   const token = localStorage.getItem("token");
-  //   if (token) {
-  //     setIsLoggedIn(true);
-  //   }
-  // }, []);
 
-  // if (isLoggedIn) {
-
-  //   return <Home />;
-  // }
 
     return (
         <div className="main-container-login">

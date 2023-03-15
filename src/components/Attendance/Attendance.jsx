@@ -8,6 +8,8 @@ import { useEffect } from "react";
 import Dropdown from "react-multilevel-dropdown";
 import swal from 'sweetalert';
 import {AiFillCaretDown} from  "react-icons/ai";
+import { useNavigate } from "react-router-dom";
+
 
 function Attendance() {
   
@@ -19,6 +21,14 @@ function Attendance() {
   const [title,setTitle]=useState('');
  const [letter,setletter]=useState('');
 //  const [isNavExpanded, setIsNavExpanded] = useState(false);
+
+const navigate = useNavigate();
+
+useEffect(() => {
+  if (!localStorage.getItem("token") && window.location.pathname !== "/") {
+    navigate("/");
+  }
+}, [navigate]);
 
   const fetchAttendance = async (e,id,status) => {
     // e.preventDefault();
@@ -69,7 +79,7 @@ function Attendance() {
 
   return (
     <div>
-      <Navhead />
+      {/* <Navhead /> */}
 
       <section>
         <div className='component-container'>

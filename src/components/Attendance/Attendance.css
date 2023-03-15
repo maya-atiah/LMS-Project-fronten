@@ -26,12 +26,21 @@
   width:100%;
 }
 
-th{
-  background-color: #017f94;
+th,td{
+  /* background-color: #017f94;
   color:white;
   padding-left: 1.5rem;
-  padding-right: 1.5rem;
+  padding-right: 1.5rem; */
+  border: 3px solid #017f94;
+  padding: 8px;
+  text-align: center;
+  width: 500px;
+  color: #ee8b3a;
+  font-size:28px;
 
+}
+th{
+  background-color: #017f94;
 }
 th, td {
   padding-top: 0.5rem;
