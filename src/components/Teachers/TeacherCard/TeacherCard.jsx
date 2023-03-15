@@ -26,7 +26,7 @@ export const TeacherCard = ({
   const [phoneNumber, setPhone] = useState("");
   const [isPending, setIsPending] = useState(false);
 
-  const submitHandler = (e) => {
+  const submithandler = (e) => {
     e.preventDefault();
     setIsPending(true);
     const updateTeacher = {
@@ -51,8 +51,16 @@ export const TeacherCard = ({
         console.log(err);
         setIsPending(false);
       });
+      setTimeout(() => {
+        setIsPending(false);
+        window.location.reload(); // reload the page
+      }, 100);
   };
 
+ 
+  //   const reload = () => {
+  //   window.location.reload();
+  // };
   return (
     <div>
       <div className="cardFrameTeacher">
@@ -66,20 +74,18 @@ export const TeacherCard = ({
         <div className="cardlineteachercard"></div>
         <div className="TeacherCardContent">
           <p>
-            <strong>
-            First Name:
-            </strong>
-            {teacher.firstName}</p>
-          <p><strong>
-            Last Name:
-            </strong> {teacher.lastName}</p>
-          <p><strong>
-            Email:
-            </strong> {teacher.email}</p>
-          <p><strong>
-            Phone Number:
-            </strong> {teacher.phoneNumber}</p>
-          
+            <strong>First Name:</strong>
+            {teacher.firstName}
+          </p>
+          <p>
+            <strong>Last Name:</strong> {teacher.lastName}
+          </p>
+          <p>
+            <strong>Email:</strong> {teacher.email}
+          </p>
+          <p>
+            <strong>Phone Number:</strong> {teacher.phoneNumber}
+          </p>
         </div>
         <div className="editButtonTeacher">
           <button className="editButtonTeacher2" onClick={handleUpdate}>
@@ -106,23 +112,23 @@ export const TeacherCard = ({
                 Update
               </Typography>
               <input
-              className="input-label-flex"
+                className="input-label-flex"
                 type="text"
                 id="firstName"
                 name="firstName"
                 placeholder="First Name"
                 onChange={(e) => setFname(e.target.value)}
               />
-              
+
               <input
-              className="input-label-flex"
+                className="input-label-flex"
                 type="text"
                 id="lastName"
                 name="lastName"
                 placeholder="Last Name"
                 onChange={(e) => setLname(e.target.value)}
               />
-                <input
+              <input
                 className="input-label-flex"
                 type="text"
                 id="email"
@@ -130,7 +136,7 @@ export const TeacherCard = ({
                 placeholder="Email"
                 onChange={(e) => setEmail(e.target.value)}
               />
-                <input
+              <input
                 className="input-label-flex"
                 type="text"
                 id="phoneNumber"
@@ -139,12 +145,12 @@ export const TeacherCard = ({
                 onChange={(e) => setPhone(e.target.value)}
               />
               {!isPending && (
-                <button className="btn-add-teacher" onClick={submitHandler}>
+                <button className="btn-add-teacher" onClick={submithandler}>
                   Edit
                 </button>
               )}
               {isPending && (
-                <button className="btn-add-teacher" onClick={submitHandler}>
+                <button className="btn-add-teacher" onClick={submithandler}>
                   Editing...
                 </button>
               )}
