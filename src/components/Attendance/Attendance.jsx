@@ -79,7 +79,7 @@ useEffect(() => {
 
   return (
     <div>
-      {/* <Navhead /> */}
+      <Navhead />
 
       <section>
         <div className='component-container'>
