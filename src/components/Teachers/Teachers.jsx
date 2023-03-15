@@ -65,11 +65,6 @@ function Teachers() {
       "Authorization": `Bearer ${token}`,
     }
   }
-  // const deleteTeacher = async (id) => {
-  //   await axios.delete(`http://localhost:8000/api/user/${id}`, config1);
-  //   getAllTeachers();
- 
-  // };
 
   const deleteTeacher = async (id) => {
     swal({
@@ -146,7 +141,7 @@ function Teachers() {
     });
   };
 
-  //grades and sections 
+  //grades, sections  and courses
   const [grades, setGrades] = useState([]);
 
   useEffect(() => {
@@ -166,6 +161,15 @@ function Teachers() {
         console.log(error);
       });
   }, []);
+
+    const [subjectt, setSubjectt] = useState([]);
+
+    useEffect(() => {
+      fetch("http://localhost:8000/api/course/getAll")
+        .then((response) => response.json())
+        .then((data) => setSubjectt(data))
+        .catch((error) => console.log(error));
+    }, []);
 
   return (
     <>
@@ -226,7 +230,7 @@ function Teachers() {
                       {" "}
                      
                       <input
-                        type='mail'
+                        type='email'
                         id='email'
                         name='email'
                         placeholder='Email'
@@ -258,26 +262,19 @@ function Teachers() {
                     <div className='input-label-flex'>
                       {" "}
                      
-                      <input
-                        type='text'
-                        id='subject'
-                        name='subject'
-                        placeholder='Course'
-                        onChange={(e) => setSubject(e.target.value)}
-                      />
+                 
                     </div>
-                    {/* <div className='input-label-flex'>
-                      {" "}
-                     
-                      <input
-                        type='text'
-                        id='subject'
-                        name='subject'
-                        placeholder='Grade'
-                        onChange={(e) => setName(e.target.value)}
-                      />
-                    </div> */}
+                    <br></br>
+                      <select id="grade" name="grade" onChange={(e) => setSubjectt(e.target.value)} className="my-select-student">
+  <option value="">-- Select a Course --</option>
+  {subjectt.map((grade) => (
+    <option key={grade.id} value={grade.subject}>
+      {grade.subject}
+    </option>
+  ))}
+  </select>   
 
+  <br></br>
 <select id="grade" name="grade" onChange={(e) => setName(e.target.value)} className="my-select-student">
   <option value="">-- Select a Grade --</option>
   {grades.map((grade) => (
@@ -289,17 +286,6 @@ function Teachers() {
 
 </select>
 <br></br>
-                    {/* <div className='input-label-flex'>
-                      {" "}
-                      <label htmlFor='role'>Section</label>
-                      <input
-                        type='text'
-                        id='subject'
-                        name='subject'
-                        placeholder='section'
-                        onChange={(e) => setLetter(e.target.value)}
-                      />
-                    </div> */}
 
 <select  id="letter" name="letter" onChange={(e) => setLetter(e.target.value)} className="my-select-student"> 
   <option value="">-- Select a letter --</option>

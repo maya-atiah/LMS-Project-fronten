@@ -10,7 +10,6 @@ import Box from "@mui/material/Box";
 import { Typography } from "@mui/material";
 import Navhead from "../../components/Navhead";
 import { useNavigate } from 'react-router-dom';
-import Dropdown from 'react-multilevel-dropdown';
 import swal from 'sweetalert';
 
 
@@ -31,23 +30,28 @@ function Courses() {
   };
 
 
-  
-
-  
   const handleDelete = async (id) => {
-    const res = await axios.delete(
-      `http://localhost:8000/api/deleteById/${id}`
-    );
+    swal({
+      title: "Are you sure?",
+      text: "Once deleted, you will not be able to recover this teacher!",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+    })
+    .then(async (willDelete) => {
+      if (willDelete) {
+        const newCourse = course.filter((course) => course.id !== id);
+        await axios.delete(`http://localhost:8000/api/deleteById/${id}`);
+        setIsDeleted(true);
+       setCourse(newCourse);
+        swal("Poof!The teacher has been deleted!", {
 
-    if (res.status === 200) {
-      const newCourse = course.filter((course) => course.id !== id);
-      setIsDeleted(true);
-      setCourse(newCourse);
-       swal({
-      title: "Course is deleted",
-      icon: "success",
+          icon: "success",
+        });
+      } else {
+        swal("The Course is safe!");
+      }
     });
-    }
   };
 
   
@@ -81,7 +85,7 @@ function Courses() {
       title: "Course is added",
       icon: "success",
     });
-    // setButtonPopup(false);
+  
   };
 
   console.log("course", course);

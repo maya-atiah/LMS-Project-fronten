@@ -14,11 +14,12 @@
   text-align: center;
   width: 500px;
   color: #ee8b3a;
-  font-size: xx-large;
+  font-size:30px;
+ 
 }
 
 .table-class th {
-  background-color: white;
+  background-color: #017f94;
 }
 .table-class tbody th.section {
   margin-right: 10px;

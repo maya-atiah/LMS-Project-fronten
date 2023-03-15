@@ -10,6 +10,8 @@ import Box from "@mui/material/Box";
 import { Typography } from "@mui/material";
 import PopupClass from "../../components/Classes/PopupClass";
 import swal from 'sweetalert';
+import { Multiselect } from "multiselect-react-dropdown";
+
 
 
 function Classes() {
@@ -25,18 +27,22 @@ function Classes() {
   const [sectionIds, setsection] = useState("[]");
   const [isPending, setIsPending] = useState(false);
   const [classes, setclass] = useState([]);
+  const [addMode, setAddMode] = useState(false);
+  const [options, setOptions] = useState([]);
+  const [selectedValues, setSelectedValues] = useState([]);
+  const [editMode, setEditMode] = useState(false);
+  const [data, setData] = useState([]);
+  const [error, setError] = useState(null);
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-const [editMode, setEditMode] = useState(false);
-const [addMode, setAddMode] = useState(false);
-const [data, setData] = useState([]);
-const [id, setId] = useState(null);
 
-const [formData, setFormData] = useState({
-  name: "",
-   });
-const handleChange = (event) => {
-  setFormData({ ...formData, [event.target.name]: event.target.value });
-};
+
+
+
+
+
+
+
+
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -81,6 +87,7 @@ const addClass = async () => {
     const body = {
       name: name,
       capacity: capacity,
+      // sectionIds,
       "sectionIds[0]": sectionIds[0],
     };
 
@@ -99,10 +106,10 @@ const addClass = async () => {
   
 }
 
-  ///
+  ////////////////////////////////////////////////////////////////////////////////////////////
   const submitHandler = (e) => {
     e.preventDefault();
-    addClass();
+   addClass();
   
   };
 
@@ -155,28 +162,35 @@ const addClass = async () => {
                 >
                   Add New Grade
                 </Typography>
-
+              
                 <input
                   type="text"
                   id="Grade"
-                  name="Grade"
+                  // name="Grade"
                   placeholder="Grade name"
-                  onChange={(e) => setGrade(e.target.value)}
+                   name="name"
+                   onChange={(e) => setGrade(e.target.value)}
                 />
+                 {/* <input
+                    className="class-input"
+                    type="text"
+                    placeholder="Capacity"
+                    name="capacity"
+                   
+                  
+                  ></input> */}
 
     <br></br>
-             
-  <select  id="letter" name="letter" onChange={(e) => setsection(e.target.value)} className="my-select-student"> 
-  <option value="">-- Select a letter --</option>
-  {letters.map((letter, index) => (
-    <option key={index} value={letter.letter}>
+     <select  id="letter" name="letter" onChange={(e) => setsection(e.target.value)} className="my-select-student"> 
+     <option value="">-- Select a letter --</option>
+     {letters.map((letter, index) => (
+      <option key={index} value={letter.letter}>
       {letter.letter}
     </option>
   ))}
 </select>
-
                 {!isPending && (
-                  <button className="btn-add-course" onClick={submitHandler}>
+                  <button className="btn-add-course" onClick={submitHandler} >
                     add
                   </button>
                 )}
@@ -185,6 +199,7 @@ const addClass = async () => {
                     adding new Grade
                   </button>
                 )}
+
               </Box>
             </PopupClass>
           </div>
