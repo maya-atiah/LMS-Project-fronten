@@ -106,22 +106,22 @@ function HomeTeacher() {
               <div key={i} className='card3'>
                 <div className='img-container'>
                   {card.img2 && <img src={card.img2} alt={card.title} />}
-                  <Link to='/Attendance'>
+                  <Link to='/TeacherSide/Attendance'>
                     <button>Attendance</button>
                   </Link>
                 </div>
                 <div className='img-container'>
                   {card.img1 && <img src={card.img1} alt={card.title} />}
-                  <Link to='/Reports'>
+                  <Link to='/TeacherSide/Reports'>
                     <button>Reports</button>
                   </Link>
                 </div>
-                <div className='img-container'>
+                {/* <div className='img-container'>
                   {card.img3 && <img src={card.img3} alt={card.title} />}
                   <Link to='/Students'>
                     <button>Students</button>
                   </Link>
-                </div>
+                </div> */}
               </div>
             ))}
           </div>

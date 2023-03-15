@@ -176,7 +176,7 @@ function AttendanceTeacher() {
                                       )
                                     }
                                   />
-                                  <label>abscent</label>
+                                  <label>absent</label>
                                 </div>
                                 <div>
                                   <input
