@@ -206,7 +206,6 @@ function Teachers() {
                   </Typography>
                   <div className='input'>
                     <div className='input-label-flex'>
-                     
                       <input
                         type='text'
                         id='firstName'
@@ -217,7 +216,6 @@ function Teachers() {
                     </div>
                     <div className='input-label-flex'>
                       {" "}
-                     
                       <input
                         type='text'
                         id='lastName'
@@ -228,7 +226,6 @@ function Teachers() {
                     </div>
                     <div className='input-label-flex'>
                       {" "}
-                     
                       <input
                         type='email'
                         id='email'
@@ -239,7 +236,6 @@ function Teachers() {
                     </div>
                     <div className='input-label-flex'>
                       {" "}
-                     
                       <input
                         type='password'
                         id='password'
@@ -250,7 +246,6 @@ function Teachers() {
                     </div>
                     <div className='input-label-flex'>
                       {" "}
-                      
                       <input
                         type='text'
                         id='phoneNumber'
