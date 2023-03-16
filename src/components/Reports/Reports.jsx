@@ -3,20 +3,23 @@ import Navhead from "../../components/Navhead";
 import { useState } from "react";
 import axios from "axios";
 import { useEffect } from "react";
+import "../components.css";
 import Dropdown from "react-multilevel-dropdown";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { Pie } from "react-chartjs-2";
+import "./Report.css";
+
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 function Reports() {
   const [gradeSection, setGradeSection] = useState([]);
   const [student, setStudent] = useState([]);
-  const [gradeId, setGradeId] = useState(null);
-  const [sectionId, setSectionId] = useState(null);
+  const [gradeId, setGradeId] = useState();
+  const [sectionId, setSectionId] = useState();
   const [attendances, setAttendances] = useState([]);
-  const [presentCount, setPresentCount] = useState(0);
-  const [absentCount, setAbsentCount] = useState(0);
-  const [lateCount, setLateCount] = useState(0);
+  const [presentCount, setPresentCount] = useState();
+  const [absentCount, setAbsentCount] = useState();
+  const [lateCount, setLateCount] = useState();
   const [pieChartData, setPieChartData] = useState({});
   const [title, setTitle] = useState("");
   const [letter, setLetter] = useState("");
@@ -30,6 +33,33 @@ function Reports() {
     }
   };
 
+  /////////////////////////////////////////
+  ////////////////////////
+
+  const fetchtheattended = async (dd) => {
+    const response = await axios.get(
+      `http://localhost:8000/api/attendance/status/${dd}`
+    );
+    console.log("hala feeeeeeeekkkkkkk", response.data);
+    console.log(response.data.present);
+    setPresentCount(response.data.present);
+    setAbsentCount(response.data.absent);
+    setLateCount(response.data.late);
+  };
+
+  const fetchthestatus = async (grade, section) => {
+    const response = await axios.get(
+      `http://localhost:8000/api/attendance/${grade}/${section}`
+    );
+    console.log(
+      "this is the attendance status",
+      response.data[0].gradeSectionId
+    );
+    fetchtheattended(response.data[0].gradeSectionId);
+  };
+
+  useEffect(() => {}, [presentCount, absentCount, lateCount, gradeId]);
+
   const fetchAllStudentByGradeSection = async (gradeId, sectionId) => {
     try {
       const response = await axios.get(
@@ -41,19 +71,6 @@ function Reports() {
       updatePieChartData(presentCount, absentCount, lateCount);
     } catch (error) {
       console.log(error);
-    }
-  };
-
-  const fetchAttendanceData = async () => {
-    try {
-      const response = await axios.get(
-        `http://localhost:8000/api/attendance/gradeSection/${sectionId}`
-      );
-      const fetchedAttendances = response.data.data;
-      setAttendances(fetchedAttendances);
-      updatePieChartData(presentCount, absentCount, lateCount);
-    } catch (error) {
-      console.error(error);
     }
   };
 
@@ -70,30 +87,6 @@ function Reports() {
     });
   };
 
-  const countPresentAttendances = () => {
-    const presentAttendances = attendances.filter(
-      (attendance) => attendance.status === "present"
-    );
-    setPresentCount(presentAttendances.length);
-    updatePieChartData(presentAttendances.length, absentCount, lateCount);
-  };
-
-  const countAbsentAttendances = () => {
-    const absentAttendances = attendances.filter(
-      (attendance) => attendance.status === "abscent"
-    );
-    setAbsentCount(absentAttendances.length);
-    updatePieChartData(presentCount, absentAttendances.length, lateCount);
-  };
-
-  const countLateAttendances = () => {
-    const lateAttendances = attendances.filter(
-      (attendance) => attendance.status === "late"
-    );
-    setLateCount(lateAttendances.length);
-    updatePieChartData(presentCount, absentCount, lateAttendances.length);
-  };
-
   const handleGetStudent = () => {
     fetchAllStudentByGradeSection(gradeId, sectionId);
     setTitle(gradeSection.name);
@@ -107,28 +100,19 @@ function Reports() {
 
   useEffect(() => {
     fetchGradeSection();
-  }, []);
+  }, [attendances]);
 
   useEffect(() => {
     if (sectionId !== null) {
       fetchAllStudentByGradeSection(gradeId, sectionId);
-      fetchAttendanceData();
+      // fetchAttendanceData();
     }
   }, [sectionId, gradeId]);
 
-  useEffect(() => {
-    countPresentAttendances();
-    countLateAttendances();
-    countAbsentAttendances();
-  }, [attendances]);
-
-
-
   const section1 = [
     {
-      title: "Total Students",
-      text1: student,
-      present: `Present: ${presentCount}`,
+      title: `AllStudents:${student} `,
+      present: `Present:${presentCount}`,
       absent: `Absent: ${absentCount}`,
       late: `Late: ${lateCount}`,
     },
@@ -137,16 +121,16 @@ function Reports() {
   return (
     <div>
       <Navhead />
-
+      <div></div>
       <section>
         <div className="component-container">
-          <h1> Reports</h1>
-          <div className="form-attendance">
+          <h1 className="Reporttt"> Reports</h1>
+          <div className="form-Reports">
             <div>
               <Dropdown
                 title="Filter By"
                 position="right"
-                className="dropdown-attendance"
+                className="dropdown-Report"
               >
                 {gradeSection &&
                   gradeSection.map((grade) => {
@@ -155,6 +139,7 @@ function Reports() {
                         key={grade.id}
                         onClick={() => {
                           setGradeId(grade.id);
+                          console.log(grade.id);
                           setTitle(grade.name);
                         }}
                       >
@@ -166,7 +151,11 @@ function Reports() {
                                 key={section.id}
                                 onClick={() => {
                                   setSectionId(section.id);
+                                  console.log(section.id);
+                                  // fetchAttendanceData(section.id);
                                   setLetter(section.letter);
+                                  fetchthestatus(gradeId, section.id);
+
                                   handleGetStudent();
                                 }}
                               >
@@ -181,27 +170,31 @@ function Reports() {
               </Dropdown>
             </div>
           </div>
-          <div className="attendance-gradename">
+          <div className="Report-gradename">
             {title} {letter}
           </div>
         </div>
       </section>
-      <div className="component-container">
-        <div className="cards">
-          {section1.map((card, i) => (
-            <div key={i} className="card">
-              <h3>{card.title} </h3>
-              <h2>{card.text1}</h2>
-              <h2>{card.present}</h2>
-              <h2>{card.absent}</h2>
-              <h2>{card.late}</h2>
+
+      <section>
+        <div className="component-container">
+          <div className="cardoo">
+            {section1.map((card, i) => (
+              <div key={i}>
+                <h3>{card.title} </h3>
+                <h2>{card.present}</h2>
+                <h2>{card.absent}</h2>
+                <h2>{card.late}</h2>
+              </div>
+            ))}
+            <div className="piechar">
+              {pieChartData && pieChartData.labels && pieChartData.datasets && (
+                <Pie data={pieChartData} />
+              )}
             </div>
-          ))}
+          </div>
         </div>
-        <div className="chart-container">
-          {/* <Pie data={pieChartData} /> */}
-        </div>
-      </div>
+      </section>
     </div>
   );
 }
