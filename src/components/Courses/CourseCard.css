@@ -5,3 +5,14 @@
 .course-para{
     color:white;
 }
+
+
+.delete-corse-button{
+    color:black;
+    background-color: none;
+}
+
+.button-course-position{
+    display: flex;
+    justify-content: flex-end;
+}
