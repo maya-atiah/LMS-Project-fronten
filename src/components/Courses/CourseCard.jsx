@@ -11,11 +11,16 @@ import {
 } from "@mui/material";
 import "../Courses/CourseCard.css";
 import { DeleteForeverRounded } from "@mui/icons-material";
+import swal from 'sweetalert';
+
 
 export default function CourseCard({ course, handleDelete }) {
+
   return (
     <div>
+
       <Card className='course-CardColor' sx={{ maxWidth: 250 }}>
+     
         <CardActionArea>
           <CardMedia
             component='img'

@@ -83,6 +83,10 @@ border: none;
   cursor: pointer;
   border: white 2px solid;
 }
+
+.orange-button {
+  background-color: #EE8B3A!important;
+}
 @media only screen and (max-width: 1000px) {
 
   .cardFrameTeacher {
@@ -91,6 +95,8 @@ border: none;
   .deleteTeacherButtencontainer {
     margin-left: 18vw;
   }
+
+
 }
 
 @media only screen and (max-width: 650px) {

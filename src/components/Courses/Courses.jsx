@@ -33,9 +33,21 @@ function Courses() {
   const handleDelete = async (id) => {
     swal({
       title: "Are you sure?",
-      text: "Once deleted, you will not be able to recover this teacher!",
+      text: "Once deleted, you will not be able to recover this course!",
       icon: "warning",
-      buttons: true,
+     
+      buttons:{
+        cancel: "Cancel",
+        confirm: {
+          text: "Delete",
+          value: true,
+          className: "btn-danger",
+          visible: true,
+          closeModal: true,
+          className: "orange-button",
+          
+        }
+      },
       dangerMode: true,
     })
     .then(async (willDelete) => {
@@ -44,7 +56,7 @@ function Courses() {
         await axios.delete(`http://localhost:8000/api/deleteById/${id}`);
         setIsDeleted(true);
        setCourse(newCourse);
-        swal("Poof!The teacher has been deleted!", {
+        swal("Poof!The course has been deleted!", {
 
           icon: "success",
         });
