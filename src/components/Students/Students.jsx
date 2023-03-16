@@ -5,13 +5,12 @@ import "../../components/Students/Students.css"
 import axios from "axios";
 import Navhead from "../../components/Navhead";
 import { useNavigate } from "react-router-dom";
-import { useState, useEffect,Fragment } from "react";
+import { useState, useEffect} from "react";
 import PopupStudent from "./PopupStudent.jsx";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import Box from "@mui/material/Box";
 import { Container, Grid } from "@mui/material";
 import { Typography } from "@mui/material";
-import { ToastContainer, toast } from "react-toastify";
 import Dropdown from "react-multilevel-dropdown";
 import swal from 'sweetalert';
 
@@ -27,13 +26,7 @@ function Students() {
   const [phoneNumber, setPhone] = useState("");
   const [isPending, setIsPending] = useState(false);
   const [isDeleted, setIsDeleted] = useState(false);
-  const [selectedInfo, setSelectedInfo] = useState({});
-  const [isUpdateMode, setIsUpdateMode] = useState(false);
-  const [tableMood, setTableMood] = useState(false);
-
-
   
-
   //////////////////////////////////////////////////////////
   const [table, setTable] = useState(false);
   const [gradeId, setGradeId] = useState(null);
@@ -326,7 +319,7 @@ const handleGetStudent = () => {
               </div>
             </div>
 
-            <div >
+            <div className="padding-dropdown">
               <Dropdown
                 title='Grade/Section '
                 
@@ -388,20 +381,7 @@ const handleGetStudent = () => {
             </Container>
           </div>
           </div>
-         
-
-
     
-       
-
-
-
-
-
-
-    
-      
-
       
     </>
   );
