@@ -14,11 +14,19 @@ export const TeacherCard = ({
   teacher,
   deleteTeacher,
   getAllTeachers,
-  config,
+  
 }) => {
   const handleUpdate = () => {
     setButtonPopup(true);
   };
+
+  const token = localStorage.getItem('token');
+  const config= {
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${token}`,
+    }
+  }
   const [buttonPopup, setButtonPopup] = useState(false);
   const [firstName, setFname] = useState("");
   const [lastName, setLname] = useState("");
