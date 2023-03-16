@@ -40,7 +40,7 @@ function Reports() {
     const response = await axios.get(
       `http://localhost:8000/api/attendance/status/${dd}`
     );
-    console.log("hala feeeeeeeekkkkkkk", response.data);
+    console.log( response.data);
     console.log(response.data.present);
     setPresentCount(response.data.present);
     setAbsentCount(response.data.absent);
@@ -80,8 +80,8 @@ function Reports() {
       datasets: [
         {
           data: [presentCount, absentCount, lateCount],
-          backgroundColor: ["#008000", "#ff0000", "#ff8c00"],
-          hoverBackgroundColor: ["#008000", "#ff0000", "#ff8c00"],
+          backgroundColor: ["#017f94", "#e06c0d", "#ff0000"],
+          hoverBackgroundColor: ["#017f94", "#e06c0d", "#ff0000"],
         },
       ],
     });
@@ -111,8 +111,8 @@ function Reports() {
 
   const section1 = [
     {
-      title: `AllStudents:${student} `,
-      present: `Present:${presentCount}`,
+      title: `AllStudents: ${student} `,
+      present: `Present: ${presentCount}`,
       absent: `Absent: ${absentCount}`,
       late: `Late: ${lateCount}`,
     },
@@ -177,7 +177,10 @@ function Reports() {
       </section>
 
       <section>
-        <div className="component-container">
+        <div
+          className="component-container"
+          style={{ display: gradeId ? "block" : "none" }}
+        >
           <div className="cardoo">
             {section1.map((card, i) => (
               <div key={i}>
@@ -198,4 +201,5 @@ function Reports() {
     </div>
   );
 }
+
 export default Reports;
