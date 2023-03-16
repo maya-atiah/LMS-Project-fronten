@@ -58,8 +58,6 @@ export const StudentCard = ({ student, deleteStudent, getAllStudents,fetchallStu
   const [phoneNumber, setPhoneNumber] = useState("");
  
 
-
-
   const [isPending, setIsPending] = useState(false);
 
   const handleUpdate = () => {
