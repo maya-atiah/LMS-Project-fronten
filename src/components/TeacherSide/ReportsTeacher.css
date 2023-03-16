@@ -1,12 +1,15 @@
 .Reporttt {
-  line-height: 46px;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 30px;
+  line-height: 36px;
   color: #017f94;
   align-self: stretch;
-  border-bottom: 1px solid #017f94;
+  border-bottom: 2px solid #017f94;
   margin-bottom: 12px;
   display: flex;
   flex-direction: row;
-  font-family: sans-serif;
   justify-content: space-between;
 }
 
