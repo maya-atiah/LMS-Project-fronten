@@ -111,6 +111,10 @@ input::placeholder {
   cursor: pointer;
 }
 
+.orange-button button{
+  background-color: #EE8B3A!important;
+}
+
 @media only screen and (max-width: 1000px) and (min-width: 600px) {
   .TeacherCardsContainer {
     display: grid;

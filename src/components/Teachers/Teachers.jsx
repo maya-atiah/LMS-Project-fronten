@@ -71,7 +71,18 @@ function Teachers() {
       title: "Are you sure?",
       text: "Once deleted, you will not be able to recover this teacher!",
       icon: "warning",
-      buttons: true,
+      buttons:{
+        cancel: "Cancel",
+        confirm: {
+          text: "Delete",
+          value: true,
+          className: "btn-danger",
+          visible: true,
+          closeModal: true,
+          className: "orange-button",
+        }
+      } ,
+      
       dangerMode: true,
     })
     .then(async (willDelete) => {
@@ -85,6 +96,7 @@ function Teachers() {
         swal("The teacher is safe!");
       }
     });
+
   };
   
   // Posting a function
@@ -271,6 +283,7 @@ function Teachers() {
     </option>
   ))}
   </select>   
+
                    {/* 
                        <input
                         type='text'
