@@ -1,4 +1,4 @@
-import { DeleteForeverOutlined } from "@mui/icons-material";
+import {DeleteForeverRounded } from "@mui/icons-material";
 import { useState, useEffect } from "react";
 import { IconButton } from "@mui/material";
 import PopupTeacher from "../PopupTeacher/PopupTeacher";
@@ -68,7 +68,7 @@ export const TeacherCard = ({
           className="deleteTeacherButtencontainer"
           onClick={() => deleteTeacher(teacher.id)}
         >
-          <DeleteForeverOutlined />
+          <DeleteForeverRounded />
         </button>
         <img src={img} alt="img" className="pfpic" />
         <div className="cardlineteachercard"></div>

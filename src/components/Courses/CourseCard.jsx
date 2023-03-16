@@ -16,6 +16,15 @@ export default function CourseCard({ course, handleDelete }) {
   return (
     <div>
       <Card className='course-CardColor' sx={{ maxWidth: 250 }}>
+      <CardActions className="button-course-position">
+          <IconButton
+            aria-label='delete'
+            onClick={() => handleDelete(course.id)}
+           
+          >
+            <DeleteForeverRounded  className="delete-corse-button" />
+          </IconButton>
+        </CardActions>
         <CardActionArea>
           <CardMedia
             component='img'
@@ -39,14 +48,7 @@ export default function CourseCard({ course, handleDelete }) {
             })}
           </CardContent>
         </CardActionArea>
-        <CardActions>
-          <IconButton
-            aria-label='delete'
-            onClick={() => handleDelete(course.id)}
-          >
-            <DeleteForeverRounded />
-          </IconButton>
-        </CardActions>
+       
       </Card>
     </div>
   );

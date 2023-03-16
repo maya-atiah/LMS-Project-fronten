@@ -42,7 +42,9 @@
     margin-bottom: 43vh;
     margin-left: 12vw;
     background: none;
+    border: none;
   border-radius: 30%; 
+
   }
   
   .deleteStudentButtencontainer:hover {
