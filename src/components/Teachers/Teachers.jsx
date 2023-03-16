@@ -162,14 +162,17 @@ function Teachers() {
       });
   }, []);
 
-    const [subjectt, setSubjectt] = useState([]);
+    const [course, setCourse] = useState([]);
 
     useEffect(() => {
       fetch("http://localhost:8000/api/course/getAll")
         .then((response) => response.json())
-        .then((data) => setSubjectt(data))
+        .then((data) => setCourse(data))
         .catch((error) => console.log(error));
     }, []);
+
+
+  
 
   return (
     <>
@@ -260,14 +263,22 @@ function Teachers() {
                  
                     </div>
                     <br></br>
-                      <select id="grade" name="grade" onChange={(e) => setSubjectt(e.target.value)} className="my-select-student">
+                      <select id="subject" name="subject" onChange={(e) => setSubject(e.target.value)} className="my-select-student">
   <option value="">-- Select a Course --</option>
-  {subjectt.map((grade) => (
-    <option key={grade.id} value={grade.subject}>
-      {grade.subject}
+  {course.map((subject) => (
+    <option key={subject.id} value={subject.subject}>
+      {subject.subject}
     </option>
   ))}
   </select>   
+                   {/* 
+                       <input
+                        type='text'
+                        id='subject'
+                        name='subject'
+                        placeholder='subject'
+                        onChange={(e) => setSubject(e.target.value)}
+                      /> */}
 
   <br></br>
 <select id="grade" name="grade" onChange={(e) => setName(e.target.value)} className="my-select-student">
