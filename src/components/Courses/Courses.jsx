@@ -21,7 +21,6 @@ function Courses() {
   const [isDeleted, setIsDeleted] = useState(false);
   const [buttonPopup, setButtonPopup] = useState(false);
   const [subject, setSubject] = useState("");
-  const [isPending, setIsPending] = useState(false);
 
   const fetchCourses = async () => {
     const res = await axios.get("http://localhost:8000/api/user-grade-section");
@@ -141,16 +140,11 @@ function Courses() {
                   placeholder="Write a Subject"
                   onChange={(e) => setSubject(e.target.value)}
                 />
-                {!isPending && (
+               
                   <button className='btn-add-course' onClick={submitHandler}>
                     add
                   </button>
-                )}
-                {isPending && (
-                  <button className='btn-add-course' onClick={submitHandler}>
-                    adding course
-                  </button>
-                )}
+                
               </Box>
             </PopupCourse>
           </div>
