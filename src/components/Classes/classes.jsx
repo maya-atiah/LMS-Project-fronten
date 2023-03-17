@@ -73,7 +73,6 @@ function Classes() {
           visible: true,
           closeModal: true,
           className: "orange-button",
-          
         }
       },
       dangerMode: true,
