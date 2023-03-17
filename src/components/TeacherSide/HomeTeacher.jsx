@@ -83,7 +83,7 @@ function HomeTeacher() {
             {section1.map((card, i) => (
               <div key={i} className='card'>
                 <img src={card.img1} alt={card.title} />
-                 <div lassName='card-total-name1' ><h3>{card.title} </h3>
+                 <div className='card-total-name1' ><h3>{card.title} </h3>
                 <h1>{card.text1}</h1>
                 </div>
                 {card.img2 && <img src={card.img2} alt={card.title} />}
