@@ -41,7 +41,7 @@ function Reports() {
     const response = await axios.get(
       `http://localhost:8000/api/attendance/status/${dd}`
     );
-    console.log( response.data);
+    console.log(response.data);
     console.log(response.data.present);
     setPresentCount(response.data.present);
     setAbsentCount(response.data.absent);
@@ -112,16 +112,16 @@ function Reports() {
 
   const section1 = [
     {
-      title: `AllStudents: ${student} `,
-      present: `Present: ${presentCount}`,
-      absent: `Absent: ${absentCount}`,
-      late: `Late: ${lateCount}`,
+      title: `All Students: ${student}`,
+      present: `Present: ${student === 0 ? 0 : presentCount}`,
+      absent: `Absent: ${student === 0 ? 0 : absentCount}`,
+      late: `Late: ${student === 0 ? 0 : lateCount}`,
     },
   ];
 
   return (
     <div>
-     <TeacherSide/>
+      <Navhead />
       <div></div>
       <section>
         <div className="component-container">
@@ -192,9 +192,10 @@ function Reports() {
               </div>
             ))}
             <div className="piechar">
-              {pieChartData && pieChartData.labels && pieChartData.datasets && (
-                <Pie data={pieChartData} />
-              )}
+              {student > 0 &&
+                pieChartData &&
+                pieChartData.labels &&
+                pieChartData.datasets && <Pie data={pieChartData} />}
             </div>
           </div>
         </div>
