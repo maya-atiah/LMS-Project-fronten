@@ -10,6 +10,7 @@ import Box from "@mui/material/Box";
 import { Typography } from "@mui/material";
 import PopupClass from "../../components/Classes/PopupClass";
 import swal from 'sweetalert';
+import { Multiselect } from "multiselect-react-dropdown";
 import Select from 'react-select';
 
 
@@ -27,7 +28,23 @@ function Classes() {
   const [sectionIds, setsection] = useState("[]");
   const [isPending, setIsPending] = useState(false);
   const [classes, setclass] = useState([]);
+  const [addMode, setAddMode] = useState(false);
+  const [options, setOptions] = useState([]);
+  const [selectedValues, setSelectedValues] = useState([]);
+  const [editMode, setEditMode] = useState(false);
+  const [data, setData] = useState([]);
+  const [error, setError] = useState(null);
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+
+
+
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   useEffect(() => {
@@ -47,7 +64,18 @@ function Classes() {
       title: "Are you sure?",
       text: "Once deleted, you will not be able to recover this grade!",
       icon: "warning",
-      buttons: true,
+      buttons:{
+        cancel: "Cancel",
+        confirm: {
+          text: "Delete",
+          value: true,
+          className: "btn-danger",
+          visible: true,
+          closeModal: true,
+          className: "orange-button",
+          
+        }
+      },
       dangerMode: true,
     })
     .then(async (willDelete) => {
@@ -220,12 +248,12 @@ const submitHandler = (e) => {
             <tbody>
               {classes.map((item, index) => {
                 return (
-                  <tr  key={index}>
+                  <tr className="" key={index}>
                     <td> {item.name} </td>
 
-                    <td className="level-section">
+                    <td>
                       {item.sections.map((section, index) => (
-                        <td key={index} className="section-styling"> {section.letter}</td>
+                        <td key={index}> {section.letter}</td>
                       ))}
                     </td>
 
