@@ -11,8 +11,6 @@ import swal from 'sweetalert';
 
 export const StudentCard = ({ student, deleteStudent, getAllStudents,fetchallStudentByGradeSection,gradeId, sectionId,fetchGradeSection, updateStudent}) => {
   const handleDelete = () => {
-    deleteStudent(student.id);
-
     swal({
       title: "Are you sure?",
       text: "Once deleted, you will not be able to recover this student!",
@@ -29,18 +27,18 @@ export const StudentCard = ({ student, deleteStudent, getAllStudents,fetchallStu
         },
       },
       dangerMode: true,
-    })
-    .then((willDelete) => {
+    }).then((willDelete) => {
       if (willDelete) {
+        deleteStudent(student.id);
         swal("Poof! The student has been deleted!", {
           icon: "success",
-          
         });
       } else {
         swal("The student is safe!");
       }
-    }); 
+    });
   };
+  
 
   const token = localStorage.getItem('token');
   const config1= {
