@@ -56,8 +56,6 @@ export const StudentCard = ({ student, deleteStudent, getAllStudents,fetchallStu
   const [phoneNumber, setPhoneNumber] = useState("");
  
 
-
-
   const [isPending, setIsPending] = useState(false);
 
   const handleUpdate = () => {
@@ -89,6 +87,10 @@ const submitHandler = (e) => {
       console.log(err);
       setIsPending(false);
     });
+    setTimeout(() => {
+      setIsPending(false);
+      window.location.reload(); // reload the page
+    }, 100);
 };
 
 

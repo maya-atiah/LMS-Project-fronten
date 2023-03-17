@@ -15,6 +15,7 @@ export const TeacherCard = ({
   deleteTeacher,
   getAllTeachers,
   
+  
 }) => {
   const handleUpdate = () => {
     setButtonPopup(true);
