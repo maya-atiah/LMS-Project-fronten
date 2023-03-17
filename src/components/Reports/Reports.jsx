@@ -1,4 +1,4 @@
-iimport React from "react";
+import React from "react";
 import Navhead from "../../components/Navhead";
 import { useState } from "react";
 import axios from "axios";
