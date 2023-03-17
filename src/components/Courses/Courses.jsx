@@ -25,7 +25,6 @@ function Courses() {
   const fetchCourses = async () => {
     const res = await axios.get("http://localhost:8000/api/user-grade-section");
     setCourse(res.data.data);
-    console.log("course", course);
   };
 
 
@@ -98,11 +97,6 @@ function Courses() {
     });
   
   };
-
-  console.log("course", course);
-
-
- 
 
   return (
     <>

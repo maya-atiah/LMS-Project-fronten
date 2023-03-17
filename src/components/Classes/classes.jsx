@@ -9,11 +9,8 @@ import axios from "axios";
 import Box from "@mui/material/Box";
 import { Typography } from "@mui/material";
 import PopupClass from "../../components/Classes/PopupClass";
-import swal from 'sweetalert';
-import { Multiselect } from "multiselect-react-dropdown";
-import Select from 'react-select';
-
-
+import swal from "sweetalert";
+import Select from "react-select";
 
 function Classes() {
   const navigate = useNavigate();
@@ -26,26 +23,7 @@ function Classes() {
   const [buttonPopup, setButtonPopup] = useState(false);
   const [name, setGrade] = useState("");
   const [sectionIds, setsection] = useState("[]");
-  const [isPending, setIsPending] = useState(false);
   const [classes, setclass] = useState([]);
-  const [addMode, setAddMode] = useState(false);
-  const [options, setOptions] = useState([]);
-  const [selectedValues, setSelectedValues] = useState([]);
-  const [editMode, setEditMode] = useState(false);
-  const [data, setData] = useState([]);
-  const [error, setError] = useState(null);
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-
-
-
-
-
-
-
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   useEffect(() => {
     loadclass();
@@ -54,17 +32,16 @@ function Classes() {
   //get
   const loadclass = async () => {
     const res = await axios.get("http://localhost:8000/api/grade");
-    console.log(res.data);
     setclass(res.data);
   };
-  
+
   //delete
   const deleteUser = async (id) => {
     swal({
       title: "Are you sure?",
       text: "Once deleted, you will not be able to recover this grade!",
       icon: "warning",
-      buttons:{
+      buttons: {
         cancel: "Cancel",
         confirm: {
           text: "Delete",
@@ -73,11 +50,10 @@ function Classes() {
           visible: true,
           closeModal: true,
           className: "orange-button",
-        }
+        },
       },
       dangerMode: true,
-    })
-    .then(async (willDelete) => {
+    }).then(async (willDelete) => {
       if (willDelete) {
         await axios.delete(`http://localhost:8000/api/grade/${id}`);
         loadclass();
@@ -89,80 +65,80 @@ function Classes() {
       }
     });
   };
-  
 
-//add new grade with sections
-const addClass = async () => {
-  const capacity = 50; 
-  const body = {
-    name,
-    capacity,
-    sectionIds,
+  //add new grade with sections
+  const addClass = async () => {
+    const capacity = 50;
+    const body = {
+      name,
+      capacity,
+      sectionIds,
+    };
+
+    try {
+      const response = await fetch("http://localhost:8000/api/grade", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(body),
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        console.log(data);
+        swal({
+          title: "Grade added successfully!",
+          icon: "success",
+        });
+        setButtonPopup(false);
+        loadclass();
+      } else {
+        const error = await response.json();
+        console.error(error);
+        if (error.error === "Grade already exists") {
+          // Grade already exists, so add the new section to it
+          const gradeId = error.grade.id;
+          const sectionId = sectionIds[0];
+          const sectionCapacity = capacity;
+          const sectionResponse = await fetch(
+            `http://localhost:8000/api/grade/${gradeId}/section/${sectionId}`,
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({ capacity: sectionCapacity }),
+            }
+          );
+          if (sectionResponse.ok) {
+            // Display a success message to the user
+            swal({
+              title: "Section added to existing grade successfully",
+              icon: "success",
+            });
+            setButtonPopup(false);
+            loadclass();
+          } else {
+            const sectionError = await sectionResponse.json();
+            console.error(sectionError);
+            alert(sectionError.error);
+          }
+        } else {
+          alert(error.error);
+        }
+      }
+    } catch (error) {
+      console.error(error);
+    }
   };
 
-  try {
-    const response = await fetch('http://localhost:8000/api/grade', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(body),
-    });
-
-    if (response.ok) {
-      const data = await response.json();
-      console.log(data);
-      swal({
-        title: "Grade added successfully!",
-        icon: "success",
-      });
-      setButtonPopup(false);
-      loadclass();
-    } else {
-      const error = await response.json();
-      console.error(error);
-      if (error.error === 'Grade already exists') {
-        // Grade already exists, so add the new section to it
-        const gradeId = error.grade.id;
-        const sectionId = sectionIds[0];
-        const sectionCapacity = capacity;
-        const sectionResponse = await fetch(`http://localhost:8000/api/grade/${gradeId}/section/${sectionId}`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ capacity: sectionCapacity }),
-        });
-        if (sectionResponse.ok) {
-          // Display a success message to the user
-          swal({
-            title: "Section added to existing grade successfully",
-            icon: "success",
-          });
-          setButtonPopup(false);
-          loadclass();
-        } else {
-          const sectionError = await sectionResponse.json();
-          console.error(sectionError)
-          alert(sectionError.error);
-        }
-      } else {
-        alert(error.error);
-      }
-    }
-  } catch (error) {
-    console.error(error);
-  }
-};
-
-
-const submitHandler = (e) => {
-  e.preventDefault();
-  addClass();
-};
+  const submitHandler = (e) => {
+    e.preventDefault();
+    addClass();
+  };
 
   ////////////////////////////////////////////////////////////////////////////////////////////
- 
 
   const [grades, setGrades] = useState([]);
 
@@ -183,110 +159,86 @@ const submitHandler = (e) => {
         console.log(error);
       });
   }, []);
-    return (
+  return (
     <>
       <Navhead />
 
-      <div className="component-container">
-        <div className="grade-title" onClick={() => setButtonPopup(true)}>
+      <div className='component-container'>
+        <div className='grade-title' onClick={() => setButtonPopup(true)}>
           <div>Grades </div>
-          <div className="addingCourse">
+          <div className='addingCourse'>
             <AddCircleIcon /> Add Grade
             <PopupClass
               trigger={buttonPopup}
               setTrigger={() => setButtonPopup(false)}
             >
               <Box
-                component="form"
+                component='form'
                 sx={{
                   "& > :not(style)": { m: 1 },
                 }}
                 noValidate
-                autoComplete="off"
+                autoComplete='off'
               >
                 <Typography
                   gutterBottom
-                  color="white"
-                  variant="h4"
-                  component="div"
+                  color='white'
+                  variant='h4'
+                  component='div'
                 >
                   Add New Grade
                 </Typography>
-              
+
                 <input
-                  type="text"
-                  id="Grade"
+                  type='text'
+                  id='Grade'
                   // name="Grade"
-                  placeholder="Grade name"
-                   name="name"
-                   onChange={(e) => setGrade(e.target.value)}
+                  placeholder='Grade name'
+                  name='name'
+                  onChange={(e) => setGrade(e.target.value)}
                 />
-                 {/* <input
-                    className="class-input"
-                    type="text"
-                    placeholder="Capacity"
-                    name="capacity"
-                   
-                  
-                  ></input> */}
 
-    <br></br>
-     {/* <select  id="letter" name="letter" onChange={(e) => setsection(e.target.value)} className="my-select-student"> 
-     <option value="">-- Select a letter --</option>
-     {letters.map((letter, index) => (
-      <option key={index} value={letter.letter}>
-      {letter.letter}
-    </option>
-  ))}
-</select> */}
-{console.log("ssHGHJ",sectionIds[0])}
-<Select 
-    isMulti
-    name="letters"
-    options={letters.map((letter) => ({value: letter.id, label: letter.id}))}
-    className="my-select-student"
-    onChange={(selectedOptions) => {
-        const selectedValues = selectedOptions.map(option => option.value);
-        setsection(selectedValues);
-    }}
-    
-/>
+                <br></br>
 
-{console.log("ssj",sectionIds)}
-{/* {console.log("secttt",selectedValues.id)} */}
-                {!isPending && (
-                  <button className="btn-add-course" onClick={submitHandler} >
-                    add
-                  </button>
-                )}
-                {isPending && (
-                  <button className="btn-add-course" onClick={submitHandler}>
-                    adding new Grade
-                  </button>
-                )}
+                {console.log("ssHGHJ", sectionIds[0])}
+                <Select
+                  isMulti
+                  name='letters'
+                  options={letters.map((letter) => ({
+                    value: letter.id,
+                    label: letter.id,
+                  }))}
+                  className='my-select-student'
+                  onChange={(selectedOptions) => {
+                    const selectedValues = selectedOptions.map(
+                      (option) => option.value
+                    );
+                    setsection(selectedValues);
+                  }}
+                />
 
+                <button className='btn-add-course' onClick={submitHandler}>
+                  add
+                </button>
               </Box>
             </PopupClass>
           </div>
         </div>
         <br></br> <br></br>
-
-
-            <div>
-             
-<table className="table-class">
-          <thead>
-            <tr className="first--">
-              <th>Class</th>
-              <th>Section</th>
-              <th>Delete</th>
-            </tr>
+        <div>
+          <table className='table-class'>
+            <thead>
+              <tr className='first--'>
+                <th>Class</th>
+                <th>Section</th>
+                <th>Delete</th>
+              </tr>
             </thead>
 
             <tbody>
               {classes.map((item, index) => {
                 return (
-                  <tr className="" key={index}>
+                  <tr className='' key={index}>
                     <td> {item.name} </td>
 
                     <td>
@@ -298,8 +250,8 @@ const submitHandler = (e) => {
                     <td>
                       {" "}
                       <button
-                        alt=""
-                        className="button"
+                        alt=''
+                        className='button'
                         onClick={() => deleteUser(item.id)}
                       >
                         {" "}

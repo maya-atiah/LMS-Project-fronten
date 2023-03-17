@@ -40,8 +40,6 @@ function Reports() {
     const response = await axios.get(
       `http://localhost:8000/api/attendance/status/${dd}`
     );
-    console.log(response.data);
-    console.log(response.data.present);
     setPresentCount(response.data.present);
     setAbsentCount(response.data.absent);
     setLateCount(response.data.late);
