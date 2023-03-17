@@ -90,32 +90,71 @@ function Classes() {
     });
   };
   
-  ///////////////////////////////////////////////////////////////////////////////////
-  //add
-  
+
+//add new grade with sections
 const addClass = async () => {
-    const capacity = 50;  
-    const body = {
-      name: name,
-      capacity: capacity,
-      sectionIds,
-      // 'sectionIds[0]': sectionIds,
-    };
-    console.log("sectooo",sectionIds)
-    console.log("body ", JSON.stringify(body));
-  await axios
-    .post("http://localhost:8000/api/grade",JSON.stringify(body),{ headers: {
-      'Content-Type': 'application/json'
-  }}
-    )
-    .then(() => {
+  const capacity = 50; 
+  const body = {
+    name,
+    capacity,
+    sectionIds,
+  };
+
+  try {
+    const response = await fetch('http://localhost:8000/api/grade', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(body),
     });
-  setButtonPopup(false);
-  loadclass();
-}
 
+    if (response.ok) {
+      const data = await response.json();
+      console.log(data);
+      swal({
+        title: "Grade added successfully!",
+        icon: "success",
+      });
+      setButtonPopup(false);
+      loadclass();
+    } else {
+      const error = await response.json();
+      console.error(error);
+      if (error.error === 'Grade already exists') {
+        // Grade already exists, so add the new section to it
+        const gradeId = error.grade.id;
+        const sectionId = sectionIds[0];
+        const sectionCapacity = capacity;
+        const sectionResponse = await fetch(`http://localhost:8000/api/grade/${gradeId}/section/${sectionId}`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ capacity: sectionCapacity }),
+        });
+        if (sectionResponse.ok) {
+          // Display a success message to the user
+          swal({
+            title: "Section added to existing grade successfully",
+            icon: "success",
+          });
+          setButtonPopup(false);
+          loadclass();
+        } else {
+          const sectionError = await sectionResponse.json();
+          console.error(sectionError)
+          alert(sectionError.error);
+        }
+      } else {
+        alert(error.error);
+      }
+    }
+  } catch (error) {
+    console.error(error);
+  }
+};
 
- 
 
 const submitHandler = (e) => {
   e.preventDefault();
