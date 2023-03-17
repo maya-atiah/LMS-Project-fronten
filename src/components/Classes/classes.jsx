@@ -57,7 +57,7 @@ function Classes() {
     console.log(res.data);
     setclass(res.data);
   };
-
+  
   //delete
   const deleteUser = async (id) => {
     swal({
