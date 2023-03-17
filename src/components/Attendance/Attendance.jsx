@@ -7,7 +7,6 @@ import axios from "axios";
 import { useEffect } from "react";
 import Dropdown from "react-multilevel-dropdown";
 import swal from "sweetalert";
-import { AiFillCaretDown } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
 
 function Attendance() {
@@ -52,6 +51,7 @@ function Attendance() {
       .then((res) => {
         setStudent(res.data);
         setTable(true);
+        
       })
       .catch((err) => console.log(err));
   };

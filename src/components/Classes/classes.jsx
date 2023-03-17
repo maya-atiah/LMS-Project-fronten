@@ -10,7 +10,6 @@ import Box from "@mui/material/Box";
 import { Typography } from "@mui/material";
 import PopupClass from "../../components/Classes/PopupClass";
 import swal from 'sweetalert';
-import { Multiselect } from "multiselect-react-dropdown";
 import Select from 'react-select';
 
 
@@ -28,23 +27,7 @@ function Classes() {
   const [sectionIds, setsection] = useState("[]");
   const [isPending, setIsPending] = useState(false);
   const [classes, setclass] = useState([]);
-  const [addMode, setAddMode] = useState(false);
-  const [options, setOptions] = useState([]);
-  const [selectedValues, setSelectedValues] = useState([]);
-  const [editMode, setEditMode] = useState(false);
-  const [data, setData] = useState([]);
-  const [error, setError] = useState(null);
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-
-
-
-
-
-
-
-
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   useEffect(() => {
@@ -237,12 +220,12 @@ const submitHandler = (e) => {
             <tbody>
               {classes.map((item, index) => {
                 return (
-                  <tr className="" key={index}>
+                  <tr  key={index}>
                     <td> {item.name} </td>
 
-                    <td>
+                    <td className="level-section">
                       {item.sections.map((section, index) => (
-                        <td key={index}> {section.letter}</td>
+                        <td key={index} className="section-styling"> {section.letter}</td>
                       ))}
                     </td>
 

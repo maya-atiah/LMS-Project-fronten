@@ -10,14 +10,20 @@
 .table-class th,
 .table-class td {
   border: 3px solid #017f94;
-  padding: 8px;
+  padding: 5px;
   text-align: center;
   width: 500px;
   color: #ee8b3a;
-  font-size:30px;
+  font-size:20px;
  
 }
+.section-styling{
+  padding: 0.2rem !important;
+}
 
+.level-section{
+  padding: 0.9rem !important;
+}
 .table-class th {
   background-color: #017f94;
 }

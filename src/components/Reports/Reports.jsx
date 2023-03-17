@@ -111,7 +111,7 @@ function Reports() {
 
   const section1 = [
     {
-      title: `AllStudents: ${student} `,
+      title: `All Students: ${student} `,
       present: `Present: ${presentCount}`,
       absent: `Absent: ${absentCount}`,
       late: `Late: ${lateCount}`,

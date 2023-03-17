@@ -19,7 +19,7 @@ export default function CourseCard({ course, handleDelete }) {
   return (
     <div>
 
-      <Card className='course-CardColor' sx={{ maxWidth: 250 }}>
+      <Card className='course-CardColor' sx={{ maxWidth: 300 }}>
       <CardActions className="button-course-position">
           <IconButton
             aria-label='delete'

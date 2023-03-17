@@ -26,3 +26,9 @@
     width: 220px;
     background: none;
   }
+
+  .padding-dropdown{
+    padding-left: 2rem;
+    margin-bottom: 2rem;
+  }
+

@@ -1,10 +1,8 @@
 import axios from "axios";
 import "./StudentCard.css";
 import img from "./student2.png";
-import { IconButton} from "@mui/material";
 import { DeleteForeverRounded } from "@mui/icons-material";
 import PopupStudent from "./PopupStudent.jsx";
-import AddCircleIcon from "@mui/icons-material/AddCircle";
 import Box from "@mui/material/Box";
 import { Typography } from "@mui/material";
 import { useState, useEffect } from "react";

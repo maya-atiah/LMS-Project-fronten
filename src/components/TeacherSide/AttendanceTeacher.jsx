@@ -1,6 +1,6 @@
 import React from "react";
 import "../components.css";
-import "../TeacherSide/AttendanceTeacher.css";
+// import "../TeacherSide/AttendanceTeacher.css";
 import { useState } from "react";
 import axios from "axios";
 import { useEffect } from "react";

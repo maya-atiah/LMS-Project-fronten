@@ -1,118 +1,125 @@
 .attendance-titile{
-    font-family: "Inter";
-    font-style: normal;
-    font-weight: 400;
-    font-size: 30px;
-    line-height: 36px;
-    color: #017f94;
-    align-self: stretch;
-    border-bottom: 2px solid #017f94;
-    margin-bottom: 12px;
-  }
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 30px;
+  line-height: 36px;
+  color: #017f94;
+  align-self: stretch;
+  border-bottom: 2px solid #017f94;
+  margin-bottom: 3rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+}
+
+
+.demo-multiple-name-label {
+  color: #EE8B3A !important;
+}
+
+.attendance-gradename{
+  color: #017f94;
+   font-weight: 400;
+  font-size: 30px;
+}
+
+
+.attendance-table{
+  width:100%;
+}
+
+th,td{
+  /* background-color: #017f94;
+  color:white;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem; */
+  border: 3px solid #017f94;
+  padding: 12px;
+  text-align: center;
+  width: 500px;
+  color: #ee8b3a;
+  font-size:20px;
+
+}
+th{
+  background-color: #017f94;
+}
+
+
+table, th, td {
+  border: 3px solid #017f94;
+  border-collapse: collapse;
+}
+
+
+.form-attendance{
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 2rem;
+  align-items:center;
+  justify-content: flex-start;
+}
+
+#demo-multiple-name{
+  color: #017f94;
+}
+.input-attendance{
+  display: flex;
+  flex-direction: row;
+  gap:1rem;
+justify-content: center;
+}
+
+ label{
+  padding:0.5rem;
+}
+
+
+.submit-attendance{
+  background: #EE8B3A ;
+  border-radius: 10rem;
+  color: white;
+  font-size:1.2rem;
+  padding: 0.5rem;
+  cursor: pointer;
+  width: 8rem;
+  height: 3rem;
+  border: none;
+  margin-top: 1px;
+  text-transform: capitalize;
+
+}
+.submit-attendance:hover{
+  background-color: #017f94;
   
-  
-  .demo-multiple-name-label {
-    color: #EE8B3A !important;
-  }
-  
-  .attendance-gradename{
-    color: #017f94;
-     font-weight: 400;
-    font-size: 30px;
-  }
-  
-  
-  .attendance-table{
-    width:100%;
-  }
-  
-  th,td{
-    /* background-color: #017f94;
-    color:white;
-    padding-left: 1.5rem;
-    padding-right: 1.5rem; */
-    border: 3px solid #017f94;
-    padding: 8px;
-    text-align: center;
-    width: 500px;
-    color: #ee8b3a;
-    font-size:20px;
-  
-  }
-  th{
-    background-color: #017f94;
-  }
-  th, td {
-    padding-top: 0.5rem;
-    padding-bottom:0.5rem;
-    padding-left: 1rem;
-    padding-right: 1rem;
-  }
-  
-  table, th, td {
-    border: 1px solid black;
-    border-collapse: collapse;
-  }
-  
-  
-  .form-attendance{
-    display: flex;
-    flex-direction: row;
-    margin-bottom: 2rem;
-    align-items:center;
-    justify-content: flex-start;
-  }
-  
-  #demo-multiple-name{
-    color: #017f94;
-  }
-  .input-attendance{
-    display: flex;
-    flex-direction: row;
-    gap:1rem;
-  justify-content: center;
-  }
-  
-   label{
-    padding:0.5rem;
-  }
-  
-  
-  .submit-attendance{
-    background: #EE8B3A ;
-    border-radius: 10rem;
-    color: white;
-    font-size:1.2rem;
-    padding: 0.5rem;
-    cursor: pointer;
-    width: 8rem;
-    height: 3rem;
-    border: none;
-    margin-top: 1px;
-    text-transform: capitalize;
-  
-  }
-  .submit-attendance:hover{
-    background-color: #017f94;
-    
-  }
-  
-  
-  .dropdown-attendance{
-    background: #EE8B3A ;
-    border-radius: 10rem;
-    color: white;
-    font-size:1.2rem;
-    padding: 0.5rem;
-    cursor: pointer;
-    width: 10rem;
-    height: 3rem;
-    border: none;
-    margin-top: 1px;
-    text-transform: capitalize;
-  }
-  
-  .dropdown-attendance:hover{
-    background-color: #017f94;
-  }
-  
+}
+
+
+.dropdown-attendance{
+  background: #EE8B3A ;
+  border-radius: 10rem;
+  color: white;
+  font-size:1.2rem;
+  padding: 0.5rem;
+  cursor: pointer;
+  width: 10rem;
+  height: 3rem;
+  border: none;
+  margin-top: 1px;
+  text-transform: capitalize;
+}
+
+.dropdown-attendance:hover{
+  background-color: #017f94;
+}
+
+
+.attendance-table tbody tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.attendance-table tbody tr:hover {
+  background-color: #ddd;
+}
