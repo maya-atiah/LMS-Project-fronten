@@ -1,5 +1,4 @@
 import React from "react";
-import Navhead from "../../components/Navhead";
 import { useState } from "react";
 import axios from "axios";
 import { useEffect } from "react";
@@ -8,7 +7,7 @@ import Dropdown from "react-multilevel-dropdown";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { Pie } from "react-chartjs-2";
 import "../TeacherSide/ReportsTeacher.css";
-import TeacherSide from "./TeacherSide";
+import TeacherSide from "../TeacherSide/TeacherSide";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -121,8 +120,8 @@ function Reports() {
 
   return (
     <div>
-      <Navhead />
-      <div></div>
+     
+     <TeacherSide/>
       <section>
         <div className="component-container">
           <h1 className="Reporttt"> Reports</h1>
@@ -205,3 +204,4 @@ function Reports() {
 }
 
 export default Reports;
+
