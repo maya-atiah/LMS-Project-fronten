@@ -7,7 +7,8 @@ import "../components.css";
 import Dropdown from "react-multilevel-dropdown";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { Pie } from "react-chartjs-2";
-import "./Report.css";
+import "../TeacherSide/ReportsTeacher.css";
+import TeacherSide from "./TeacherSide";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -40,7 +41,7 @@ function Reports() {
     const response = await axios.get(
       `http://localhost:8000/api/attendance/status/${dd}`
     );
-    console.log( response.data);
+    console.log(response.data);
     console.log(response.data.present);
     setPresentCount(response.data.present);
     setAbsentCount(response.data.absent);
@@ -111,10 +112,10 @@ function Reports() {
 
   const section1 = [
     {
-      title: `All Students: ${student} `,
-      present: `Present: ${presentCount}`,
-      absent: `Absent: ${absentCount}`,
-      late: `Late: ${lateCount}`,
+      title: `All Students: ${student}`,
+      present: `Present: ${student === 0 ? 0 : presentCount}`,
+      absent: `Absent: ${student === 0 ? 0 : absentCount}`,
+      late: `Late: ${student === 0 ? 0 : lateCount}`,
     },
   ];
 
@@ -191,9 +192,10 @@ function Reports() {
               </div>
             ))}
             <div className="piechar">
-              {pieChartData && pieChartData.labels && pieChartData.datasets && (
-                <Pie data={pieChartData} />
-              )}
+              {student > 0 &&
+                pieChartData &&
+                pieChartData.labels &&
+                pieChartData.datasets && <Pie data={pieChartData} />}
             </div>
           </div>
         </div>
