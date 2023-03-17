@@ -8,6 +8,8 @@
   flex-direction: row;
   font-family: sans-serif;
   justify-content: space-between;
+  font-weight: 400;
+  font-size: 30px;
 }
 
 .piechar {
