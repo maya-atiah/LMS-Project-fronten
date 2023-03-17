@@ -87,6 +87,10 @@ const submitHandler = (e) => {
       console.log(err);
       setIsPending(false);
     });
+    setTimeout(() => {
+      setIsPending(false);
+      window.location.reload(); // reload the page
+    }, 100);
 };
 
 
