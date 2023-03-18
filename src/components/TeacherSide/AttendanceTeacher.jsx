@@ -27,7 +27,8 @@ function AttendanceTeacher() {
     }
   }, [navigate]);
 
-  const fetchAttendance = async (id, status) => {
+  const fetchAttendance = async (e, id, status) => {
+    // e.preventDefault();
     const res = await axios.post(`http://localhost:8000/api/attendance/${id}`, {
       status,
     });
@@ -50,6 +51,7 @@ function AttendanceTeacher() {
       .then((res) => {
         setStudent(res.data);
         setTable(true);
+        
       })
       .catch((err) => console.log(err));
   };
@@ -77,7 +79,8 @@ function AttendanceTeacher() {
     <div>
        <TeacherSide/>
 
-      <section>
+     
+       <section>
         <div className='component-container'>
           <h1 className='attendance-titile'> Attendance</h1>
           <div className='form-attendance'>
@@ -191,7 +194,7 @@ function AttendanceTeacher() {
                                       )
                                     }
                                   />
-                                  <label>late</label>
+                                  <label for='late'>late</label>
                                 </div>
                               </div>
                             </form>{" "}
