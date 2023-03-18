@@ -26,6 +26,9 @@
     width: 220px;
     background: none;
   }
+ .addingStudent:hover{
+    color:#EE8B3A;
+  }
 
   .padding-dropdown{
     padding-left: 2rem;
