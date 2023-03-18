@@ -251,7 +251,7 @@ function Classes() {
                       {" "}
                       <button
                         alt=''
-                        className='button'
+                        className='button-delete-class'
                         onClick={() => deleteUser(item.id)}
                       >
                         {" "}
