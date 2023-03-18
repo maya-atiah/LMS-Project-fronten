@@ -27,7 +27,8 @@ function Attendance() {
     }
   }, [navigate]);
 
-  const fetchAttendance = async (id, status) => {
+  const fetchAttendance = async (e, id, status) => {
+    // e.preventDefault();
     const res = await axios.post(`http://localhost:8000/api/attendance/${id}`, {
       status,
     });
@@ -190,7 +191,7 @@ function Attendance() {
                                       )
                                     }
                                   />
-                                  <label >late</label>
+                                  <label for='late'>late</label>
                                 </div>
                               </div>
                             </form>{" "}
@@ -209,3 +210,4 @@ function Attendance() {
 }
 
 export default Attendance;
+
