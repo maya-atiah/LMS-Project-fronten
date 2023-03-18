@@ -21,6 +21,9 @@
 .addingCourse{
     cursor: pointer;
 }
+.addingCourse:hover{
+    color: #EE8B3A;
+}
 .course-title-input{
     color:white;
 }
