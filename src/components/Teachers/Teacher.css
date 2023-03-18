@@ -23,6 +23,11 @@
   border-radius: 20px;
   color: white;
 }
+
+.addTeacher:hover,.alignAddTeacher:hover,.Addd:hover{
+color: #ee8b3a ;
+}
+
 .titleTeacherAdd button:active {
   padding: 5px 15px;
   background-color: #017f94;
