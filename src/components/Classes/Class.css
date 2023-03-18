@@ -39,7 +39,7 @@
   background-color: #ddd;
 }
 
-.button {
+.button-delete-class {
   background-color: #ee8b3a;
   border: none;
   color: #017f94;
@@ -51,7 +51,9 @@
   cursor: pointer;
   border-radius: 4px;
 }
-
+.button-delete-class:hover{
+  background-color: #ee8b3a98;
+}
 .sectionss {
   padding-left: 20px;
 }
