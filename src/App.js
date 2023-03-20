@@ -13,6 +13,8 @@ import ReportsTeacher from "./components/TeacherSide/ReportsTeacher";
 import HomeTeacher from "./components/TeacherSide/HomeTeacher";
 import "./style/index.css";
 import LoginPage from "./components/Login/Login";
+import Error from "./components/Error/Error";
+
 
 function App() {
 
@@ -38,6 +40,8 @@ function App() {
           <Route path="/TeacherSide/Attendance" element={<AttendanceTeacher />} />
           <Route path="/TeacherSide/Reports"   element={<ReportsTeacher />} />
           <Route path="/TeacherSide/Home" element={<HomeTeacher/>} />
+          <Route path="/*" element={<Error />} />
+
         </Routes>
 
       </div>

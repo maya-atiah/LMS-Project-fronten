@@ -1,0 +1,35 @@
+.shadi {
+  background-color: #ff9100;
+  border: 1px solid #ccc;
+  padding: 20px;
+  text-align: center;
+  margin: 0 auto;
+  margin-top: 60px;
+  width: 80%;
+  max-width: 600px;
+}
+
+.shadi img {
+  background-color: #017f94;
+}
+.shadi h1 {
+  font-size: 3rem;
+  margin-bottom: 20px;
+}
+.shadi p {
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+  font-weight: 700;
+}
+.shadi .home {
+  display: inline-block;
+  background-color: #007bff;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 5px;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+.shadi .home:hover {
+  background-color: #0062cc;
+}
