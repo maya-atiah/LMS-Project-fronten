@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./Error.css";
-import profile from "/home/hasan/Desktop/LMS-FRONT-FINAL/LMS-Project-frontend/src/assets/Images/logo.png";
+import profile from "../../assets/Images/logo.png";
 
 const Error = () => {
   return (
