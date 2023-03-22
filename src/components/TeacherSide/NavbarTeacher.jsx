@@ -8,6 +8,7 @@ import {
 } from "react-icons/fa";
 import { NavLink, useNavigate } from "react-router-dom";
 import "../../style/navbar.css";
+import logo from '../assets/Images/logo.png';
 
 const ICON_SIZE = 20;
 
@@ -32,7 +33,7 @@ function NavbarTeacher() {
       <nav className={`nav ${visible ? "visible" : ""}`}>
         <div>
           <NavLink className='logo'>
-            <img src={require("../../assets/Images/logo.png")} alt='logo' />
+            <img src={logo} alt='logo' />
           </NavLink>
           <div className='links nav-top'>
             <NavLink to='/TeacherSide/Home' className='nav-link'>
