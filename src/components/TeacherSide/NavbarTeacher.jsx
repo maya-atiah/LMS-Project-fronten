@@ -8,7 +8,7 @@ import {
 } from "react-icons/fa";
 import { NavLink, useNavigate } from "react-router-dom";
 import "../../style/navbar.css";
-import logo from '../assets/Images/logo.png';
+import logo from '../../assets/Images/logo.png';
 
 const ICON_SIZE = 20;
 
