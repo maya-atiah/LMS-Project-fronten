@@ -26,7 +26,9 @@ function Reports() {
 
   const fetchGradeSection = async () => {
     try {
-      const response = await axios.get("http://localhost:8000/api/grade");
+      const response = await axios.get(
+        "https://lms-backend-production-9753.up.railway.app/api/grade"
+      );
       setGradeSection(response.data);
     } catch (error) {
       console.log(error);
@@ -38,7 +40,7 @@ function Reports() {
 
   const fetchtheattended = async (dd) => {
     const response = await axios.get(
-      `http://localhost:8000/api/attendance/status/${dd}`
+      `https://lms-backend-production-9753.up.railway.app/api/attendance/status/${dd}`
     );
     setPresentCount(response.data.present);
     setAbsentCount(response.data.absent);
@@ -47,7 +49,7 @@ function Reports() {
 
   const fetchthestatus = async (grade, section) => {
     const response = await axios.get(
-      `http://localhost:8000/api/attendance/${grade}/${section}`
+      `https://lms-backend-production-9753.up.railway.app/api/attendance/${grade}/${section}`
     );
     console.log(
       "this is the attendance status",
@@ -61,7 +63,7 @@ function Reports() {
   const fetchAllStudentByGradeSection = async (gradeId, sectionId) => {
     try {
       const response = await axios.get(
-        `http://localhost:8000/api/allStudent/${gradeId}/${sectionId}`
+        `https://lms-backend-production-9753.up.railway.app/api/allStudent/${gradeId}/${sectionId}`
       );
       const students = response.data;
       const studentCount = students.length; // Get the length of the array of students
@@ -118,17 +120,16 @@ function Reports() {
 
   return (
     <div>
-     
-     <TeacherSide/>
+      <TeacherSide />
       <section>
-        <div className="component-container">
-          <h1 className="Reporttt"> Reports</h1>
-          <div className="form-Reports">
+        <div className='component-container'>
+          <h1 className='Reporttt'> Reports</h1>
+          <div className='form-Reports'>
             <div>
               <Dropdown
-                title="Filter By"
-                position="right"
-                className="dropdown-Report"
+                title='Filter By'
+                position='right'
+                className='dropdown-Report'
               >
                 {gradeSection &&
                   gradeSection.map((grade) => {
@@ -142,7 +143,7 @@ function Reports() {
                         }}
                       >
                         {grade.name}
-                        <Dropdown.Submenu position="right">
+                        <Dropdown.Submenu position='right'>
                           {grade.sections.map((section) => {
                             return (
                               <Dropdown.Item
@@ -168,7 +169,7 @@ function Reports() {
               </Dropdown>
             </div>
           </div>
-          <div className="Report-gradename">
+          <div className='Report-gradename'>
             {title} {letter}
           </div>
         </div>
@@ -176,10 +177,10 @@ function Reports() {
 
       <section>
         <div
-          className="component-container"
+          className='component-container'
           style={{ display: gradeId ? "block" : "none" }}
         >
-          <div className="cardoo">
+          <div className='cardoo'>
             {section1.map((card, i) => (
               <div key={i}>
                 <h3>{card.title} </h3>
@@ -188,7 +189,7 @@ function Reports() {
                 <h2>{card.late}</h2>
               </div>
             ))}
-            <div className="piechar">
+            <div className='piechar'>
               {student > 0 &&
                 pieChartData &&
                 pieChartData.labels &&
@@ -202,4 +203,3 @@ function Reports() {
 }
 
 export default Reports;
-

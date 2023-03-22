@@ -45,7 +45,7 @@ function Students() {
   //get
   const getAllStudents = () =>
     axios
-      .get("http://localhost:8000/api/student")
+      .get("https://lms-backend-production-9753.up.railway.app/api/student")
       .then((response) => {
         setStudent(response.data.users);
         console.log(response.data.users);
@@ -70,7 +70,7 @@ function Students() {
   const [grades, setGrades] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:8000/api/grade")
+    fetch("https://lms-backend-production-9753.up.railway.app/api/grade")
       .then((response) => response.json())
       .then((data) => setGrades(data))
       .catch((error) => console.log(error));
@@ -79,7 +79,7 @@ function Students() {
   const [letters, setLetters] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:8000/api/section")
+    fetch("https://lms-backend-production-9753.up.railway.app/api/section")
       .then((response) => response.json())
       .then((data) => setLetters(data["All Sections"]))
       .catch((error) => {
@@ -90,14 +90,16 @@ function Students() {
   ///////////////////////////////////////////////////////////////
   const fetchGradeSection = async () => {
     await axios
-      .get("http://localhost:8000/api/grade")
+      .get("https://lms-backend-production-9753.up.railway.app/api/grade")
       .then((res) => setGradeSection(res.data))
       .catch((err) => console.log(err));
   };
   ///get students by grade/section
   const fetchallStudentByGradeSection = async (gradeId, sectionId) => {
     await axios
-      .get(`http://localhost:8000/api/allStudent/${gradeId}/${sectionId}`)
+      .get(
+        `https://lms-backend-production-9753.up.railway.app/api/allStudent/${gradeId}/${sectionId}`
+      )
       .then((res) => {
         setStudent(res.data);
       })
@@ -114,7 +116,7 @@ function Students() {
   //delete
   const deleteStudent = async (id) => {
     const res = await axios.delete(
-      `http://localhost:8000/api/user/${id}`,
+      `https://lms-backend-production-9753.up.railway.app/api/user/${id}`,
       config1
     );
 
@@ -141,7 +143,7 @@ function Students() {
     var data = JSON.stringify(body);
     var config = {
       method: "post",
-      url: "http://localhost:8000/api/user",
+      url: "https://lms-backend-production-9753.up.railway.app/api/user",
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,

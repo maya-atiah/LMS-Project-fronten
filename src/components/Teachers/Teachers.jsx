@@ -10,10 +10,9 @@ import PopupTeacher from "./PopupTeacher/PopupTeacher";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import Box from "@mui/material/Box";
 import { Typography } from "@mui/material";
-import swal from 'sweetalert';
+import swal from "sweetalert";
 import "./Teacher.css";
-import "../components.css"
-
+import "../components.css";
 
 function Teachers() {
   const [teacher, setTeacher] = useState([]);
@@ -24,12 +23,10 @@ function Teachers() {
   const [password, setPassword] = useState("");
   const [phoneNumber, setPhone] = useState("");
   const [isPending, setIsPending] = useState(false);
-  const token = localStorage.getItem('token');
+  const token = localStorage.getItem("token");
   const [name, setName] = useState("");
   const [letter, setLetter] = useState("");
   const [subject, setSubject] = useState("");
-
-
 
   const navigate = useNavigate();
   useEffect(() => {
@@ -40,7 +37,7 @@ function Teachers() {
   // Fetching all users
   const getAllTeachers = () =>
     axios
-      .get("http://localhost:8000/api/teacher")
+      .get("https://lms-backend-production-9753.up.railway.app/api/teacher")
       .then((response) => {
         setTeacher(response.data.users);
         console.log(response.data.users);
@@ -59,19 +56,19 @@ function Teachers() {
     );
   });
 
-  const config1= {
+  const config1 = {
     headers: {
       "Content-Type": "application/json",
-      "Authorization": `Bearer ${token}`,
-    }
-  }
+      Authorization: `Bearer ${token}`,
+    },
+  };
 
   const deleteTeacher = async (id) => {
     swal({
       title: "Are you sure?",
       text: "Once deleted, you will not be able to recover this teacher!",
       icon: "warning",
-      buttons:{
+      buttons: {
         cancel: "Cancel",
         confirm: {
           text: "Delete",
@@ -80,14 +77,16 @@ function Teachers() {
           visible: true,
           closeModal: true,
           className: "orange-button",
-        }
-      } ,
-      
+        },
+      },
+
       dangerMode: true,
-    })
-    .then(async (willDelete) => {
+    }).then(async (willDelete) => {
       if (willDelete) {
-        await axios.delete(`http://localhost:8000/api/user/${id}`, config1);
+        await axios.delete(
+          `https://lms-backend-production-9753.up.railway.app/api/user/${id}`,
+          config1
+        );
         getAllTeachers();
         swal("Poof! The teacher has been deleted!", {
           icon: "success",
@@ -96,9 +95,8 @@ function Teachers() {
         swal("The teacher is safe!");
       }
     });
-
   };
-  
+
   // Posting a function
   const addTeacher = async () => {
     const body = {
@@ -107,22 +105,21 @@ function Teachers() {
       email,
       password,
       phoneNumber,
-      role:"teacher",
+      role: "teacher",
       name,
       letter,
       subject,
     };
-    // const response = await axios.post("http://localhost:8000/api/user",JSON.stringify(body));
+    // const response = await axios.post("https://lms-backend-production-9753.up.railway.app/api/user",JSON.stringify(body));
 
     var data = JSON.stringify(body);
 
     var config = {
       method: "post",
-      url: "http://localhost:8000/api/user",
+      url: "https://lms-backend-production-9753.up.railway.app/api/user",
       headers: {
         "Content-Type": "application/json",
-      "Authorization": `Bearer ${token}`,
-
+        Authorization: `Bearer ${token}`,
       },
       data: data,
     };
@@ -130,8 +127,7 @@ function Teachers() {
     axios(config)
       .then(function (response) {
         console.log("res ", JSON.stringify(response.data));
-      setButtonPopup(false);
-
+        setButtonPopup(false);
       })
       .catch(function (error) {
         console.log(error);
@@ -157,7 +153,7 @@ function Teachers() {
   const [grades, setGrades] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:8000/api/grade")
+    fetch("https://lms-backend-production-9753.up.railway.app/api/grade")
       .then((response) => response.json())
       .then((data) => setGrades(data))
       .catch((error) => console.log(error));
@@ -166,7 +162,7 @@ function Teachers() {
   const [letters, setLetters] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:8000/api/section")
+    fetch("https://lms-backend-production-9753.up.railway.app/api/section")
       .then((response) => response.json())
       .then((data) => setLetters(data["All Sections"]))
       .catch((error) => {
@@ -174,29 +170,28 @@ function Teachers() {
       });
   }, []);
 
-    const [course, setCourse] = useState([]);
+  const [course, setCourse] = useState([]);
 
-    useEffect(() => {
-      fetch("http://localhost:8000/api/course/getAll")
-        .then((response) => response.json())
-        .then((data) => setCourse(data))
-        .catch((error) => console.log(error));
-    }, []);
-
-
-  
+  useEffect(() => {
+    fetch(
+      "https://lms-backend-production-9753.up.railway.app/api/course/getAll"
+    )
+      .then((response) => response.json())
+      .then((data) => setCourse(data))
+      .catch((error) => console.log(error));
+  }, []);
 
   return (
     <>
       <Navhead />
 
-      <div className="component-container">
-        <div className="allTeachersSection">
-          <div className="titleTeacherAdd">
-            <div className="allTeachersTitle">All Teachers</div>
-            <div className="addTeacher" onClick={() => setButtonPopup(true)}>
-              <div className="alignAddTeacher">
-                <AddCircleIcon /> <div className="Addd">Add Teacher</div>
+      <div className='component-container'>
+        <div className='allTeachersSection'>
+          <div className='titleTeacherAdd'>
+            <div className='allTeachersTitle'>All Teachers</div>
+            <div className='addTeacher' onClick={() => setButtonPopup(true)}>
+              <div className='alignAddTeacher'>
+                <AddCircleIcon /> <div className='Addd'>Add Teacher</div>
               </div>
 
               <PopupTeacher
@@ -204,18 +199,18 @@ function Teachers() {
                 setTrigger={() => setButtonPopup(false)}
               >
                 <Box
-                  component="form"
+                  component='form'
                   sx={{
                     "& > :not(style)": { m: 1 },
                   }}
                   noValidate
-                  autoComplete="off"
+                  autoComplete='off'
                 >
                   <Typography
                     gutterBottom
-                    color="white"
-                    variant="h4"
-                    component="div"
+                    color='white'
+                    variant='h4'
+                    component='div'
                   >
                     Add Teacher
                   </Typography>
@@ -269,22 +264,22 @@ function Teachers() {
                         onChange={(e) => setPhone(e.target.value)}
                       />
                     </div>{" "}
-                    <div className='input-label-flex'>
-                      {" "}
-                     
-                 
-                    </div>
+                    <div className='input-label-flex'> </div>
                     <br></br>
-                      <select id="subject" name="subject" onChange={(e) => setSubject(e.target.value)} className="my-select-student">
-  <option value="">-- Select a Course --</option>
-  {course.map((subject) => (
-    <option key={subject.id} value={subject.subject}>
-      {subject.subject}
-    </option>
-  ))}
-  </select>   
-
-                   {/* 
+                    <select
+                      id='subject'
+                      name='subject'
+                      onChange={(e) => setSubject(e.target.value)}
+                      className='my-select-student'
+                    >
+                      <option value=''>-- Select a Course --</option>
+                      {course.map((subject) => (
+                        <option key={subject.id} value={subject.subject}>
+                          {subject.subject}
+                        </option>
+                      ))}
+                    </select>
+                    {/* 
                        <input
                         type='text'
                         id='subject'
@@ -292,37 +287,43 @@ function Teachers() {
                         placeholder='subject'
                         onChange={(e) => setSubject(e.target.value)}
                       /> */}
-
-  <br></br>
-<select id="grade" name="grade" onChange={(e) => setName(e.target.value)} className="my-select-student">
-  <option value="">-- Select a Grade --</option>
-  {grades.map((grade) => (
-    <option key={grade.id} value={grade.name}>
-      {grade.name}
-    </option>
-  ))}
-
-
-</select>
-<br></br>
-
-<select  id="letter" name="letter" onChange={(e) => setLetter(e.target.value)} className="my-select-student"> 
-  <option value="">-- Select a letter --</option>
-  {letters.map((letter, index) => (
-    <option key={index} value={letter.letter}>
-      {letter.letter}
-    </option>
-  ))}
-</select>
+                    <br></br>
+                    <select
+                      id='grade'
+                      name='grade'
+                      onChange={(e) => setName(e.target.value)}
+                      className='my-select-student'
+                    >
+                      <option value=''>-- Select a Grade --</option>
+                      {grades.map((grade) => (
+                        <option key={grade.id} value={grade.name}>
+                          {grade.name}
+                        </option>
+                      ))}
+                    </select>
+                    <br></br>
+                    <select
+                      id='letter'
+                      name='letter'
+                      onChange={(e) => setLetter(e.target.value)}
+                      className='my-select-student'
+                    >
+                      <option value=''>-- Select a letter --</option>
+                      {letters.map((letter, index) => (
+                        <option key={index} value={letter.letter}>
+                          {letter.letter}
+                        </option>
+                      ))}
+                    </select>
                   </div>
 
                   {!isPending && (
-                    <button className="btn-add-teacher" onClick={submitHandler}>
+                    <button className='btn-add-teacher' onClick={submitHandler}>
                       add
                     </button>
                   )}
                   {isPending && (
-                    <button className="btn-add-teacher" onClick={submitHandler}>
+                    <button className='btn-add-teacher' onClick={submitHandler}>
                       adding course
                     </button>
                   )}
@@ -330,8 +331,8 @@ function Teachers() {
               </PopupTeacher>
             </div>
           </div>
-          <div className="MTeachersline"></div>
-          <div className="TeacherCardsContainer">
+          <div className='MTeachersline'></div>
+          <div className='TeacherCardsContainer'>
             {teacher.map((each, key) => (
               <TeacherCard
                 key={key}
@@ -342,7 +343,7 @@ function Teachers() {
           </div>
         </div>
       </div>
-      <div className="Teachercontainer"></div>
+      <div className='Teachercontainer'></div>
     </>
   );
 }

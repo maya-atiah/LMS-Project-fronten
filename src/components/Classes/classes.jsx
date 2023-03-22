@@ -31,7 +31,9 @@ function Classes() {
 
   //get
   const loadclass = async () => {
-    const res = await axios.get("http://localhost:8000/api/grade");
+    const res = await axios.get(
+      "https://lms-backend-production-9753.up.railway.app/api/grade"
+    );
     setclass(res.data);
   };
 
@@ -55,7 +57,9 @@ function Classes() {
       dangerMode: true,
     }).then(async (willDelete) => {
       if (willDelete) {
-        await axios.delete(`http://localhost:8000/api/grade/${id}`);
+        await axios.delete(
+          `https://lms-backend-production-9753.up.railway.app/api/grade/${id}`
+        );
         loadclass();
         swal("Poof! The grade has been deleted!", {
           icon: "success",
@@ -76,13 +80,16 @@ function Classes() {
     };
 
     try {
-      const response = await fetch("http://localhost:8000/api/grade", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(body),
-      });
+      const response = await fetch(
+        "https://lms-backend-production-9753.up.railway.app/api/grade",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(body),
+        }
+      );
 
       if (response.ok) {
         const data = await response.json();
@@ -102,7 +109,7 @@ function Classes() {
           const sectionId = sectionIds[0];
           const sectionCapacity = capacity;
           const sectionResponse = await fetch(
-            `http://localhost:8000/api/grade/${gradeId}/section/${sectionId}`,
+            `https://lms-backend-production-9753.up.railway.app/api/grade/${gradeId}/section/${sectionId}`,
             {
               method: "POST",
               headers: {
@@ -143,7 +150,7 @@ function Classes() {
   const [grades, setGrades] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:8000/api/grade")
+    fetch("https://lms-backend-production-9753.up.railway.app/api/grade")
       .then((response) => response.json())
       .then((data) => setGrades(data))
       .catch((error) => console.log(error));
@@ -152,7 +159,7 @@ function Classes() {
   const [letters, setLetters] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:8000/api/section")
+    fetch("https://lms-backend-production-9753.up.railway.app/api/section")
       .then((response) => response.json())
       .then((data) => setLetters(data["All Sections"]))
       .catch((error) => {

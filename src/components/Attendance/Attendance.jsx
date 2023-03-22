@@ -29,9 +29,12 @@ function Attendance() {
 
   const fetchAttendance = async (e, id, status) => {
     // e.preventDefault();
-    const res = await axios.post(`http://localhost:8000/api/attendance/${id}`, {
-      status,
-    });
+    const res = await axios.post(
+      `https://lms-backend-production-9753.up.railway.app/api/attendance/${id}`,
+      {
+        status,
+      }
+    );
 
     swal({
       title: res.data.message,
@@ -40,18 +43,19 @@ function Attendance() {
 
   const fetchGradeSection = async () => {
     await axios
-      .get("http://localhost:8000/api/grade")
+      .get("https://lms-backend-production-9753.up.railway.app/api/grade")
       .then((res) => setGradeSection(res.data))
       .catch((err) => console.log(err));
   };
 
   const fetchallStudentByGradeSection = async (gradeId, sectionId) => {
     await axios
-      .get(`http://localhost:8000/api/allStudent/${gradeId}/${sectionId}`)
+      .get(
+        `https://lms-backend-production-9753.up.railway.app/api/allStudent/${gradeId}/${sectionId}`
+      )
       .then((res) => {
         setStudent(res.data);
         setTable(true);
-        
       })
       .catch((err) => console.log(err));
   };
@@ -210,4 +214,3 @@ function Attendance() {
 }
 
 export default Attendance;
-

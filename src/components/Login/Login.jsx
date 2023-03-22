@@ -19,7 +19,7 @@ const LoginPage = () => {
   // const handleLogin = async (event) => {
   //   event.preventDefault();
   //   try {
-  //     const response = await fetch("http://localhost:8000/api/user/login", {
+  //     const response = await fetch("https://lms-backend-production-9753.up.railway.app/api/user/login", {
   //       method: "POST",
   //       headers: {
   //         "Content-Type": "application/json",
@@ -65,16 +65,19 @@ const LoginPage = () => {
   const handleLogin = async (event) => {
     event.preventDefault();
     try {
-      const response = await fetch("http://localhost:8000/api/user/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          email,
-          password,
-        }),
-      });
+      const response = await fetch(
+        "https://lms-backend-production-9753.up.railway.app/api/user/login",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            email,
+            password,
+          }),
+        }
+      );
 
       const data = await response.json();
       if (response.ok) {

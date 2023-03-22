@@ -9,32 +9,29 @@ import PopupCourse from "../../components/Courses/PopupCourse";
 import Box from "@mui/material/Box";
 import { Typography } from "@mui/material";
 import Navhead from "../../components/Navhead";
-import { useNavigate } from 'react-router-dom';
-import swal from 'sweetalert';
-
-
+import { useNavigate } from "react-router-dom";
+import swal from "sweetalert";
 
 function Courses() {
-
-
-  const [course,setCourse]=useState([]);
+  const [course, setCourse] = useState([]);
   const [isDeleted, setIsDeleted] = useState(false);
   const [buttonPopup, setButtonPopup] = useState(false);
   const [subject, setSubject] = useState("");
 
   const fetchCourses = async () => {
-    const res = await axios.get("http://localhost:8000/api/user-grade-section");
+    const res = await axios.get(
+      "https://lms-backend-production-9753.up.railway.app/api/user-grade-section"
+    );
     setCourse(res.data.data);
   };
-
 
   const handleDelete = async (id) => {
     swal({
       title: "Are you sure?",
       text: "Once deleted, you will not be able to recover this course!",
       icon: "warning",
-     
-      buttons:{
+
+      buttons: {
         cancel: "Cancel",
         confirm: {
           text: "Delete",
@@ -43,19 +40,18 @@ function Courses() {
           visible: true,
           closeModal: true,
           className: "orange-button",
-          
-        }
+        },
       },
       dangerMode: true,
-    })
-    .then(async (willDelete) => {
+    }).then(async (willDelete) => {
       if (willDelete) {
         const newCourse = course.filter((course) => course.id !== id);
-        await axios.delete(`http://localhost:8000/api/deleteById/${id}`);
+        await axios.delete(
+          `https://lms-backend-production-9753.up.railway.app/api/deleteById/${id}`
+        );
         setIsDeleted(true);
-       setCourse(newCourse);
+        setCourse(newCourse);
         swal("Poof!The course has been deleted!", {
-
           icon: "success",
         });
       } else {
@@ -64,11 +60,11 @@ function Courses() {
     });
   };
 
-  
-
   const addCourse = async () => {
     await axios
-      .post("http://localhost:8000/api/course", { subject })
+      .post("https://lms-backend-production-9753.up.railway.app/api/course", {
+        subject,
+      })
       .then(() => {
         // setIsPending(false);
       });
@@ -77,11 +73,10 @@ function Courses() {
 
   const navigate = useNavigate();
   useEffect(() => {
-    if (!localStorage.getItem('token') && window.location.pathname !== '/') {
-      navigate('/');
+    if (!localStorage.getItem("token") && window.location.pathname !== "/") {
+      navigate("/");
     }
   }, []);
-
 
   useEffect(() => {
     fetchCourses();
@@ -95,7 +90,6 @@ function Courses() {
       title: "Course is added",
       icon: "success",
     });
-  
   };
 
   return (
@@ -107,10 +101,7 @@ function Courses() {
           <div>Courses </div>
           <div className='addingCourse'>
             <AddCircleIcon /> Add Course
-            <PopupCourse
-              trigger={buttonPopup}
-              setTrigger={setButtonPopup}
-            >
+            <PopupCourse trigger={buttonPopup} setTrigger={setButtonPopup}>
               <Box
                 component='form'
                 sx={{
@@ -131,14 +122,13 @@ function Courses() {
                   type='text'
                   id='subject'
                   name='subject'
-                  placeholder="Write a Subject"
+                  placeholder='Write a Subject'
                   onChange={(e) => setSubject(e.target.value)}
                 />
-               
-                  <button className='btn-add-course' onClick={submitHandler}>
-                    add
-                  </button>
-                
+
+                <button className='btn-add-course' onClick={submitHandler}>
+                  add
+                </button>
               </Box>
             </PopupCourse>
           </div>

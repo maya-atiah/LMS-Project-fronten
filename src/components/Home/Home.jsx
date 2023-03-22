@@ -27,7 +27,9 @@ function Home() {
 
   const fetchStudents = () => {
     axios
-      .get("http://localhost:8000/api/users/student")
+      .get(
+        "https://lms-backend-production-9753.up.railway.app/api/users/student"
+      )
       .then((response) => {
         setStudents(response.data);
       })
@@ -36,7 +38,9 @@ function Home() {
 
   const fetchTeachers = () => {
     axios
-      .get("http://localhost:8000/api/users/teacher")
+      .get(
+        "https://lms-backend-production-9753.up.railway.app/api/users/teacher"
+      )
       .then((response) => {
         console.log(response.data);
         setTeachers(response.data);
@@ -57,13 +61,11 @@ function Home() {
     },
   ];
 
-
-
   const [section3] = useState([
     {
       img2: attend,
       img1: report,
-      img3:stud
+      img3: stud,
     },
   ]);
 
@@ -71,17 +73,16 @@ function Home() {
     <div>
       <Navhead />
       <div className='component-container'>
-      
-        
-          <h1 className='home'> Home </h1>
-          
-          <div className='cards'>
+        <h1 className='home'> Home </h1>
+
+        <div className='cards'>
           <section className='home-section'>
             {section1.map((card, i) => (
               <div key={i} className='card'>
                 <img src={card.img1} alt={card.title} />
-                 <div className='card-total-name1' ><h3>{card.title} </h3>
-                <h1>{card.text1}</h1>
+                <div className='card-total-name1'>
+                  <h3>{card.title} </h3>
+                  <h1>{card.text1}</h1>
                 </div>
                 {card.img2 && <img src={card.img2} alt={card.title} />}
                 <div className='card-total-name2'>
@@ -90,10 +91,8 @@ function Home() {
                 </div>
               </div>
             ))}
-              </section>
-          </div>
-        
-     
+          </section>
+        </div>
       </div>
 
       <section>

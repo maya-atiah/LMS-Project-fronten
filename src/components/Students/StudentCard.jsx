@@ -6,10 +6,18 @@ import PopupStudent from "./PopupStudent.jsx";
 import Box from "@mui/material/Box";
 import { Typography } from "@mui/material";
 import { useState, useEffect } from "react";
-import swal from 'sweetalert';
+import swal from "sweetalert";
 
-
-export const StudentCard = ({ student, deleteStudent, getAllStudents,fetchallStudentByGradeSection,gradeId, sectionId,fetchGradeSection, updateStudent}) => {
+export const StudentCard = ({
+  student,
+  deleteStudent,
+  getAllStudents,
+  fetchallStudentByGradeSection,
+  gradeId,
+  sectionId,
+  fetchGradeSection,
+  updateStudent,
+}) => {
   const handleDelete = () => {
     swal({
       title: "Are you sure?",
@@ -38,21 +46,19 @@ export const StudentCard = ({ student, deleteStudent, getAllStudents,fetchallStu
       }
     });
   };
-  
 
-  const token = localStorage.getItem('token');
-  const config1= {
+  const token = localStorage.getItem("token");
+  const config1 = {
     headers: {
       "Content-Type": "application/json",
-      "Authorization": `Bearer ${token}`,
-    }
-  }
+      Authorization: `Bearer ${token}`,
+    },
+  };
   const [buttonPopup, setButtonPopup] = useState(false);
   const [firstName, setFname] = useState("");
   const [lastName, setLname] = useState("");
   const [email, setEmail] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
- 
 
   const [isPending, setIsPending] = useState(false);
 
@@ -60,49 +66,48 @@ export const StudentCard = ({ student, deleteStudent, getAllStudents,fetchallStu
     setButtonPopup(true);
   };
 
-
-const submitHandler = (e) => {
-  e.preventDefault();
-  setIsPending(true);
-  const updatedStudent = {
-    id: student.id,
-    firstName: firstName || student.firstName,
-    lastName: lastName || student.lastName,
-    email: email|| student.email,
-    phoneNumber:  phoneNumber || student.phoneNumber,
-    
-
-  };
-  axios.put(`http://localhost:8000/api/user/${student.id}`, updatedStudent, config1)
-    .then(() => {
-      setIsPending(false);
-      setButtonPopup(false);
-      // getAllStudents();
-      // fetchGradeSection();
-      fetchallStudentByGradeSection(gradeId, sectionId);
-    })
-    .catch((err) => {
-      console.log(err);
-      setIsPending(false);
-    });
+  const submitHandler = (e) => {
+    e.preventDefault();
+    setIsPending(true);
+    const updatedStudent = {
+      id: student.id,
+      firstName: firstName || student.firstName,
+      lastName: lastName || student.lastName,
+      email: email || student.email,
+      phoneNumber: phoneNumber || student.phoneNumber,
+    };
+    axios
+      .put(
+        `https://lms-backend-production-9753.up.railway.app/api/user/${student.id}`,
+        updatedStudent,
+        config1
+      )
+      .then(() => {
+        setIsPending(false);
+        setButtonPopup(false);
+        // getAllStudents();
+        // fetchGradeSection();
+        fetchallStudentByGradeSection(gradeId, sectionId);
+      })
+      .catch((err) => {
+        console.log(err);
+        setIsPending(false);
+      });
     setTimeout(() => {
       setIsPending(false);
       window.location.reload(); // reload the page
     }, 100);
-};
+  };
 
-
-
-  
   return (
     <div>
-      <div className="cardFrameStudent">
-        <button className="deleteStudentButtencontainer" onClick={handleDelete}>
+      <div className='cardFrameStudent'>
+        <button className='deleteStudentButtencontainer' onClick={handleDelete}>
           <DeleteForeverRounded />
         </button>
-        <img src={img} alt="img" className="pfpicc" />
-        <div className="cardlinestudentcard"></div>
-        <div className="StudentCardContent">
+        <img src={img} alt='img' className='pfpicc' />
+        <div className='cardlinestudentcard'></div>
+        <div className='StudentCardContent'>
           <p>
             <strong>First Name:</strong> {student.firstName}
           </p>
@@ -115,17 +120,15 @@ const submitHandler = (e) => {
           <p>
             <strong>Phone Number:</strong> {student.phoneNumber}
           </p>
-         
         </div>
-        <div className="editButtonStudent">
+        <div className='editButtonStudent'>
           {/* <IconButton onClick={handleUpdate}>
 
           
             <Typography>Edit</Typography>
           </IconButton> */}
 
-
-          <button className="editButtonStudent2" onClick={handleUpdate}>
+          <button className='editButtonStudent2' onClick={handleUpdate}>
             Edit
           </button>
           <PopupStudent
@@ -133,61 +136,61 @@ const submitHandler = (e) => {
             setTrigger={() => setButtonPopup(false)}
           >
             <Box
-              component="form"
+              component='form'
               sx={{
                 "& > :not(style)": { m: 1 },
               }}
               noValidate
-              autoComplete="off"
+              autoComplete='off'
             >
               <Typography
                 gutterBottom
-                color="white"
-                variant="h4"
-                component="div"
+                color='white'
+                variant='h4'
+                component='div'
               >
-               Update
+                Update
               </Typography>
               <input
-                type="text"
-                id="firstName"
-                name="firstName"
-                placeholder="First Name"
+                type='text'
+                id='firstName'
+                name='firstName'
+                placeholder='First Name'
                 onChange={(e) => setFname(e.target.value)}
               />
               <br />
               <input
-                type="text"
-                id="lastName"
-                name="lastName"
-                placeholder="Last Name"
+                type='text'
+                id='lastName'
+                name='lastName'
+                placeholder='Last Name'
                 onChange={(e) => setLname(e.target.value)}
               />
-               <br />
+              <br />
               <input
-                type="text"
-                id="email"
-                name="email"
-                placeholder="Email"
+                type='text'
+                id='email'
+                name='email'
+                placeholder='Email'
                 onChange={(e) => setEmail(e.target.value)}
               />
               <br />
               <input
-                type="text"
-                id="phonenumber"
-                name="phonenumber"
-                placeholder="Phone NUmber"
+                type='text'
+                id='phonenumber'
+                name='phonenumber'
+                placeholder='Phone NUmber'
                 onChange={(e) => setPhoneNumber(e.target.value)}
               />
-                 <br />
-           
+              <br />
+
               {!isPending && (
-                <button className="btn-add-teacher" onClick={submitHandler}>
+                <button className='btn-add-teacher' onClick={submitHandler}>
                   Edit
                 </button>
               )}
               {isPending && (
-                <button className="btn-add-teacher" onClick={submitHandler}>
+                <button className='btn-add-teacher' onClick={submitHandler}>
                   Editing...
                 </button>
               )}
@@ -198,4 +201,3 @@ const submitHandler = (e) => {
     </div>
   );
 };
-
